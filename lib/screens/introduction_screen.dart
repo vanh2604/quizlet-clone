@@ -47,16 +47,27 @@ class IntroductionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Quizzy')),
-      body: CarouselSlider(
-        options: CarouselOptions(
-          autoPlay: true,
-          aspectRatio: 2.0,
-          enlargeCenterPage: true,
-        ),
-        items: imageSliders,
-      ),
-    );
+    return Container(
+        color: const Color(0xff2A2D3F),
+        child: Container(
+            padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
+            child: Column(children: <Widget>[
+              SizedBox(
+                height: 200,
+                child: CarouselSlider(
+                  options: CarouselOptions(
+                    height: 200,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    aspectRatio: 2.0,
+                  ),
+                  items: imageSliders,
+                ),
+              ),
+            ])));
   }
 }
