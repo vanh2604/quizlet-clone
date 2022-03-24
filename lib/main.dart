@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/introduction_screen.dart';
 import 'package:quizlet/screens/standby_sceen.dart';
-import 'package:quizlet/screens/test.dart';
-import 'package:quizlet/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
