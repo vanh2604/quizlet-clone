@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/screens/standby_sceen.dart';
-import 'package:quizlet/utils/colors.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Quizlet',
       home: StandbyScreen(),
     );
   }
