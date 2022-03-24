@@ -12,11 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Quizlet',
+      title: 'Quizzy',
       theme: ThemeData(fontFamily: 'GoogleSans'),
       home: const Scaffold(
         body: StandbyScreen(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
