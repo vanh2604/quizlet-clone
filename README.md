@@ -5,6 +5,10 @@ A new Flutter project.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+So you need to have flutter SDK set up in your machine follow https://docs.flutter.dev/get-started/install
+
+- fisrt run : flutter pub get
+- then run : flutter run
 
 A few resources to get you started if this is your first Flutter project:
 
