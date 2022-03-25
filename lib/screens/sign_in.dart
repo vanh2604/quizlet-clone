@@ -55,20 +55,18 @@ class SignIn extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                Container(
-                  child: TextFormField(
-                    style: const TextStyle(color: textColor),
-                    cursorColor: textColor,
-                    maxLength: 20,
-                    decoration: const InputDecoration(
-                      helperText: 'Email',
-                      hintStyle:
-                          TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                      hintText: "example@emai.com",
-                      helperStyle: TextStyle(color: textColor),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: textColor),
-                      ),
+                TextFormField(
+                  style: const TextStyle(color: textColor),
+                  cursorColor: textColor,
+                  maxLength: 20,
+                  decoration: const InputDecoration(
+                    helperText: 'Email',
+                    hintStyle:
+                        TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
+                    hintText: "example@emai.com",
+                    helperStyle: TextStyle(color: textColor),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: textColor),
                     ),
                   ),
                 ),

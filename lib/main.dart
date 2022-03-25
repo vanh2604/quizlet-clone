@@ -1,5 +1,6 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/sign_in.dart';
+import 'package:quizlet/screens/standby_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +12,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
     return MaterialApp(
-      title: 'Quizlet',
+      title: 'Quizzy',
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
+        brightness: Brightness.dark,
         fontFamily: "GoogleSans",
         primarySwatch: Colors.blue,
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -25,8 +30,9 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: const Scaffold(
-        body: SignIn(),
+        body: StandbyScreen(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
