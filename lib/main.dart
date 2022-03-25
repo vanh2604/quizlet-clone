@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/standby_sceen.dart';
+import 'package:quizlet/screens/standby_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,11 +16,19 @@ class MyApp extends StatelessWidget {
         const SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
     return MaterialApp(
       title: 'Quizzy',
-      theme: ThemeData(
-        fontFamily: 'GoogleSans',
-        brightness: Brightness.dark,
-      ),
       themeMode: ThemeMode.dark,
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        fontFamily: "GoogleSans",
+        primarySwatch: Colors.blue,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            primary: const Color.fromRGBO(
+                66, 86, 255, 1), // background (button) color
+            onPrimary: Colors.black, // foreground (text) color
+          ),
+        ),
+      ),
       home: const Scaffold(
         body: StandbyScreen(),
       ),

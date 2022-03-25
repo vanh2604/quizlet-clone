@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignIn extends StatelessWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class SignUp extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
-                  'QUICKLY SIGN UP WITH',
+                  'QUICKLY LOGIN WITH',
                   style: TextStyle(
                       color: textColor,
                       fontSize: 16,
@@ -48,7 +48,7 @@ class SignUp extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(top: 20, bottom: 10),
                   child: const Text(
-                    'OR CREATE AN ACCOUNT',
+                    'OR LOGIN IN',
                     style: TextStyle(
                         color: textColor,
                         fontSize: 16,
@@ -89,7 +89,7 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 250),
+                  margin: const EdgeInsets.only(top: 240),
                   child: Row(
                     children: [
                       Expanded(
@@ -101,7 +101,7 @@ class SignUp extends StatelessWidget {
                         ))),
                         onPressed: () {},
                         child: const Text(
-                          'SIGN UP',
+                          'SIGN IN',
                           style: TextStyle(
                               color: textColor,
                               fontWeight: FontWeight.bold,

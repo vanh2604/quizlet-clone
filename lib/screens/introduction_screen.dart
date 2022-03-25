@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:quizlet/utils/colors.dart';
+import 'package:quizlet/screens/sign_in.dart';
+import 'package:quizlet/screens/sign_up.dart';
 
 final List<String> imgList = [
   'https://firebasestorage.googleapis.com/v0/b/quizzy-64099.appspot.com/o/quizlet-intro1.png?alt=media&token=aa5d9baf-699f-46a5-87d8-ac832694036a',
@@ -94,6 +98,36 @@ class IntroductionScreen extends StatelessWidget {
                       decoration: TextDecoration.none,
                     ),
                   ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ))),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.leftToRight,
+                                child: const SignUp()));
+                      },
+                      child: const Text(
+                        'SIGN UP',
+                        style: TextStyle(
+                            color: textColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
+                      ),
+                    ))
+                  ],
                 ),
               ),
             ])));
