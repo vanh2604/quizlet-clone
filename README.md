@@ -4,8 +4,7 @@
 <!-- [![Stargazers][stars-shield]][stars-url] -->
 <!-- [![Issues][issues-shield]][issues-url] -->
 <!-- [![MIT License][license-shield]][license-url] -->
-
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<!-- [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 <br />
 <div align="center">
@@ -17,9 +16,6 @@
   <p align="center">
     A Quizlet clone built using Flutter!
   </p>
-  <a align="center" href="https://github.com/nooeen/flutterplayground/tree/main">Main App </a> |
-  <a align="center" href="https://github.com/nooeen/flutterplayground/tree/browser">Browser App </a> |
-  <a align="center" href="https://github.com/nooeen/flutterplayground/tree/hello-world">Hello World App </a>
 </div>
 
 <br/>
