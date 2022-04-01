@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Scaffold(
-        body: FolderScreen(folderTitle: 'English', terms: 10, username: 'abc',),
+      home: const Scaffold(
+        body: StandbyScreen(),
       ),
       debugShowCheckedModeBanner: false,
     );
