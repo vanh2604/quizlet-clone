@@ -73,6 +73,7 @@ Built based on the Flutter and Firebase, these app focus on cloning the basic fe
 - [Firebase](https://firebase.google.com/)
 - [scoped_model](https://pub.dev/packages/scoped_model/versions/2.0.0-nullsafety.0)
 - [carousel_slider](https://pub.dev/packages/carousel_slider)
+- [page_transtition](https://pub.dev/packages/page_transition)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
