@@ -4,12 +4,13 @@ import 'package:quizlet/widgets/app_text.dart';
 class LearnCustomButton extends StatelessWidget {
   final String text;
   IconData icon;
-  LearnCustomButton({Key? key, required this.text, required this.icon}) : super(key: key);
+  LearnCustomButton({Key? key, required this.text, required this.icon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 20, right:20),
+      margin: const EdgeInsets.only(top: 20, right: 20),
       width: 100,
       height: 150,
       decoration: BoxDecoration(
@@ -19,8 +20,13 @@ class LearnCustomButton extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 50,),
-          SizedBox(height: 10,),
+          Icon(
+            icon,
+            size: 50,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
           AppText(text: text, color: Colors.white)
         ],
       ),
