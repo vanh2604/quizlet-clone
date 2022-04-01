@@ -27,21 +27,13 @@ class SignUp extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.network(
-                          'https://firebasestorage.googleapis.com/v0/b/quizzy-64099.appspot.com/o/Apple.png?alt=media&token=c1c23fde-6340-4832-994d-540aaf795192',
-                          width: 50,
-                          height: 50),
+                      Image.asset('apple.png', width: 50, height: 50),
                       Container(
                         margin: const EdgeInsets.only(left: 45, right: 45),
-                        child: Image.network(
-                            'https://firebasestorage.googleapis.com/v0/b/quizzy-64099.appspot.com/o/Facebook.png?alt=media&token=da623fe6-d4e5-4a13-a4ed-fbaf4daeb411',
-                            width: 50,
-                            height: 50),
+                        child:
+                            Image.asset('facebook.png', width: 50, height: 50),
                       ),
-                      Image.network(
-                          'https://firebasestorage.googleapis.com/v0/b/quizzy-64099.appspot.com/o/Google.png?alt=media&token=7727d5a3-8a82-4382-872d-44eb70cc15fdr',
-                          width: 50,
-                          height: 50)
+                      Image.asset('google.png', width: 50, height: 50)
                     ],
                   ),
                 ),

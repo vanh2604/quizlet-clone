@@ -6,9 +6,9 @@ import 'package:quizlet/screens/sign_in.dart';
 import 'package:quizlet/screens/sign_up.dart';
 
 final List<String> imgList = [
-  'https://firebasestorage.googleapis.com/v0/b/quizzy-64099.appspot.com/o/quizlet-intro1.png?alt=media&token=aa5d9baf-699f-46a5-87d8-ac832694036a',
-  'https://firebasestorage.googleapis.com/v0/b/quizzy-64099.appspot.com/o/quizzy_intro2.png?alt=media&token=85ad2213-3322-4e2d-aaa2-8f094163deec',
-  'https://firebasestorage.googleapis.com/v0/b/quizzy-64099.appspot.com/o/quizzy_intro3.png?alt=media&token=cc638a96-6afe-41b2-a48f-670bae17afb1'
+  'quizzy_intro1.png',
+  'quizzy_intro2.png',
+  'quizzy_intro3.png'
 ];
 
 final List<Widget> imageSliders = imgList
@@ -18,7 +18,7 @@ final List<Widget> imageSliders = imgList
               borderRadius: const BorderRadius.all(Radius.circular(5.0)),
               child: Stack(
                 children: <Widget>[
-                  Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                  Image.asset(item, fit: BoxFit.cover, width: 1000.0),
                   Positioned(
                     bottom: 0.0,
                     left: 0.0,
@@ -116,13 +116,43 @@ class IntroductionScreen extends StatelessWidget {
                         Navigator.push(
                             context,
                             PageTransition(
-                                type: PageTransitionType.leftToRight,
+                                type: PageTransitionType.rightToLeft,
                                 child: const SignUp()));
                       },
                       child: const Text(
-                        'SIGN UP',
+                        'Sign up for free',
                         style: TextStyle(
                             color: textColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14),
+                      ),
+                    ))
+                  ],
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ))),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: const SignIn()));
+                      },
+                      child: const Text(
+                        'Or log in',
+                        style: TextStyle(
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 14),
                       ),

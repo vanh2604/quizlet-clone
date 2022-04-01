@@ -30,7 +30,7 @@ class _StandbyScreenState extends State<StandbyScreen> {
             height: 200,
             decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("images/quizzy.png"), fit: BoxFit.cover)),
+                    image: AssetImage("assets/quizzy.png"), fit: BoxFit.cover)),
           ),
         );
       },
