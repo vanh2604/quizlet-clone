@@ -1,4 +1,4 @@
-<div id="top"></div>
+<!-- <div id="top"></div> -->
 <!-- [![Contributors][contributors-shield]][contributors-url] -->
 <!-- [![Forks][forks-shield]][forks-url] -->
 <!-- [![Stargazers][stars-shield]][stars-url] -->
@@ -41,8 +41,7 @@
 
 ## Acknowledgments
 
-- Student Name: Nguyen Duy Ngoc
-- Student ID: 19021341
+- Students: Vu Dinh Viet Anh, Dinh Viet Anh, Nguyen Duy Ngoc
 - Course: Mobile Development (INT3120_20)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -50,7 +49,7 @@
 ## About The Project
 
 <div align="center">
-  <a href="https://github.com/nooeen/flutterplayground">
+<!--   <a href="https://github.com/nooeen/flutterplayground">
     <img src="images/homepage.png" alt="Screenshot" width="188" height="334">
   </a>
   <a href="https://github.com/nooeen/flutterplayground">
@@ -61,17 +60,19 @@
   </a>
   <a href="https://github.com/nooeen/flutterplayground">
     <img src="images/helloworld2.png" alt="Screenshot" width="188" height="334">
-  </a>
+  </a> -->
 </div>
 
-Built based on the Flutter Fundamentals' course, these app focus on the basic features of Flutter, which will be the foundation for other Flutter apps made in the future.
+Built based on the Flutter and Firebase, these app focus on cloning the basic features Quizzy while improving its user interface with the power of Flutter
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
 
 - [Flutter](https://flutter.dev/)
+- [Firebase](https://firebase.google.com/)
 - [scoped_model](https://pub.dev/packages/scoped_model/versions/2.0.0-nullsafety.0)
+- [carousel_slider](https://pub.dev/packages/carousel_slider)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -79,7 +80,7 @@ Built based on the Flutter Fundamentals' course, these app focus on the basic fe
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/nooeen/flutterplayground.git
+   git clone https://github.com/vanh2604/quizlet-clone.git
    ```
 2. Create a iOS Simulator device using [Xcode](https://developer.apple.com/xcode/) or AVD using [Android Studio](https://developer.android.com/studio)
 3. Run the app
@@ -112,15 +113,12 @@ Distributed under the Github's Default License.
 
 ## Contact
 
-Ngoc Nguyen - duyngoc.nguyen2001@gmail.com
-
-Project Link: [https://github.com/nooeen/flutterplayground](https://github.com/nooeen/flutterplayground)
+Project Link: [https://github.com/vanh2604/quizlet-clone](https://github.com/vanh2604/quizlet-clone)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
 [contributors-shield]: https://img.shields.io/github/contributors/nooeen/flutterplayground.svg?style=for-the-badge
 [contributors-url]: https://github.com/nooeen/flutterplayground/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/nooeen/flutterplayground.svg?style=for-the-badge
