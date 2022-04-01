@@ -5,7 +5,7 @@ import '../utils/colors.dart';
 class SetCard extends StatelessWidget {
   final String title;
   final String username;
-  double terms;
+  int terms;
   double width;
   double height;
   // thêm một biến để lưu ảnh thay cho icon

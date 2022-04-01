@@ -1,5 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
+import 'package:quizlet/screens/folder_screen.dart';
+import 'package:quizlet/screens/set_screens/detail_set_screen.dart';
+import 'package:quizlet/screens/set_screens/set_screen.dart';
 import 'package:quizlet/screens/standby_screen.dart';
 
 void main() {
@@ -29,8 +32,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const Scaffold(
-        body: StandbyScreen(),
+      home: Scaffold(
+        body: FolderScreen(folderTitle: 'English', terms: 10, username: 'abc',),
       ),
       debugShowCheckedModeBanner: false,
     );
