@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class TermCard extends StatelessWidget {
   final String title;
   final String definition;
-  const TermCard({Key? key, required this.title, required this.definition}) : super(key: key);
-
+  const TermCard({Key? key, required this.title, required this.definition})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: 20, bottom: 15),
+      margin: const EdgeInsets.only(right: 20, bottom: 15),
       //height: 100,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -18,10 +18,9 @@ class TermCard extends StatelessWidget {
         color: const Color.fromRGBO(52, 58, 85, 1),
       ),
       child: Container(
-        constraints: BoxConstraints(
-          maxHeight: double.infinity
-        ),
-        padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+        constraints: const BoxConstraints(maxHeight: double.infinity),
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
         child: Column(
           children: [
             Row(
@@ -29,28 +28,28 @@ class TermCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width*(0.6),
+                  width: MediaQuery.of(context).size.width * (0.6),
                   child: AutoSizeText(
                     title,
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
-                Icon(Icons.favorite_border),
-
+                const Icon(Icons.favorite_border),
               ],
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               child: AutoSizeText(
                 definition,
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
               ),
             ),
           ],
         ),
       ),
-
     );
   }
 }
