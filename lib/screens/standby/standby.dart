@@ -45,11 +45,6 @@ class _StandbyScreenState extends State<StandbyScreen> {
             type: PageTransitionType.rightToLeft,
             child: const IntroductionScreen(),
           ));
-      // MaterialPageRoute(
-      //   builder: (BuildContext context) {
-      //     return IntroductionScreen();
-      //   },
-      // ),
     });
     return "Done";
   }

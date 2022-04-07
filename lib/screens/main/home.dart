@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const DetailSetScreen(),
+                        builder: (context) => const SetDetailScreen(),
                       ),
                     )
                   },
@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const DetailSetScreen(),
+                        builder: (context) => const SetDetailScreen(),
                       ),
                     )
                   },
@@ -137,7 +137,7 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const DetailSetScreen(),
+                        builder: (context) => const SetDetailScreen(),
                       ),
                     )
                   },

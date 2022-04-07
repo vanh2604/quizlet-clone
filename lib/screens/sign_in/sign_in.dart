@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-class SignIn extends StatelessWidget {
-  const SignIn({Key? key}) : super(key: key);
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,10 @@ class SignIn extends StatelessWidget {
             text: "Quizzy", color: Colors.white, size: 30, isBold: true),
         centerTitle: false,
         elevation: 0,
-        backgroundColor: darkThemeColor,
+        backgroundColor: authThemeColor,
       ),
       resizeToAvoidBottomInset: false,
-      backgroundColor: darkThemeColor,
+      backgroundColor: authThemeColor,
       body: Container(
           margin: const EdgeInsets.only(top: 50, left: 16, right: 16),
           child: SingleChildScrollView(
@@ -65,7 +65,7 @@ class SignIn extends StatelessWidget {
                     helperText: 'Email',
                     hintStyle:
                         TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
-                    hintText: "example@emai.com",
+                    hintText: "example@email.com",
                     helperStyle: TextStyle(color: textColor),
                     enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: textColor),

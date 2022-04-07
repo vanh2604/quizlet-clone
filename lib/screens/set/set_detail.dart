@@ -5,14 +5,14 @@ import 'package:quizlet/widgets/flip_term_card.dart';
 import 'package:quizlet/widgets/learn_custom_button.dart';
 import 'package:quizlet/widgets/term_card.dart';
 
-class DetailSetScreen extends StatefulWidget {
-  const DetailSetScreen({Key? key}) : super(key: key);
+class SetDetailScreen extends StatefulWidget {
+  const SetDetailScreen({Key? key}) : super(key: key);
 
   @override
-  State<DetailSetScreen> createState() => _DetailSetScreenState();
+  State<SetDetailScreen> createState() => _SetDetailScreenState();
 }
 
-class _DetailSetScreenState extends State<DetailSetScreen> {
+class _SetDetailScreenState extends State<SetDetailScreen> {
   late PageController _questionController;
   int activeQuestion = 0;
 

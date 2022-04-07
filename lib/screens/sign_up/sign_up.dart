@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-class SignUp extends StatelessWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,10 @@ class SignUp extends StatelessWidget {
             text: "Quizzy", color: Colors.white, size: 30, isBold: true),
         centerTitle: false,
         elevation: 0,
-        backgroundColor: darkThemeColor,
+        backgroundColor: authThemeColor,
       ),
       resizeToAvoidBottomInset: false,
-      backgroundColor: darkThemeColor,
+      backgroundColor: authThemeColor,
       body: Container(
           margin: const EdgeInsets.only(top: 50, left: 16, right: 16),
           child: SingleChildScrollView(
