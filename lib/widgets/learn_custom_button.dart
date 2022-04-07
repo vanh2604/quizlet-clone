@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 class LearnCustomButton extends StatelessWidget {
   final String text;
-  IconData icon;
-  LearnCustomButton({Key? key, required this.text, required this.icon})
+  final IconData icon;
+  const LearnCustomButton({Key? key, required this.text, required this.icon})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class LearnCustomButton extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          AppText(text: text, color: Colors.white)
+          QText(text: text, color: Colors.white)
         ],
       ),
     );

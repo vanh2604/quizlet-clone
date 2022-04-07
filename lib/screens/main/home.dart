@@ -1,13 +1,12 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/set_screens/detail_set_screen.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/screens/set/set_detail.dart';
+import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/folder_card_home.dart';
 import 'package:quizlet/widgets/set_card_home.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +25,16 @@ class Home extends StatelessWidget {
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppText(
+              children: const [
+                QText(
                   text: 'Sets',
                   color: Colors.white,
                   size: 14,
                   isBold: true,
                 ),
-                AppText(
+                QText(
                     text: 'View all',
-                    color: const Color.fromRGBO(103, 108, 168, 1),
+                    color: Color.fromRGBO(103, 108, 168, 1),
                     size: 14),
               ],
             ),
@@ -69,16 +68,16 @@ class Home extends StatelessWidget {
             margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppText(
+              children: const [
+                QText(
                   text: 'Folders',
                   color: Colors.white,
                   size: 14,
                   isBold: true,
                 ),
-                AppText(
+                QText(
                     text: 'View all',
-                    color: const Color.fromRGBO(103, 108, 168, 1),
+                    color: Color.fromRGBO(103, 108, 168, 1),
                     size: 14),
               ],
             ),
@@ -112,16 +111,16 @@ class Home extends StatelessWidget {
             margin: const EdgeInsets.only(top: 0, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppText(
+              children: const [
+                QText(
                   text: 'Recommended',
                   color: Colors.white,
                   size: 14,
                   isBold: true,
                 ),
-                AppText(
+                QText(
                     text: 'View all',
-                    color: const Color.fromRGBO(103, 108, 168, 1),
+                    color: Color.fromRGBO(103, 108, 168, 1),
                     size: 14),
               ],
             ),

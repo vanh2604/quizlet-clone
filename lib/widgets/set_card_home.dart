@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 import '../utils/colors.dart';
 
 class SetCardBig extends StatelessWidget {
   final String title;
   final String username;
-  int terms;
-  double width;
-  double height;
+  final int terms;
+  final double width;
+  final double height;
   // thêm một biến để lưu ảnh thay cho icon
 
-  SetCardBig({
+  const SetCardBig({
     Key? key,
     required this.title,
     required this.username,
@@ -21,34 +21,6 @@ class SetCardBig extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  // Widget build(BuildContext context) {
-  //   return Container(
-  //     padding: const EdgeInsets.only(left: 20, top:5, bottom: 10),
-  //     width: width,
-  //     height: height,
-  //     decoration: BoxDecoration(
-  //       color: darkThemeColor,
-  //       border: Border.all(color: const Color.fromRGBO(52, 58, 85, 1)),
-  //       borderRadius: BorderRadius.circular(20)
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //       children: [
-  //         AppText(text: title, color: textColor, size: 25),
-  //         //const SizedBox(height: 2,),
-  //         AppText(text: terms.toString()+" terms", color: termTextColor),
-  //         const SizedBox(height: 50,),
-  //         Row(
-  //           children: [
-  //             Icon(Icons.search),
-  //             const SizedBox(width: 10,),
-  //             AppText(text: title, color: textColor, size: 10,)
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 0, 5, 5),
@@ -62,8 +34,8 @@ class SetCardBig extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: AppText(text: title, color: Colors.white, size: 22.5),
-                  subtitle: AppText(
+                  title: QText(text: title, color: Colors.white, size: 22.5),
+                  subtitle: QText(
                       text: terms.toString() + " terms",
                       color: termTextColor,
                       size: 12.5),
@@ -80,7 +52,7 @@ class SetCardBig extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      AppText(
+                      QText(
                         text: title,
                         color: textColor,
                         size: 13,

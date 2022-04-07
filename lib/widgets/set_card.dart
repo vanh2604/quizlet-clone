@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 import '../utils/colors.dart';
+
 class SetCard extends StatelessWidget {
   final String title;
   final String username;
-  int terms;
-  double width;
-  double height;
+  final int terms;
+  final double width;
+  final double height;
   // thêm một biến để lưu ảnh thay cho icon
 
-  SetCard({Key? key,
+  const SetCard({
+    Key? key,
     required this.title,
     required this.username,
-    this.terms = 0,
-    this.width = double.infinity,
-    this.height = 150,
+    final this.terms = 0,
+    final this.width = double.infinity,
+    final this.height = 150,
   }) : super(key: key);
 
   @override
@@ -55,24 +57,34 @@ class SetCard extends StatelessWidget {
           Card(
             color: const Color.fromRGBO(52, 58, 85, 1),
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20))
-            ),
+                borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                 ListTile(
-                  title: AppText(text: title, color: Colors.white, size:22.5),
-                   subtitle: AppText(text: terms.toString() + " terms", color: termTextColor, size:12.5),
+                ListTile(
+                  title: QText(text: title, color: Colors.white, size: 22.5),
+                  subtitle: QText(
+                      text: terms.toString() + " terms",
+                      color: termTextColor,
+                      size: 12.5),
                 ),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(12,0,0,10),
+                  padding: const EdgeInsets.fromLTRB(12, 0, 0, 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Icon(Icons.search) , // Thay bằng ảnh
-                      const SizedBox(width: 10,),
-                      AppText(text: title, color: textColor, size: 13,)
+                      const Icon(Icons.search), // Thay bằng ảnh
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      QText(
+                        text: title,
+                        color: textColor,
+                        size: 13,
+                      )
                     ],
                   ),
                 )
@@ -83,5 +95,4 @@ class SetCard extends StatelessWidget {
       ),
     );
   }
-
 }
