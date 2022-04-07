@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
-import 'package:quizlet/screens/sign_in/sign_in.dart';
-import 'package:quizlet/screens/sign_up/sign_up.dart';
 
 final List<String> imgList = [
   'assets/quizzy_intro1.png',
@@ -108,13 +105,8 @@ class IntroductionScreen extends StatelessWidget {
                                       RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ))),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-                                        child: const SignUpScreen()));
-                              },
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, '/signup'),
                               child: const Text(
                                 'Sign up for free',
                                 style: TextStyle(
@@ -138,13 +130,10 @@ class IntroductionScreen extends StatelessWidget {
                                       RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ))),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.rightToLeft,
-                                        child: const SignInScreen()));
-                              },
+                              onPressed: () => Navigator.pushNamed(
+                                context,
+                                '/signin',
+                              ),
                               child: const Text(
                                 'Or log in',
                                 style: TextStyle(
