@@ -60,7 +60,7 @@ class IntroductionScreen extends StatelessWidget {
         body: Container(
             color: introBackgroundColor,
             child: Container(
-                padding: const EdgeInsets.fromLTRB(0, 25, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                 child: Column(children: <Widget>[
                   SizedBox(
                     height: 300,
@@ -93,65 +93,70 @@ class IntroductionScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ))),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: const SignUp()));
-                          },
-                          child: const Text(
-                            'Sign up for free',
-                            style: TextStyle(
-                                color: textColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                          ),
-                        ))
-                      ],
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                            child: ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ))),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: const SignIn()));
-                          },
-                          child: const Text(
-                            'Or log in',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14),
-                          ),
-                        ))
-                      ],
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 25),
+                    child: Column(children: [
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: ElevatedButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ))),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: const SignUp()));
+                              },
+                              child: const Text(
+                                'Sign up for free',
+                                style: TextStyle(
+                                    color: textColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                              ),
+                            ))
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                                child: ElevatedButton(
+                              style: ButtonStyle(
+                                  shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ))),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.rightToLeft,
+                                        child: const SignIn()));
+                              },
+                              child: const Text(
+                                'Or log in',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14),
+                              ),
+                            ))
+                          ],
+                        ),
+                      ),
+                    ]),
                   ),
                 ]))));
   }

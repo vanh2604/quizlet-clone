@@ -35,13 +35,15 @@ class SignUp extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset('assets/apple.png', width: 50, height: 50),
                       Container(
-                        margin: const EdgeInsets.only(left: 45, right: 45),
+                        margin: const EdgeInsets.only(left: 25, right: 25),
                         child: Image.asset('assets/facebook.png',
                             width: 50, height: 50),
                       ),
-                      Image.asset('assets/google.png', width: 50, height: 50)
+                      Container(
+                          margin: const EdgeInsets.only(left: 25, right: 25),
+                          child: Image.asset('assets/google.png',
+                              width: 50, height: 50))
                     ],
                   ),
                 ),
