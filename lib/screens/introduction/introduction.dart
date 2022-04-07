@@ -113,7 +113,7 @@ class IntroductionScreen extends StatelessWidget {
                                     context,
                                     PageTransition(
                                         type: PageTransitionType.rightToLeft,
-                                        child: const SignUp()));
+                                        child: const SignUpScreen()));
                               },
                               child: const Text(
                                 'Sign up for free',
@@ -143,7 +143,7 @@ class IntroductionScreen extends StatelessWidget {
                                     context,
                                     PageTransition(
                                         type: PageTransitionType.rightToLeft,
-                                        child: const SignIn()));
+                                        child: const SignInScreen()));
                               },
                               child: const Text(
                                 'Or log in',
