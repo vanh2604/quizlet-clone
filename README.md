@@ -112,12 +112,6 @@ Distributed under the Github's Default License.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Contact
-
-Project Link: [https://github.com/vanh2604/quizlet-clone](https://github.com/vanh2604/quizlet-clone)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/nooeen/flutterplayground.svg?style=for-the-badge
