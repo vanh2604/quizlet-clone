@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/introduction/introduction.dart';
 import 'package:quizlet/utils/colors.dart';
-import 'package:page_transition/page_transition.dart';
-import 'dart:async';
 
 class StandbyScreen extends StatefulWidget {
   const StandbyScreen({Key? key}) : super(key: key);
@@ -39,12 +36,8 @@ class _StandbyScreenState extends State<StandbyScreen> {
 
   Future<String> _navigateToIntroduction() async {
     await Future.delayed(const Duration(seconds: 5)).then((value) {
-      Navigator.pushReplacement(
-          context,
-          PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: const IntroductionScreen(),
-          ));
+      Navigator.pushNamedAndRemoveUntil(
+          context, 'introduction', (route) => false);
     });
     return "Done";
   }
