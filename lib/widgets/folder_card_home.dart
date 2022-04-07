@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 import '../utils/colors.dart';
 
 class FolderCardBig extends StatelessWidget {
   final String title;
   final String username;
-  int terms;
-  double width;
-  double height;
+  final int terms;
+  final double width;
+  final double height;
   // thêm một biến để lưu ảnh thay cho icon
 
-  FolderCardBig({
+  const FolderCardBig({
     Key? key,
     required this.title,
     required this.username,
@@ -62,14 +62,14 @@ class FolderCardBig extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: AppText(
+                  title: QText(
                       text: terms.toString() + " sets",
                       color: termTextColor,
                       size: 12.5),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 0, 20),
-                  child: AppText(
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(12, 0, 0, 20),
+                  child: QText(
                     text: "English",
                     color: textColor,
                     isBold: true,
@@ -85,7 +85,7 @@ class FolderCardBig extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      AppText(
+                      QText(
                         text: title,
                         color: textColor,
                         size: 13,

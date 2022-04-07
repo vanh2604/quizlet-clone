@@ -27,7 +27,7 @@ class TermCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * (0.6),
                   child: AutoSizeText(
                     title,
@@ -40,7 +40,7 @@ class TermCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width,
               child: AutoSizeText(
                 definition,

@@ -62,13 +62,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/quizzy.png
-    - assets/quizzy_intro1.png
-    - assets/quizzy_intro2.png
-    - assets/quizzy_intro3.png
-    - assets/apple.png
-    - assets/facebook.png
-    - assets/google.png
+    - assets/
   fonts:
     - family: GoogleSans
       fonts:

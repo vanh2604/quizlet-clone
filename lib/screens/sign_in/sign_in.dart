@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -7,6 +8,13 @@ class SignIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const QText(
+            text: "Quizzy", color: Colors.white, size: 30, isBold: true),
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: darkThemeColor,
+      ),
       resizeToAvoidBottomInset: false,
       backgroundColor: darkThemeColor,
       body: Container(
@@ -27,13 +35,13 @@ class SignIn extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset('apple.png', width: 50, height: 50),
+                      Image.asset('assets/apple.png', width: 50, height: 50),
                       Container(
                         margin: const EdgeInsets.only(left: 45, right: 45),
-                        child:
-                            Image.asset('facebook.png', width: 50, height: 50),
+                        child: Image.asset('assets/facebook.png',
+                            width: 50, height: 50),
                       ),
-                      Image.asset('google.png', width: 50, height: 50)
+                      Image.asset('assets/google.png', width: 50, height: 50)
                     ],
                   ),
                 ),

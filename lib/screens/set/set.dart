@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/set_card.dart';
-import 'package:quizlet/screens/set_screens/detail_set_screen.dart';
+import 'package:quizlet/screens/set/set_detail.dart';
 
 class SetScreen extends StatelessWidget {
   const SetScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class SetScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: AppText(
+        title: const QText(
           color: Colors.white,
           text: 'Sets',
           size: 35,

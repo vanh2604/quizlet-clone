@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
-import '../widgets/set_card.dart';
+import '../../widgets/set_card.dart';
 
 class FolderScreen extends StatelessWidget {
   final String folderTitle;
   final String username;
-  int terms;
-  FolderScreen(
+  final int terms;
+  const FolderScreen(
       {Key? key,
       required this.folderTitle,
       required this.username,
@@ -34,7 +34,7 @@ class FolderScreen extends StatelessWidget {
           //mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AppText(
+            QText(
               text: folderTitle,
               color: Colors.white,
               isBold: true,
@@ -46,7 +46,7 @@ class FolderScreen extends StatelessWidget {
                 const SizedBox(
                   width: 5,
                 ),
-                AppText(text: username, color: Colors.white),
+                QText(text: username, color: Colors.white),
                 const SizedBox(
                   width: 5,
                 )
@@ -65,52 +65,49 @@ class FolderScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back))
         ],
       ),
-      body: Container(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 90,
-              child: Container(
-                margin: const EdgeInsets.only(right: 15, left: 15, top: 10),
-                //height: MediaQuery.of(context).size.height*0.78,
-                child: ListView.builder(
-                  itemCount: _setCard.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return SetCard(
-                      terms: _setCard[index]['terms'],
-                      title: _setCard[index]['title'],
-                      username: _setCard[index]['username'],
-                    );
-                  },
-                ),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 90,
+            child: Container(
+              margin: const EdgeInsets.only(right: 15, left: 15, top: 10),
+              //height: MediaQuery.of(context).size.height*0.78,
+              child: ListView.builder(
+                itemCount: _setCard.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return SetCard(
+                    terms: _setCard[index]['terms'],
+                    title: _setCard[index]['title'],
+                    username: _setCard[index]['username'],
+                  );
+                },
               ),
             ),
-            Expanded(
-              flex: 10,
-              child: Container(
-                //height: MediaQuery.of(context).size.height*0.07,
-                width: MediaQuery.of(context).size.width,
+          ),
+          Expanded(
+            flex: 10,
+            child: Container(
+              //height: MediaQuery.of(context).size.height*0.07,
+              width: MediaQuery.of(context).size.width,
 
-                margin: const EdgeInsets.only(
-                    left: 30, right: 30, top: 10, bottom: 10),
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(10)),
-                child: SizedBox(
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      //padding: const EdgeInsets.all(16.0),
-                      primary: Colors.white,
-                      textStyle: const TextStyle(fontSize: 15),
-                    ),
-                    onPressed: () {},
-                    child: const AutoSizeText("Study this folder"),
+              margin: const EdgeInsets.only(
+                  left: 30, right: 30, top: 10, bottom: 10),
+              decoration: BoxDecoration(
+                  color: Colors.blue, borderRadius: BorderRadius.circular(10)),
+              child: SizedBox(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    //padding: const EdgeInsets.all(16.0),
+                    primary: Colors.white,
+                    textStyle: const TextStyle(fontSize: 15),
                   ),
+                  onPressed: () {},
+                  child: const AutoSizeText("Study this folder"),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
     );

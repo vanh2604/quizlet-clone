@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class AppText extends StatelessWidget {
-  double size;
+class QText extends StatelessWidget {
+  final double size;
   final String text;
   final Color color;
-  bool isBold;
+  final bool isBold;
 
-  AppText(
+  const QText(
       {Key? key,
       required this.text,
       required this.color,

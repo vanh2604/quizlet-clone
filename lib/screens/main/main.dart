@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/homepage.dart';
-import 'package:quizlet/screens/search.dart';
-import 'package:quizlet/widgets/app_text.dart';
+import 'package:quizlet/widgets/qtext.dart';
+import 'package:quizlet/screens/main/home.dart';
+import 'package:quizlet/screens/main/search.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({Key? key}) : super(key: key);
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
   Widget getBody() {
     switch (currentIndex) {
       case 0:
-        return const Home();
+        return const HomeScreen();
       case 1:
         return const SearchScreen();
       default:
-        return const Home();
+        return const HomeScreen();
     }
   }
 
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppText(
+        title: const QText(
             text: "Quizzy", color: Colors.white, size: 30, isBold: true),
         centerTitle: false,
         elevation: 0,

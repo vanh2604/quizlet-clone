@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/introduction_screen.dart';
+import 'package:quizlet/screens/introduction/introduction.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:async';
