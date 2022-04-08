@@ -36,8 +36,8 @@ class _StandbyScreenState extends State<StandbyScreen> {
 
   Future<String> _navigateToIntroduction() async {
     await Future.delayed(const Duration(seconds: 5)).then((value) {
-      Navigator.pushNamedAndRemoveUntil(
-          context, 'introduction', (route) => false);
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/introduction', (Route<dynamic> route) => false);
     });
     return "Done";
   }
