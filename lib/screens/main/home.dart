@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:quizlet/screens/set/set_detail.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/folder_card_home.dart';
 import 'package:quizlet/widgets/set_card_home.dart';
@@ -48,12 +47,7 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SetDetailScreen(),
-                      ),
-                    )
+                    Navigator.pushNamed(context, '/set'),
                   },
                   child: SetCardBig(
                     title: _setCard[index]['title'],
@@ -91,12 +85,7 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SetDetailScreen(),
-                      ),
-                    )
+                    Navigator.pushNamed(context, '/set'),
                   },
                   child: FolderCardBig(
                     title: _setCard[index]['title'],
@@ -134,12 +123,7 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onTap: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SetDetailScreen(),
-                      ),
-                    )
+                    Navigator.pushNamed(context, '/set'),
                   },
                   child: SetCardBig(
                     title: _setCard[index]['title'],
