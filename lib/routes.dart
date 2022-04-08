@@ -3,8 +3,8 @@ import 'package:quizlet/screens/introduction/introduction.dart';
 import 'package:quizlet/screens/sign_up/sign_up.dart';
 import 'package:quizlet/screens/sign_in/sign_in.dart';
 import 'package:quizlet/screens/main/main.dart';
+import 'package:quizlet/screens/set/sets.dart';
 import 'package:quizlet/screens/set/set.dart';
-import 'package:quizlet/screens/set/set_detail.dart';
 // import 'package:quizlet/screens/folder/folder.dart';
 
 var appRoutes = {
@@ -14,6 +14,6 @@ var appRoutes = {
   '/signin': (context) => const SignInScreen(),
   '/main': (context) => const MainScreen(),
   '/set': (context) => const SetScreen(),
-  '/set/detail': (context) => const SetDetailScreen(),
+  '/sets': (context) => const SetsScreen(),
   // '/folder': (context) => const FolderScreen(),
 };
