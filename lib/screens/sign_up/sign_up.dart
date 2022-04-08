@@ -99,7 +99,9 @@ class SignUpScreen extends StatelessWidget {
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ))),
-                        onPressed: () {},
+                        onPressed: () => Navigator.of(context)
+                            .pushNamedAndRemoveUntil(
+                                '/main', (Route<dynamic> route) => false),
                         child: const Text(
                           'SIGN UP',
                           style: TextStyle(
