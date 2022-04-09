@@ -21,34 +21,6 @@ class FolderCardBig extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  // Widget build(BuildContext context) {
-  //   return Container(
-  //     padding: const EdgeInsets.only(left: 20, top:5, bottom: 10),
-  //     width: width,
-  //     height: height,
-  //     decoration: BoxDecoration(
-  //       color: darkThemeColor,
-  //       border: Border.all(color: const Color.fromRGBO(52, 58, 85, 1)),
-  //       borderRadius: BorderRadius.circular(20)
-  //     ),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //       children: [
-  //         AppText(text: title, color: textColor, size: 25),
-  //         //const SizedBox(height: 2,),
-  //         AppText(text: terms.toString()+" terms", color: termTextColor),
-  //         const SizedBox(height: 50,),
-  //         Row(
-  //           children: [
-  //             Icon(Icons.search),
-  //             const SizedBox(width: 10,),
-  //             AppText(text: title, color: textColor, size: 10,)
-  //           ],
-  //         ),
-  //       ],
-  //     ),
-  //   );
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 0, 5, 5),
