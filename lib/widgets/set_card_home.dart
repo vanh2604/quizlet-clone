@@ -34,7 +34,8 @@ class SetCardBig extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: QText(text: title, color: Colors.white, size: 22.5),
+                  title: QText(
+                      text: title, color: Colors.white, size: 18, isBold: true),
                   subtitle: QText(
                       text: terms.toString() + " terms",
                       color: termTextColor,

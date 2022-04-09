@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         (index) => {
               'username': 'Person #$index',
               'terms': Random().nextInt(100) + 1,
-              'title': 'Title $index',
+              'title': 'English $index',
             });
     return SingleChildScrollView(
       child: Container(
