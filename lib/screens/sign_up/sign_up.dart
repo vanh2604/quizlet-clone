@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final emailTextController = TextEditingController();
+    final passwordTextController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const QText(
@@ -58,9 +62,10 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 TextFormField(
+                  controller: emailTextController,
                   style: const TextStyle(color: textColor),
                   cursorColor: textColor,
-                  maxLength: 20,
+                  maxLength: 50,
                   decoration: const InputDecoration(
                     helperText: 'Email',
                     hintStyle:
@@ -73,6 +78,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 TextFormField(
+                  controller: passwordTextController,
                   cursorColor: textColor,
                   maxLength: 20,
                   obscureText: true,
@@ -99,9 +105,26 @@ class SignUpScreen extends StatelessWidget {
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ))),
-                        onPressed: () => Navigator.of(context)
-                            .pushNamedAndRemoveUntil(
-                                '/main', (Route<dynamic> route) => false),
+                        onPressed: () async {
+                          try {
+                            final credential = await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                              email: emailTextController.text,
+                              password: passwordTextController.text,
+                            );
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/main', (Route<dynamic> route) => false);
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'weak-password') {
+                              print('The password provided is too weak.');
+                            } else if (e.code == 'email-already-in-use') {
+                              print(
+                                  'The account already exists for that email.');
+                            }
+                          } catch (e) {
+                            print(e);
+                          }
+                        },
                         child: const Text(
                           'SIGN UP',
                           style: TextStyle(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class StandbyScreen extends StatefulWidget {
   const StandbyScreen({Key? key}) : super(key: key);
@@ -36,8 +37,17 @@ class _StandbyScreenState extends State<StandbyScreen> {
 
   Future<String> _navigateToIntroduction() async {
     await Future.delayed(const Duration(seconds: 5)).then((value) {
-      Navigator.of(context).pushNamedAndRemoveUntil(
-          '/introduction', (Route<dynamic> route) => false);
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              '/introduction', (Route<dynamic> route) => false);
+        } else {
+          print('User is signed in!');
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              '/main', (Route<dynamic> route) => false);
+        }
+      });
     });
     return "Done";
   }

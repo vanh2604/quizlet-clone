@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
+import 'package:quizlet/screens/user/user.dart';
 import 'package:quizlet/screens/main/home.dart';
 import 'package:quizlet/screens/main/search.dart';
 
@@ -17,6 +18,10 @@ class _MainScreenState extends State<MainScreen> {
         return const HomeScreen();
       case 1:
         return const SearchScreen();
+      case 2:
+        return const HomeScreen();
+      case 3:
+        return const UserScreen();
       default:
         return const HomeScreen();
     }
@@ -45,7 +50,7 @@ class _MainScreenState extends State<MainScreen> {
             currentIndex = index;
           });
         },
-        showSelectedLabels: false, // <-- HERE
+        showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const [
           BottomNavigationBarItem(
