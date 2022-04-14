@@ -91,7 +91,7 @@ class IntroductionScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 25),
+                    padding: const EdgeInsets.only(top: 35),
                     child: Column(children: [
                       Container(
                         margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -128,7 +128,7 @@ class IntroductionScreen extends StatelessWidget {
                               child: const Text(
                                 'Or log in',
                                 style: TextStyle(
-                                  color: const Color(0xFF656B86),
+                                  color: Color(0xFF656B86),
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
