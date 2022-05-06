@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
 
 class StandbyScreen extends StatefulWidget {
   const StandbyScreen({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class StandbyScreen extends StatefulWidget {
 }
 
 class _StandbyScreenState extends State<StandbyScreen> {
+  // late StreamSubscription<User> _listener;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,16 +42,24 @@ class _StandbyScreenState extends State<StandbyScreen> {
     await Future.delayed(const Duration(seconds: 5)).then((value) {
       FirebaseAuth.instance.authStateChanges().listen((User? user) {
         if (user == null) {
-          print('User is currently signed out!');
+          // print('User is currently signed out!');
           Navigator.of(context).pushNamedAndRemoveUntil(
               '/introduction', (Route<dynamic> route) => false);
         } else {
-          print('User is signed in!');
+          // print('User is signed in!');
           Navigator.of(context).pushNamedAndRemoveUntil(
               '/main', (Route<dynamic> route) => false);
         }
       });
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/main', (Route<dynamic> route) => false);
     });
     return "Done";
+  }
+
+  @override
+  void dispose() {
+    // _listener.cancel();
+    super.dispose();
   }
 }
