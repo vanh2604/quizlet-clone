@@ -91,7 +91,7 @@ class IntroductionScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 25),
+                    padding: const EdgeInsets.only(top: 35),
                     child: Column(children: [
                       Container(
                         margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
@@ -119,32 +119,23 @@ class IntroductionScreen extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                                child: ElevatedButton(
-                              style: ButtonStyle(
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ))),
-                              onPressed: () => Navigator.pushNamed(
-                                context,
-                                '/signin',
-                              ),
+                          margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: GestureDetector(
+                              onTap: () =>
+                                  Navigator.pushNamed(context, '/signin'),
                               child: const Text(
                                 'Or log in',
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14),
+                                  color: Color(0xFF656B86),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                            ))
-                          ],
-                        ),
-                      ),
+                            ),
+                          )),
                     ]),
                   ),
                 ]))));

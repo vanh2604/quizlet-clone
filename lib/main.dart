@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Quizzy',
+      initialRoute: '/',
       routes: appRoutes,
       theme: appTheme,
       themeMode: ThemeMode.dark,

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:quizlet/services/auth.services.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final emailTextController = TextEditingController();
+    final passwordTextController = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(
         title: const QText(
@@ -31,19 +36,48 @@ class SignUpScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 20),
+                  margin: const EdgeInsets.only(top: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.only(left: 25, right: 25),
-                        child: Image.asset('assets/facebook.png',
-                            width: 50, height: 50),
-                      ),
-                      Container(
-                          margin: const EdgeInsets.only(left: 25, right: 25),
-                          child: Image.asset('assets/google.png',
-                              width: 50, height: 50))
+                    children: [
+                      Expanded(
+                          child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ))),
+                        onPressed: () async {
+                          await AuthService().googleLogin();
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/main', (Route<dynamic> route) => false);
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Image.asset(
+                                'assets/google.png',
+                                width: 25,
+                                height: 25,
+                              ),
+                            ),
+                            const Text(
+                              'SIGN UP WITH GOOGLE',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14),
+                            ),
+                          ],
+                        ),
+                      ))
                     ],
                   ),
                 ),
@@ -58,9 +92,10 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 TextFormField(
+                  controller: emailTextController,
                   style: const TextStyle(color: textColor),
                   cursorColor: textColor,
-                  maxLength: 20,
+                  maxLength: 50,
                   decoration: const InputDecoration(
                     helperText: 'Email',
                     hintStyle:
@@ -73,6 +108,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 TextFormField(
+                  controller: passwordTextController,
                   cursorColor: textColor,
                   maxLength: 20,
                   obscureText: true,
@@ -99,9 +135,15 @@ class SignUpScreen extends StatelessWidget {
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ))),
-                        onPressed: () => Navigator.of(context)
-                            .pushNamedAndRemoveUntil(
-                                '/main', (Route<dynamic> route) => false),
+                        onPressed: () async {
+                          await AuthService().emailLogin(
+                              emailTextController.text,
+                              passwordTextController.text);
+                          if (FirebaseAuth.instance.currentUser != null) {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/main', (Route<dynamic> route) => false);
+                          }
+                        },
                         child: const Text(
                           'SIGN UP',
                           style: TextStyle(

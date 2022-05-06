@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
-import 'package:quizlet/screens/main/home.dart';
-import 'package:quizlet/screens/main/search.dart';
+import 'package:quizlet/screens/main/user/user.dart';
+import 'package:quizlet/screens/main/home/home.dart';
+import 'package:quizlet/screens/main/search/search.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -17,6 +18,10 @@ class _MainScreenState extends State<MainScreen> {
         return const HomeScreen();
       case 1:
         return const SearchScreen();
+      case 2:
+        return const HomeScreen();
+      case 3:
+        return const UserScreen();
       default:
         return const HomeScreen();
     }
@@ -41,11 +46,13 @@ class _MainScreenState extends State<MainScreen> {
         unselectedFontSize: 14,
         currentIndex: currentIndex,
         onTap: (int index) {
-          setState(() {
-            currentIndex = index;
-          });
+          if (mounted) {
+            setState(() {
+              currentIndex = index;
+            });
+          }
         },
-        showSelectedLabels: false, // <-- HERE
+        showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const [
           BottomNavigationBarItem(
