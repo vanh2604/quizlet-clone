@@ -22,22 +22,36 @@ class AuthService {
     }
   }
 
-  Future<void> emailLogin(email, password) async {
+  Future<String> emailSignup(email, password) async {
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        return 'weak-password'; //The password provided is too weak
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        return 'email-already-in-use'; // The account already exists for that email
       }
     } catch (e) {
       print(e);
     }
+    return '';
+  }
+
+  Future<String> emailSignin(email, password) async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return 'user-not-found'; // User with that email doesn't exist
+      } else if (e.code == 'wrong-password') {
+        return 'wrong-password'; // The password is invalid
+      }
+    }
+    return '';
   }
 
   Future<void> signOut() async {

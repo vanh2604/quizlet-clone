@@ -3,7 +3,6 @@ import 'package:quizlet/screens/set/learn/result_screen.dart';
 
 import '../../../data/question_data.dart';
 
-
 class LearnScreen extends StatefulWidget {
   const LearnScreen({Key? key}) : super(key: key);
 
@@ -86,44 +85,58 @@ class _LearnScreenState extends State<LearnScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-
-                        fillColor: btnPressed ? (i==selected_index?(questions[index].answers!.values.toList()[i]?Colors.green:Colors.red):(questions[index].answers!.values.toList()[i]?Colors.green:const Color.fromRGBO(12, 12, 48, 1))): const Color.fromRGBO(12, 12, 48, 1),
-                        onPressed: !answered?() {
-                          if (questions[index].answers!.values.toList()[i]) {
-                            score++;
-                            print("yes");
-                            setState(() {
-                              selected_index = i;
-                            });
-
-                          } else {
-                            setState(() {
-                              selected_index = i;
-                            });
-                            print("no");
-                          }
-                          print(selected_index);
-                          setState(() {
-                            btnPressed = true;
-                            answered = true;
-                          });
-                          Future.delayed(const Duration(seconds: 3),() {
-                            if (_controller!.page?.toInt() == questions.length - 1) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ResultScreen(score)));
-                            } else {
-                              _controller!.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
-                              setState(() {
-                                btnPressed = false;
-                                selected_index= -1;
-                              });
-                            }
-                          });
-
-                        }:null,
-
+                        fillColor: btnPressed
+                            ? (i == selected_index
+                                ? (questions[index].answers!.values.toList()[i]
+                                    ? Colors.green
+                                    : Colors.red)
+                                : (questions[index].answers!.values.toList()[i]
+                                    ? Colors.green
+                                    : const Color.fromRGBO(12, 12, 48, 1)))
+                            : const Color.fromRGBO(12, 12, 48, 1),
+                        onPressed: !answered
+                            ? () {
+                                if (questions[index]
+                                    .answers!
+                                    .values
+                                    .toList()[i]) {
+                                  score++;
+                                  print("yes");
+                                  setState(() {
+                                    selected_index = i;
+                                  });
+                                } else {
+                                  setState(() {
+                                    selected_index = i;
+                                  });
+                                  print("no");
+                                }
+                                print(selected_index);
+                                setState(() {
+                                  btnPressed = true;
+                                  answered = true;
+                                });
+                                Future.delayed(const Duration(seconds: 3), () {
+                                  if (_controller!.page?.toInt() ==
+                                      questions.length - 1) {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ResultScreen(score)));
+                                  } else {
+                                    _controller!.nextPage(
+                                        duration:
+                                            const Duration(milliseconds: 250),
+                                        curve: Curves.easeInOut);
+                                    setState(() {
+                                      btnPressed = false;
+                                      selected_index = -1;
+                                    });
+                                  }
+                                });
+                              }
+                            : null,
                         child: Text(questions[index].answers!.keys.toList()[i],
                             style: const TextStyle(
                               color: Colors.white,
