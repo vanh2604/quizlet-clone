@@ -4,9 +4,14 @@ import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     final emailTextController = TextEditingController();
@@ -125,7 +130,7 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 240),
+                  margin: const EdgeInsets.only(top: 20),
                   child: Row(
                     children: [
                       Expanded(
@@ -136,12 +141,49 @@ class SignInScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ))),
                         onPressed: () async {
-                          await AuthService().emailLogin(
-                              emailTextController.text,
-                              passwordTextController.text);
-                          if (FirebaseAuth.instance.currentUser != null) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/main', (Route<dynamic> route) => false);
+                          if (emailTextController.text != '' &&
+                              passwordTextController.text != '') {
+                            final emailResult = await AuthService().emailSignin(
+                                emailTextController.text,
+                                passwordTextController.text);
+                            if (emailResult == 'user-not-found') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: QText(
+                                      text:
+                                          'User with that email doesn\'t exist.',
+                                      color: Colors.white),
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: snackBarColor,
+                                ),
+                              );
+                            }
+                            if (emailResult == 'wrong-password') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: QText(
+                                      text: 'The password is invalid.',
+                                      color: Colors.white),
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: snackBarColor,
+                                ),
+                              );
+                            }
+                            if (FirebaseAuth.instance.currentUser != null &&
+                                mounted) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  '/main', (Route<dynamic> route) => false);
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: QText(
+                                    text: 'Please fill in all fields',
+                                    color: Colors.white),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: snackBarColor,
+                              ),
+                            );
                           }
                         },
                         child: const Text(

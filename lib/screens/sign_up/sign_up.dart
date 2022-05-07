@@ -4,9 +4,14 @@ import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     final emailTextController = TextEditingController();
@@ -125,7 +130,7 @@ class SignUpScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 250),
+                  margin: const EdgeInsets.only(top: 20),
                   child: Row(
                     children: [
                       Expanded(
@@ -136,12 +141,49 @@ class SignUpScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10.0),
                         ))),
                         onPressed: () async {
-                          await AuthService().emailLogin(
-                              emailTextController.text,
-                              passwordTextController.text);
-                          if (FirebaseAuth.instance.currentUser != null) {
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/main', (Route<dynamic> route) => false);
+                          if (emailTextController.text != '' &&
+                              passwordTextController.text != '') {
+                            final emailResult = await AuthService().emailSignin(
+                                emailTextController.text,
+                                passwordTextController.text);
+                            if (emailResult == 'weak-password') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: QText(
+                                      text: 'The password provided is too weak',
+                                      color: Colors.white),
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: snackBarColor,
+                                ),
+                              );
+                            }
+                            if (emailResult == 'email-already-in-use') {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: QText(
+                                      text:
+                                          'The account already exists for that email',
+                                      color: Colors.white),
+                                  behavior: SnackBarBehavior.floating,
+                                  backgroundColor: snackBarColor,
+                                ),
+                              );
+                            }
+                            if (FirebaseAuth.instance.currentUser != null &&
+                                mounted) {
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  '/main', (Route<dynamic> route) => false);
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: QText(
+                                    text: 'Please fill in all fields',
+                                    color: Colors.white),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: snackBarColor,
+                              ),
+                            );
                           }
                         },
                         child: const Text(

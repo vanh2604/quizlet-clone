@@ -75,7 +75,7 @@ class IntroductionScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.fromLTRB(0, 50, 10, 20),
+                    padding: const EdgeInsets.fromLTRB(0, 55, 10, 20),
                     child: const Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -91,7 +91,7 @@ class IntroductionScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 35),
+                    padding: const EdgeInsets.only(top: 30),
                     child: Column(children: [
                       Container(
                         margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
