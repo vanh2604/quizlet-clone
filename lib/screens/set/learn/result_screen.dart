@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:quizlet/data/question_data.dart';
 
 import 'learn_screen.dart';
 
@@ -58,7 +58,7 @@ class _ResultScreenState extends State<ResultScreen> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LearnScreen(),
+                    builder: (context) => LearnScreen(questionLearn: questions,),
                   ));
             },
             shape: StadiumBorder(),
