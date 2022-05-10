@@ -54,7 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(10.0),
                             ))),
                         onPressed: () async {
-                          await AuthService().googleLogin();
+                          await AuthService().googleSignUp();
                           if (FirebaseAuth.instance.currentUser != null) {
                             Navigator.of(context).pushNamedAndRemoveUntil(
                                 '/main', (Route<dynamic> route) => false);
@@ -143,7 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onPressed: () async {
                           if (emailTextController.text != '' &&
                               passwordTextController.text != '') {
-                            final emailResult = await AuthService().emailSignin(
+                            final emailResult = await AuthService().emailSignup(
                                 emailTextController.text,
                                 passwordTextController.text);
                             if (emailResult == 'weak-password') {

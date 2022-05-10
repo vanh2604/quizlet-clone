@@ -20,7 +20,6 @@ class _LearnScreenState extends State<LearnScreen> {
   bool answered = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = PageController(initialPage: 0);
   }
