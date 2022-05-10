@@ -49,7 +49,7 @@ List<QuestionModel> questions = [
     "War": true,
   }),
   QuestionModel("Mars Is the ___ planet from the sun ?", {
-    "Secon": false,
+    "Second": false,
     "Third": false,
     "Fourth": true,
     "Sixth": false,

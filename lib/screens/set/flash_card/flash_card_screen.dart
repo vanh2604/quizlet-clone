@@ -4,7 +4,6 @@ import 'package:quizlet/screens/set/flash_card/swipe_card.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
 import 'card_provider.dart';
-import 'flip_Y_term_card.dart';
 
 void main() {
   runApp(const FlashCardScreen());
