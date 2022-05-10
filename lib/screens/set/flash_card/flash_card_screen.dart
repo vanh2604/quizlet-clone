@@ -104,7 +104,14 @@ class _MainPageState extends State<MainPage> {
                   color: Color.fromRGBO(140, 137, 204, 1),
                 ),
                 child: TextButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>const FlashCardScreen()));
+                      final provider = Provider.of<CardProvider>(context, listen: false);
+                      provider.resetList();
+                    },
                     child: QText(text: 'Hoc lai', color: Colors.white,)),
               )
             ],
