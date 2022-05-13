@@ -1,0 +1,516 @@
+id: YZxVzUDka027WKEc9qxkoQ
+projectId: nAkXCdo-4ECNdiX4zIFo_Q
+projectName: Quizzy
+created: 2022-05-13T08:15:04.9859263Z
+owner: Ngoc Nguyen
+protocol: 1
+tests:
+- id: JOcof5A-70aw4B4CDC2dig
+  name: Google Sign-up
+  description: ''
+  platform: iOS
+  type: Mobile
+  driverType: Appium_iOS
+  version: 0.1
+  creationDate: 2022-05-13T07:17:35.0000000
+  modificationDate: 2022-05-13T07:34:55.0000000
+  settings:
+    automationAssistant: true
+    deviceId: 4FCC7115-AEDF-458C-A388-0F6AF67CAC5E
+    appId: GTBeKAFswkm2mDQUMqi-_A
+    stepSleepTime: 500
+    stepTimeout: 15000
+    stepSleepTiming: Before
+    stepFailureBehaviorType: Abort
+    stepTakeScreenshotConditionType: Failure
+  application:
+    id: GTBeKAFswkm2mDQUMqi-_A
+    appleBundleId: com.example.quizlet
+    name: quizlet
+    platform: iOS
+  steps:
+  - id: O95LCaUxrUyEHrFfVAkHeg
+    enabled: true
+    invertResult: false
+    order: 1
+    repeat: 1
+    type: Action
+    elementId: 9IbcamX1A0KGYTmCh2oJwg
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: dmb_uSifXUWqBrhcO_lfLg
+    enabled: true
+    invertResult: false
+    order: 2
+    repeat: 1
+    type: Action
+    elementId: 7gYYDc0DW0O0bJbZrrzNpw
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: 9nfI6bcNKEep1KIw-AnE7A
+    enabled: true
+    invertResult: false
+    order: 3
+    repeat: 1
+    type: Action
+    elementId: FDF8C-fSC0yN9th9qIqCDQ
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: esboa_6sIU6J9tMBXtZYSQ
+    enabled: true
+    invertResult: false
+    order: 4
+    repeat: 1
+    type: Action
+    elementId: mQU1SZteEEm320PrkPdrHg
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: B0m05M6RSES9-95YyvYS9A
+    enabled: true
+    invertResult: false
+    order: 5
+    repeat: 1
+    type: Action
+    elementId: ZXcx-7ktL0GJHjZQbolAEA
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: oR8P0auJCE-qs3lTsuh1EQ
+    enabled: true
+    invertResult: false
+    order: 6
+    repeat: 1
+    type: Action
+    elementId: ZXcx-7ktL0GJHjZQbolAEA
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 6f94fdaa-0041-4265-b73b-ecfcbe702d66
+      source: System
+    parameterMaps:
+    - name: keys
+      value: duyngoc.nguyen.test
+      direction: Input
+    conditions: []
+    validations: []
+    contexts: []
+  - id: SEBMFCBrqkSX2-GYyE0dqA
+    enabled: true
+    invertResult: false
+    order: 7
+    repeat: 1
+    type: Action
+    elementId: GsXccZ7zHkSaYvpkR1E4Gw
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: d9QLxPiQHU6DqjXbR1zxIw
+    enabled: true
+    invertResult: false
+    order: 8
+    repeat: 1
+    type: Action
+    elementId: _14ROSmDb0GrIQ5ignsohA
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: K5vZOc6fd0CXWSXEZcEUcw
+    enabled: true
+    invertResult: false
+    order: 9
+    repeat: 1
+    type: Action
+    elementId: _14ROSmDb0GrIQ5ignsohA
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 6f94fdaa-0041-4265-b73b-ecfcbe702d66
+      source: System
+    parameterMaps:
+    - name: keys
+      value: maihoa040600
+      direction: Input
+    conditions: []
+    validations: []
+    contexts: []
+  - id: eOqq6xQET061MtK2w2CuMA
+    enabled: true
+    invertResult: false
+    order: 10
+    repeat: 1
+    type: Action
+    elementId: GsXccZ7zHkSaYvpkR1E4Gw
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: 9OqiIuHfYkuXZgfLz1BdYA
+    enabled: true
+    invertResult: false
+    order: 11
+    repeat: 1
+    type: Action
+    elementId: Q96iH3Ci40S-2dpmN0_8XQ
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 85da72d0-c5a4-4587-be33-8cb3b5fa7910
+      source: System
+    parameterMaps:
+    - name: text
+      value: Sets
+      direction: Input
+    conditions: []
+    validations: []
+    contexts: []
+  - id: lLuDzV1gJUyS1FhBHrnMNQ
+    enabled: true
+    invertResult: false
+    order: 12
+    repeat: 1
+    type: Action
+    elementId: exQqTR6XGUClwKnQzbcAlA
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  - id: ateIjbYQGESBOInrfB0oBQ
+    enabled: true
+    invertResult: false
+    order: 13
+    repeat: 1
+    type: Action
+    elementId: DpuD-CLYEkGXxhOV9nV0vA
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 02d572b2-d610-4700-9ad3-40076ddb9807
+      source: System
+    parameterMaps: []
+    conditions: []
+    validations: []
+    contexts: []
+  parameters: []
+auxTests: []
+elements:
+- id: 9IbcamX1A0KGYTmCh2oJwg
+  name: Sign up for free
+  type:
+    id: jUwODgyNjAyNzk2NTk3NjY
+    name: XCUIElementTypeButton
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: Sign up for free
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeButton' AND label == 'Sign up for free' AND visible == 1
+    priority: 1
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeButton' AND visible == 1
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeButton
+    priority: 3
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeButton[1]
+    priority: 4
+- id: Q96iH3Ci40S-2dpmN0_8XQ
+  name: Sets
+  type:
+    id: jUwODgyNjAyNzk2NTk4MjM
+    name: XCUIElementTypeStaticText
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: Sets
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeStaticText' AND label == 'Sets' AND visible == 1
+    priority: 1
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeStaticText' AND value == 'Sets' AND visible == 1
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeStaticText[1]
+    priority: 3
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeStaticText[1]
+    priority: 4
+- id: 7gYYDc0DW0O0bJbZrrzNpw
+  name: SIGN UP WITH GOOGLE
+  type:
+    id: jUwODgyNjAyNzk2NTk3NjY
+    name: XCUIElementTypeButton
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: SIGN UP WITH GOOGLE
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeButton' AND label == 'SIGN UP WITH GOOGLE' AND visible == 1
+    priority: 1
+  - name: XPATH
+    value: //XCUIElementTypeOther[3]/XCUIElementTypeButton[1]
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeButton[1]
+    priority: 3
+- id: FDF8C-fSC0yN9th9qIqCDQ
+  name: Continue
+  type:
+    id: jUwODgyNjAyNzk2NTk3NjY
+    name: XCUIElementTypeButton
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: Continue
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeButton' AND label == 'Continue' AND visible == 1
+    priority: 1
+  - name: XPATH
+    value: //XCUIElementTypeOther[3]/XCUIElementTypeButton
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[10]/XCUIElementTypeOther[3]/XCUIElementTypeAlert[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeScrollView[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeButton[1]
+    priority: 3
+- id: mQU1SZteEEm320PrkPdrHg
+  name: XCUIELEMENTTYPEOTHER1
+  type:
+    id: jUwODgyNjAyNzk2NTk3OTk
+    name: XCUIElementTypeOther
+    source: System
+  locators:
+  - name: XPATH
+    value: //XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]
+    priority: 0
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeOther[2]
+    priority: 1
+- id: ZXcx-7ktL0GJHjZQbolAEA
+  name: Email hoặc số điện thoại
+  type:
+    id: jUwODgyNjAyNzk2NTk4MzM
+    name: XCUIElementTypeTextField
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: Email hoặc số điện thoại
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeTextField' AND label == 'Email hoặc số điện thoại' AND visible == 1
+    priority: 1
+  - name: XPATH
+    value: //XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeTextField
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeTextField[1]
+    priority: 3
+- id: GsXccZ7zHkSaYvpkR1E4Gw
+  name: Tiếp theo
+  type:
+    id: jUwODgyNjAyNzk2NTk3NjY
+    name: XCUIElementTypeButton
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: Tiếp theo
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeButton' AND label == 'Tiếp theo' AND visible == 1
+    priority: 1
+  - name: XPATH
+    value: //XCUIElementTypeOther[6]//XCUIElementTypeButton
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[6]/XCUIElementTypeOther[1]/XCUIElementTypeButton[1]
+    priority: 3
+- id: _14ROSmDb0GrIQ5ignsohA
+  name: Nhập mật khẩu của bạn
+  type:
+    id: jUwODgyNjAyNzk2NTk4MTc
+    name: XCUIElementTypeSecureTextField
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: Nhập mật khẩu của bạn
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeSecureTextField' AND label == 'Nhập mật khẩu của bạn' AND visible == 1
+    priority: 1
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeSecureTextField' AND visible == 1
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeSecureTextField
+    priority: 3
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeWebView[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[3]/XCUIElementTypeSecureTextField[1]
+    priority: 4
+- id: exQqTR6XGUClwKnQzbcAlA
+  name: >-
+    News
+
+    Tab 4 of 4
+  type:
+    id: jUwODgyNjAyNzk2NTk4MjM
+    name: XCUIElementTypeStaticText
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: >-
+      News
+
+      Tab 4 of 4
+    priority: 0
+  - name: IOSPREDICATE
+    value: >-
+      type == 'XCUIElementTypeStaticText' AND label == 'News
+
+      Tab 4 of 4' AND visible == 1
+    priority: 1
+  - name: IOSPREDICATE
+    value: >-
+      type == 'XCUIElementTypeStaticText' AND value == 'News
+
+      Tab 4 of 4' AND visible == 1
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeOther[4]/XCUIElementTypeStaticText[3]
+    priority: 3
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[4]/XCUIElementTypeStaticText[3]
+    priority: 4
+- id: DpuD-CLYEkGXxhOV9nV0vA
+  name: Sign Out
+  type:
+    id: jUwODgyNjAyNzk2NTk4MjM
+    name: XCUIElementTypeStaticText
+    source: System
+  locators:
+  - name: ACCESSIBILITYID
+    value: Sign Out
+    priority: 0
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeStaticText' AND label == 'Sign Out' AND visible == 1
+    priority: 1
+  - name: IOSPREDICATE
+    value: type == 'XCUIElementTypeStaticText' AND value == 'Sign Out' AND visible == 1
+    priority: 2
+  - name: XPATH
+    value: //XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]
+    priority: 3
+  - name: XPATH
+    value: //XCUIElementTypeApplication[1]/XCUIElementTypeWindow[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[1]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]
+    priority: 4
+projectParameters: []
+addons: []
