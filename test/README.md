@@ -12,6 +12,6 @@
 - Ongoing...
 
 ## Reports
-![Email Sign-up](/reports/email-sign-up.png?raw=true "Email Sign-up")
+![Email Sign-up](../reports/email-sign-up.png?raw=true "Email Sign-up")
 ![Email Sign-in](/reports/email-sign-in.png?raw=true "Email Sign-in")
 ![Google Sign-up](/reports/email-sign-up.png?raw=true "Google Sign-up")
