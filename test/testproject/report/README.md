@@ -1,4 +1,4 @@
-![Email Sign-in](/email-sign-in.png?raw=true "Email Sign-in")
+![Email Sign-in](email-sign-in.png?raw=true "Email Sign-in")
 ![1](/google-sign-up.png?raw=true)
 ![](/google-sign-in-cancel.png?raw=true)
 ![](/google-sign-up-cancel.png?raw=true)
