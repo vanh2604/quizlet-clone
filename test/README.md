@@ -12,6 +12,4 @@
 - Ongoing...
 
 ## Reports
-![Email Sign-up](reports/email-sign-up.png?raw=true "Email Sign-up")
-![Email Sign-in](reports/email-sign-in.png?raw=true "Email Sign-in")
-![Google Sign-up](reports/google-sign-up.png?raw=true "Google Sign-up")
+[TestProject's Report](https://github.com/vanh2604/quizlet-clone/tree/main/test/testproject/report)

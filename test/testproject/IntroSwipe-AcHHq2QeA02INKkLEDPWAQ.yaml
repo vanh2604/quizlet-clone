@@ -1,0 +1,172 @@
+id: RgB_N4nHFUqe1fg6IaIwnw
+projectId: nAkXCdo-4ECNdiX4zIFo_Q
+projectName: Quizzy
+created: 2022-05-14T17:55:30.5884065Z
+owner: Ngoc Nguyen
+protocol: 1
+tests:
+- id: AcHHq2QeA02INKkLEDPWAQ
+  name: IntroSwipe
+  description: ''
+  platform: iOS
+  type: Mobile
+  driverType: Appium_iOS
+  version: 0.1
+  creationDate: 2022-05-14T16:55:43.0000000
+  modificationDate: 2022-05-14T16:56:47.0000000
+  settings:
+    automationAssistant: true
+    deviceId: 4FCC7115-AEDF-458C-A388-0F6AF67CAC5E
+    appId: GTBeKAFswkm2mDQUMqi-_A
+    stepSleepTime: 500
+    stepTimeout: 15000
+    stepSleepTiming: Before
+    stepFailureBehaviorType: Abort
+    stepTakeScreenshotConditionType: Failure
+  application:
+    id: GTBeKAFswkm2mDQUMqi-_A
+    appleBundleId: com.example.quizlet
+    name: quizlet
+    platform: iOS
+  steps:
+  - id: liq03YawhEqsVSv00xw35A
+    enabled: true
+    invertResult: false
+    order: 1
+    repeat: 1
+    type: Action
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 144af44b-2c26-4c8b-b5e6-7c6b7d6cad72
+      source: System
+    parameterMaps:
+    - name: startX
+      value: 1000
+      direction: Input
+    - name: startY
+      value: 988
+      direction: Input
+    - name: endX
+      value: 127
+      direction: Input
+    - name: endY
+      value: 1015
+      direction: Input
+    - name: duration
+      value: 300
+      direction: Input
+    conditions: []
+    validations: []
+    contexts: []
+  - id: qO2QIsG5lEumwnekWK8s2w
+    enabled: true
+    invertResult: false
+    order: 2
+    repeat: 1
+    type: Action
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 144af44b-2c26-4c8b-b5e6-7c6b7d6cad72
+      source: System
+    parameterMaps:
+    - name: startX
+      value: 1038
+      direction: Input
+    - name: startY
+      value: 977
+      direction: Input
+    - name: endX
+      value: 235
+      direction: Input
+    - name: endY
+      value: 973
+      direction: Input
+    - name: duration
+      value: 300
+      direction: Input
+    conditions: []
+    validations: []
+    contexts: []
+  - id: ug6sBRVfZUSPOWcier3S9g
+    enabled: true
+    invertResult: false
+    order: 3
+    repeat: 1
+    type: Action
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 144af44b-2c26-4c8b-b5e6-7c6b7d6cad72
+      source: System
+    parameterMaps:
+    - name: startX
+      value: 185
+      direction: Input
+    - name: startY
+      value: 907
+      direction: Input
+    - name: endX
+      value: 980
+      direction: Input
+    - name: endY
+      value: 849
+      direction: Input
+    - name: duration
+      value: 300
+      direction: Input
+    conditions: []
+    validations: []
+    contexts: []
+  - id: 5ZK8F-OA2E6jCcr-7lhggw
+    enabled: true
+    invertResult: false
+    order: 4
+    repeat: 1
+    type: Action
+    settings:
+      sleepTime: -1
+      timeout: -1
+      sleepTiming: Inherit
+      failureBehaviorType: Inherit
+      takeScreenshotConditionType: Inherit
+    action:
+      id: 144af44b-2c26-4c8b-b5e6-7c6b7d6cad72
+      source: System
+    parameterMaps:
+    - name: startX
+      value: 127
+      direction: Input
+    - name: startY
+      value: 872
+      direction: Input
+    - name: endX
+      value: 961
+      direction: Input
+    - name: endY
+      value: 892
+      direction: Input
+    - name: duration
+      value: 300
+      direction: Input
+    conditions: []
+    validations: []
+    contexts: []
+  parameters: []
+auxTests: []
+elements: []
+projectParameters: []
+addons: []

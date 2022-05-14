@@ -1,0 +1,36 @@
+id: mbH2vhedOkiqglCrC0MLAQ
+projectId: nAkXCdo-4ECNdiX4zIFo_Q
+projectName: Quizzy
+created: 2022-05-14T18:02:26.4315843Z
+owner: Ngoc Nguyen
+protocol: 1
+tests:
+- id: nyWPSncIa0G9QdQQcKkF8A
+  name: Google Sign-up Cancel
+  description: ''
+  platform: iOS
+  type: Mobile
+  driverType: Appium_iOS
+  version: 0.1
+  creationDate: 2022-05-14T17:48:18.0000000
+  modificationDate: 2022-05-14T17:48:43.0000000
+  settings:
+    automationAssistant: true
+    deviceId: 4FCC7115-AEDF-458C-A388-0F6AF67CAC5E
+    appId: GTBeKAFswkm2mDQUMqi-_A
+    stepSleepTime: 500
+    stepTimeout: 15000
+    stepSleepTiming: Before
+    stepFailureBehaviorType: Abort
+    stepTakeScreenshotConditionType: Failure
+  application:
+    id: GTBeKAFswkm2mDQUMqi-_A
+    appleBundleId: com.example.quizlet
+    name: quizlet
+    platform: iOS
+  steps: []
+  parameters: []
+auxTests: []
+elements: []
+projectParameters: []
+addons: []
