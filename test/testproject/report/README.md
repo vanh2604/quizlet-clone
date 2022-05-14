@@ -1,5 +1,5 @@
-![](/email-sign-in.png?raw=true)
-![](/google-sign-up.png?raw=true)
+![1](/email-sign-in.png?raw=true)
+![1](/google-sign-up.png?raw=true)
 ![](/google-sign-in-cancel.png?raw=true)
 ![](/google-sign-up-cancel.png?raw=true)
 ![](/bottom-nav-bar.png?raw=true)
