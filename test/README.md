@@ -12,4 +12,5 @@
 - Ongoing...
 
 ## Reports
-[TestProject's Report](https://github.com/vanh2604/quizlet-clone/tree/main/test/testproject/report)
+- [TestProject's Report](/testproject/report/)
+
