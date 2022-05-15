@@ -27,3 +27,8 @@ Future<String> getEmail() async {
   }
   return '';
 }
+
+Future<String> getUID() async {
+  final uid = user.uid;
+  return uid;
+}
