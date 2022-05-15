@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-import '../../widgets/set_card.dart';
+import '../../widgets/sets/set_card.dart';
 
 class FolderScreen extends StatelessWidget {
   final String folderTitle;

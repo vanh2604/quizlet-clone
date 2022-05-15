@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
-import 'package:quizlet/widgets/flip_term_card.dart';
-import 'package:quizlet/widgets/learn_custom_button.dart';
-import 'package:quizlet/widgets/term_card.dart';
+import 'package:quizlet/widgets/set/flip_term_card.dart';
+import 'package:quizlet/widgets/set/learn_custom_button.dart';
+import 'package:quizlet/widgets/set/term_card.dart';
 
 class SetScreen extends StatefulWidget {
   const SetScreen({Key? key}) : super(key: key);
@@ -84,16 +84,6 @@ class _SetScreenState extends State<SetScreen> {
                                   definition: _question[activeQuestion]
                                       ['definition'],
                                 ),
-                                // decoration: BoxDecoration(
-                                //   color: const Color.fromRGBO(52, 58, 85, 1),
-                                //   borderRadius: BorderRadius.circular(20),
-                                // ),
-                                // child: Column(
-                                //   mainAxisAlignment: MainAxisAlignment.center,
-                                //   children: [
-                                //     AppText(color: Colors.white, text: _question[activeQuestion]['title'],),
-                                //   ],
-                                // )
                               );
                             },
                           ),
@@ -142,7 +132,7 @@ class _SetScreenState extends State<SetScreen> {
                             LearnCustomButton(
                                 text: "Write", icon: Icons.favorite),
                             LearnCustomButton(
-                                text: "Test", icon: Icons.favorite)
+                                text: "Exam", icon: Icons.favorite)
                           ])
                         ],
                       ),
@@ -150,18 +140,17 @@ class _SetScreenState extends State<SetScreen> {
                         height: 20,
                       ),
 
-                      // Term line
                       const QText(
                         text: "Terms",
                         color: Colors.white,
                         isBold: true,
                         size: 20,
                       ),
+
                       const SizedBox(
                         height: 10,
                       ),
 
-                      //Terms card
                       for (var q in _question)
                         TermCard(title: q['title'], definition: q['definition'])
                     ],

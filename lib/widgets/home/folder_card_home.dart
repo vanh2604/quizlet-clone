@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-import '../utils/colors.dart';
+import '../../utils/colors.dart';
 
 class FolderCardBig extends StatelessWidget {
   final String title;

@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
-import 'package:quizlet/widgets/set_card.dart';
+import 'package:quizlet/widgets/sets/set_card.dart';
 
 class SetsScreen extends StatelessWidget {
   const SetsScreen({Key? key}) : super(key: key);
