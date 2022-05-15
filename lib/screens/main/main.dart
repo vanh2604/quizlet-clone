@@ -60,15 +60,15 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.home),
           ),
           BottomNavigationBarItem(
-            label: 'Music',
+            label: 'Search',
             icon: Icon(Icons.search),
           ),
           BottomNavigationBarItem(
-            label: 'Places',
+            label: 'Create',
             icon: Icon(Icons.add_circle_rounded),
           ),
           BottomNavigationBarItem(
-            label: 'News',
+            label: 'User',
             icon: Icon(Icons.person),
           ),
         ],
