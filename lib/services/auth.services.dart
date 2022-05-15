@@ -39,12 +39,13 @@ class AuthService {
     }
   }
 
-  Future<String> emailSignup(email, password) async {
+  Future<String> emailSignup(name, email, password) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
       await FirebaseAuth.instance.currentUser?.updatePhotoURL(defaultAvatarURL);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

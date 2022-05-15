@@ -14,6 +14,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
+    final nameTextController = TextEditingController();
     final emailTextController = TextEditingController();
     final passwordTextController = TextEditingController();
 
@@ -97,6 +98,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 TextFormField(
+                  controller: nameTextController,
+                  style: const TextStyle(color: textColor),
+                  cursorColor: textColor,
+                  maxLength: 50,
+                  decoration: const InputDecoration(
+                    helperText: 'Name',
+                    hintStyle:
+                        TextStyle(color: Color.fromRGBO(255, 255, 255, 0.5)),
+                    hintText: "Abraham Lincoln",
+                    helperStyle: TextStyle(color: textColor),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: textColor),
+                    ),
+                  ),
+                ),
+                TextFormField(
                   controller: emailTextController,
                   style: const TextStyle(color: textColor),
                   cursorColor: textColor,
@@ -142,8 +159,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ))),
                         onPressed: () async {
                           if (emailTextController.text != '' &&
-                              passwordTextController.text != '') {
+                              passwordTextController.text != '' &&
+                              nameTextController.text != '') {
                             final emailResult = await AuthService().emailSignup(
+                                nameTextController.text,
                                 emailTextController.text,
                                 passwordTextController.text);
                             if (emailResult == 'weak-password') {

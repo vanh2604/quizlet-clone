@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/question_data.dart';
+import '../../../data/card_data.dart';
 
 void main() => runApp(const WriteScreen());
 
@@ -40,12 +40,12 @@ class _WriteScreen extends State<WriteScreen> {
         backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
         body: PageView.builder(
           controller: _pageController,
-          onPageChanged: (page){
+          onPageChanged: (page) {
             setState(() {
               _haveSummited = false;
               _isCorrectAnswer = false;
               _autofocus = true;
-              countEnterToAnswer =0;
+              countEnterToAnswer = 0;
             });
           },
           physics: const NeverScrollableScrollPhysics(),
@@ -61,7 +61,7 @@ class _WriteScreen extends State<WriteScreen> {
     return Container(
       padding: const EdgeInsets.all(20.0),
       child: Column(
-        crossAxisAlignment:CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Row(
@@ -80,70 +80,112 @@ class _WriteScreen extends State<WriteScreen> {
                           fontSize: 22.0,
                         ),
                       ),
-                      for(int i=0;i<questions[index].answers!.length;i++)
+                      for (int i = 0; i < questions[index].answer!.length; i++)
                         Text(
-                          questions[index].answers!.keys.toList()[i],
+                          questions[index].answer!.keys.toList()[i],
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 22.0,
                           ),
                         )
                     ],
-                  )
-              ),
+                  )),
               Row(
                 children: [
-                  (countEnterToAnswer==0) && _isCorrectAnswer?const Icon(Icons.circle,color: Colors.green,):countEnterToAnswer >= 1?const Icon(Icons.circle,color: Colors.red,):const Icon(Icons.circle_outlined,color: Colors.white,),
-                  (countEnterToAnswer==0||countEnterToAnswer==1) && _isCorrectAnswer?const Icon(Icons.circle,color: Colors.green,):countEnterToAnswer == 2?const Icon(Icons.circle,color: Colors.red,):const Icon(Icons.circle_outlined,color: Colors.white,)
+                  (countEnterToAnswer == 0) && _isCorrectAnswer
+                      ? const Icon(
+                          Icons.circle,
+                          color: Colors.green,
+                        )
+                      : countEnterToAnswer >= 1
+                          ? const Icon(
+                              Icons.circle,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.circle_outlined,
+                              color: Colors.white,
+                            ),
+                  (countEnterToAnswer == 0 || countEnterToAnswer == 1) &&
+                          _isCorrectAnswer
+                      ? const Icon(
+                          Icons.circle,
+                          color: Colors.green,
+                        )
+                      : countEnterToAnswer == 2
+                          ? const Icon(
+                              Icons.circle,
+                              color: Colors.red,
+                            )
+                          : const Icon(
+                              Icons.circle_outlined,
+                              color: Colors.white,
+                            )
                 ],
               )
-
             ],
           ),
           TextFormField(
             style: const TextStyle(color: Colors.white),
             cursorColor: Colors.white,
             focusNode: _focusNode,
-            decoration:  InputDecoration(
+            decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: _haveSummited? _isCorrectAnswer?Colors.green:Colors.orange:Colors.white,
-                    width: 5
-                ),
+                    color: _haveSummited
+                        ? _isCorrectAnswer
+                            ? Colors.green
+                            : Colors.orange
+                        : Colors.white,
+                    width: 5),
               ),
             ),
             autofocus: _autofocus,
-            onFieldSubmitted: !_haveSummited?(String?value){
-              if(questions[index].answers!.containsKey(value) && questions[index].answers![value] == true) {
-                setState(() {
-                  _haveSummited = true;
-                  _isCorrectAnswer = true;
-                  _autofocus = true;
-                });
-              } else {
-                setState(() {
-                  _haveSummited = true;
-                  _isCorrectAnswer = false;
-                  countEnterToAnswer ++;
-                  _autofocus = true;
-                });
-              }
+            onFieldSubmitted: !_haveSummited
+                ? (String? value) {
+                    if (questions[index].answer!.containsKey(value) &&
+                        questions[index].answer![value] == true) {
+                      setState(() {
+                        _haveSummited = true;
+                        _isCorrectAnswer = true;
+                        _autofocus = true;
+                      });
+                    } else {
+                      setState(() {
+                        _haveSummited = true;
+                        _isCorrectAnswer = false;
+                        countEnterToAnswer++;
+                        _autofocus = true;
+                      });
+                    }
 
-              Future.delayed(const Duration(seconds: 3),() {
-                if(_isCorrectAnswer || countEnterToAnswer == 2){
-                  _pageController!.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.easeInOut);
-                } else{
-                  setState(() {
-                    _haveSummited =  false;
-                    _isCorrectAnswer = false;
-                  });
-                }
-              });
-            }:null,
+                    Future.delayed(const Duration(seconds: 3), () {
+                      if (_isCorrectAnswer || countEnterToAnswer == 2) {
+                        _pageController!.nextPage(
+                            duration: const Duration(milliseconds: 250),
+                            curve: Curves.easeInOut);
+                      } else {
+                        setState(() {
+                          _haveSummited = false;
+                          _isCorrectAnswer = false;
+                        });
+                      }
+                    });
+                  }
+                : null,
           ),
-          const SizedBox(height: 10,),
-          _haveSummited?_isCorrectAnswer?const Text("Correct",style: TextStyle(color: Colors.green)):const Text("Incorrect",style: TextStyle(color: Colors.orange))
-              :const Text("Fill the blank",style: TextStyle(color: Colors.white),)
+          const SizedBox(
+            height: 10,
+          ),
+          _haveSummited
+              ? _isCorrectAnswer
+                  ? const Text("Correct", style: TextStyle(color: Colors.green))
+                  : const Text("Incorrect",
+                      style: TextStyle(color: Colors.orange))
+              : const Text(
+                  "Fill the blank",
+                  style: TextStyle(color: Colors.white),
+                )
         ],
       ),
     );

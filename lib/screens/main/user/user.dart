@@ -20,8 +20,17 @@ class _UserScreenState extends State<UserScreen> {
         children: [
           const ProfileCard(),
           GestureDetector(
+            child: const OptionCard(icon: Icons.storage_rounded, text: 'Sets'),
+            onTap: () async {},
+          ),
+          GestureDetector(
             child: const OptionCard(
-                icon: Icons.door_back_door_outlined, text: 'Sign Out'),
+                icon: Icons.folder_copy_rounded, text: 'Folders'),
+            onTap: () async {},
+          ),
+          GestureDetector(
+            child: const OptionCard(
+                icon: Icons.door_back_door_rounded, text: 'Sign Out'),
             onTap: () async {
               await AuthService().signOut();
               if (mounted) {

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/model/question_model.dart';
+import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/learn/result_screen.dart';
 
-import '../../../data/question_data.dart';
+import '../../../data/card_data.dart';
 
-void main() => runApp( LearnScreen(questionLearn: questions,));
-
+void main() => runApp(LearnScreen(
+      questionLearn: questions,
+    ));
 
 class LearnScreen extends StatefulWidget {
-  List <QuestionModel> questionLearn;
+  List<CardModel> questionLearn;
   LearnScreen({Key? key, required this.questionLearn}) : super(key: key);
 
   @override
@@ -76,7 +77,9 @@ class _LearnScreenState extends State<LearnScreen> {
                         ),
                       ),
                     ),
-                    for (int i = 0; i < widget.questionLearn[index].answers!.length; i++)
+                    for (int i = 0;
+                        i < widget.questionLearn[index].answer!.length;
+                        i++)
                       Container(
                         width: double.infinity,
                         height: 50.0,
@@ -84,21 +87,23 @@ class _LearnScreenState extends State<LearnScreen> {
                             bottom: 20.0, left: 12.0, right: 12.0),
                         child: RawMaterialButton(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                            side: BorderSide(color: Colors.white)
-                          ),
+                              borderRadius: BorderRadius.circular(8.0),
+                              side: BorderSide(color: Colors.white)),
                           fillColor: btnPressed
                               ? (i == selected_index
-                                  ? (widget.questionLearn[index].answers!.values.toList()[i]
+                                  ? (widget.questionLearn[index].answer!.values
+                                          .toList()[i]
                                       ? Colors.green
                                       : Colors.red)
-                                  : (widget.questionLearn[index].answers!.values.toList()[i]
+                                  : (widget.questionLearn[index].answer!.values
+                                          .toList()[i]
                                       ? Colors.green
                                       : const Color.fromRGBO(12, 12, 48, 1)))
                               : const Color.fromRGBO(12, 12, 48, 1),
                           onPressed: !answered
                               ? () {
-                                  if (widget.questionLearn[index].answers!.values.toList()[i]) {
+                                  if (widget.questionLearn[index].answer!.values
+                                      .toList()[i]) {
                                     score++;
                                     setState(() {
                                       selected_index = i;
@@ -112,7 +117,8 @@ class _LearnScreenState extends State<LearnScreen> {
                                     btnPressed = true;
                                     answered = true;
                                   });
-                                  Future.delayed(const Duration(seconds: 3), () {
+                                  Future.delayed(const Duration(seconds: 3),
+                                      () {
                                     if (_controller!.page?.toInt() ==
                                         widget.questionLearn.length - 1) {
                                       Navigator.push(
@@ -133,7 +139,9 @@ class _LearnScreenState extends State<LearnScreen> {
                                   });
                                 }
                               : null,
-                          child: Text(widget.questionLearn[index].answers!.keys.toList()[i],
+                          child: Text(
+                              widget.questionLearn[index].answer!.keys
+                                  .toList()[i],
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18.0,

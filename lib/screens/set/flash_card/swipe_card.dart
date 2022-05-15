@@ -46,13 +46,6 @@ class _SwipeCardState extends State<SwipeCard> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Container(
-          // decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //         image: AssetImage(widget.urlImage),
-          //         alignment: Alignment(-0.3,0),
-          //         fit: BoxFit.fill
-          //     ),
-          // ),
           child: FlipYTermCard(
             definition: widget.urlImage + "_____",
             title: widget.urlImage,
