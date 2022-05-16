@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
+import 'package:quizlet/services/seed.services.dart';
 import 'package:quizlet/screens/main/user/user.dart';
 import 'package:quizlet/screens/main/home/home.dart';
 import 'package:quizlet/screens/main/search/search.dart';
@@ -31,8 +32,11 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const QText(
-            text: "Quizzy", color: Colors.white, size: 30, isBold: true),
+        title: GestureDetector(
+          onTap: () => seedDatabase(),
+          child: const QText(
+              text: "Quizzy", color: Colors.white, size: 30, isBold: true),
+        ),
         centerTitle: false,
         elevation: 0,
         backgroundColor: const Color.fromRGBO(12, 12, 48, 1),

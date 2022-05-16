@@ -6,9 +6,6 @@ import 'package:quizlet/utils/firestore_url.dart';
 import 'package:quizlet/services/firestore.services.dart';
 
 class AuthService {
-  final userStream = FirebaseAuth.instance.authStateChanges();
-  final user = FirebaseAuth.instance.currentUser;
-
   Future<void> googleSignUp() async {
     try {
       final googleUser = await GoogleSignIn().signIn();
