@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:quizlet/services/storage.services.dart';
 import 'package:quizlet/widgets/user/option_card.dart';
 import 'package:quizlet/widgets/user/profile_card.dart';
 import 'package:quizlet/services/auth.services.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -18,10 +21,20 @@ class _UserScreenState extends State<UserScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ProfileCard(),
+          GestureDetector(
+              onTap: () => _showPicker(context), child: const ProfileCard()),
+          GestureDetector(
+            child: const OptionCard(icon: Icons.storage_rounded, text: 'Sets'),
+            onTap: () async {},
+          ),
           GestureDetector(
             child: const OptionCard(
-                icon: Icons.door_back_door_outlined, text: 'Sign Out'),
+                icon: Icons.folder_copy_rounded, text: 'Folders'),
+            onTap: () async {},
+          ),
+          GestureDetector(
+            child: const OptionCard(
+                icon: Icons.door_back_door_rounded, text: 'Sign Out'),
             onTap: () async {
               await AuthService().signOut();
               if (mounted) {
@@ -33,5 +46,57 @@ class _UserScreenState extends State<UserScreen> {
         ],
       ),
     );
+  }
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future imgFromGallery() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      if (pickedFile != null) {
+        uploadAvatar(pickedFile);
+      }
+    });
+  }
+
+  Future imgFromCamera() async {
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        uploadAvatar(pickedFile);
+      }
+    });
+  }
+
+  void _showPicker(context) {
+    showBarModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SafeArea(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                    leading: const Icon(Icons.photo_library),
+                    title: const Text('Gallery'),
+                    onTap: () {
+                      imgFromGallery();
+                      Navigator.of(context).pop();
+                    }),
+                ListTile(
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('Camera'),
+                  onTap: () {
+                    imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        });
   }
 }

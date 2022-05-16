@@ -3,11 +3,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quizlet/utils/firestore_url.dart';
+import 'package:quizlet/services/firestore.services.dart';
 
 class AuthService {
-  final userStream = FirebaseAuth.instance.authStateChanges();
-  final user = FirebaseAuth.instance.currentUser;
-
   Future<void> googleSignUp() async {
     try {
       final googleUser = await GoogleSignIn().signIn();
@@ -19,6 +17,7 @@ class AuthService {
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
       await FirebaseAuth.instance.currentUser?.updatePhotoURL(defaultAvatarURL);
+      await createUserDB();
     } on FirebaseAuthException catch (e) {
       print(e);
     }
@@ -39,13 +38,15 @@ class AuthService {
     }
   }
 
-  Future<String> emailSignup(email, password) async {
+  Future<String> emailSignup(name, email, password) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
       await FirebaseAuth.instance.currentUser?.updatePhotoURL(defaultAvatarURL);
+      await createUserDB();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         return 'weak-password'; //The password provided is too weak

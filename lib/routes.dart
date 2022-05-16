@@ -15,5 +15,5 @@ var appRoutes = {
   '/main': (context) => const MainScreen(),
   '/set': (context) => const SetScreen(),
   '/sets': (context) => const SetsScreen(),
-  // '/folder': (context) => const FolderScreen(),
+  //'/folder': (context) => const FolderScreen(),
 };

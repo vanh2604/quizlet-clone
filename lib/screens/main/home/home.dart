@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
-import 'package:quizlet/widgets/folder_card_home.dart';
-import 'package:quizlet/widgets/set_card_home.dart';
+import 'package:quizlet/widgets/home/folder_card_home.dart';
+import 'package:quizlet/widgets/home/set_card_home.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

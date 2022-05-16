@@ -49,7 +49,7 @@ class _ProfileCardState extends State<ProfileCard> {
                 width: MediaQuery.of(context).size.width * 0.92,
                 height: 100,
                 child: Container(
-                  color: secondaryColor.withOpacity(0.5),
+                  color: secondaryColor,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

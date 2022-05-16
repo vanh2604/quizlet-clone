@@ -21,12 +21,22 @@ class OptionCard extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.92,
               height: 70,
               child: Container(
-                color: secondaryColor.withOpacity(0.5),
-                child: Row(
-                  children: [
-                    Icon(icon, color: Colors.white),
-                    QText(text: text, color: Colors.white, isBold: true),
-                  ],
+                color: secondaryColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Icon(icon, color: Colors.white, size: 36),
+                      ),
+                      QText(
+                          text: text,
+                          color: Colors.white,
+                          isBold: true,
+                          size: 18),
+                    ],
+                  ),
                 ),
               ),
             ),
