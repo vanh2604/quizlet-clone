@@ -1,7 +1,7 @@
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:async';
 
 class StandbyScreen extends StatefulWidget {
   const StandbyScreen({Key? key}) : super(key: key);
@@ -22,9 +22,11 @@ class _StandbyScreenState extends State<StandbyScreen> {
               width: 200,
               height: 200,
               decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/quizzy.png"),
-                      fit: BoxFit.cover)),
+                image: DecorationImage(
+                  image: AssetImage("assets/quizzy.png"),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
           );
         },
@@ -40,11 +42,15 @@ class _StandbyScreenState extends State<StandbyScreen> {
           if (user == null) {
             //User is currently signed out
             Navigator.of(context).pushNamedAndRemoveUntil(
-                '/introduction', (Route<dynamic> route) => false);
+              '/introduction',
+              (Route<dynamic> route) => false,
+            );
           } else {
             // User is signed in
             Navigator.of(context).pushNamedAndRemoveUntil(
-                '/main', (Route<dynamic> route) => false);
+              '/main',
+              (Route<dynamic> route) => false,
+            );
           }
         }
       });

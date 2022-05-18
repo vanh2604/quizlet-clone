@@ -3,21 +3,23 @@ import 'package:quizlet/data/card_data.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
 
-void main() => runApp(ExamScreen(
-      listQuestion: questions,
-    ));
+void main() => runApp(
+      ExamScreen(
+        listQuestion: questions,
+      ),
+    );
 
 class ExamScreen extends StatefulWidget {
   bool isMultichoice;
   bool isWrite;
   List<CardModel> listQuestion;
 
-  ExamScreen(
-      {Key? key,
-      required this.listQuestion,
-      this.isMultichoice = true,
-      this.isWrite = true})
-      : super(key: key);
+  ExamScreen({
+    Key? key,
+    required this.listQuestion,
+    this.isMultichoice = true,
+    this.isWrite = true,
+  }) : super(key: key);
 
   @override
   State<ExamScreen> createState() => _ExamScreenState();
@@ -33,8 +35,8 @@ class _ExamScreenState extends State<ExamScreen> {
   int countEnterToAnswer = 0;
 
   // Multichoice variable
-  int question_pos = 0;
-  int selected_index = -1;
+  int questionPos = 0;
+  int selectedIndex = -1;
   int score = 0;
   bool btnPressed = false;
   String btnText = "Next Question";
@@ -46,7 +48,7 @@ class _ExamScreenState extends State<ExamScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0);
+    _pageController = PageController();
     widget.listQuestion.shuffle();
 
     _focusNode.addListener(() {
@@ -77,7 +79,7 @@ class _ExamScreenState extends State<ExamScreen> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (BuildContext context, int index) {
             return widget.isWrite && widget.isMultichoice
-                ? (index % 2 == 0
+                ? (index.isOdd
                     ? buildWriteScreen(index)
                     : buildMultiQuestion(index))
                 : widget.isWrite
@@ -101,61 +103,64 @@ class _ExamScreenState extends State<ExamScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                  width: 300,
-                  height: 200,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                width: 300,
+                height: 200,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${widget.listQuestion[index].question}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22.0,
+                      ),
+                    ),
+                    for (int i = 0;
+                        i < widget.listQuestion[index].answer!.length;
+                        i++)
                       Text(
-                        "${widget.listQuestion[index].question}",
+                        widget.listQuestion[index].answer!.keys.toList()[i],
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
                         ),
-                      ),
-                      for (int i = 0;
-                          i < widget.listQuestion[index].answer!.length;
-                          i++)
-                        Text(
-                          widget.listQuestion[index].answer!.keys.toList()[i],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22.0,
-                          ),
-                        )
-                    ],
-                  )),
+                      )
+                  ],
+                ),
+              ),
               Row(
                 children: [
-                  (countEnterToAnswer == 0) && _isCorrectAnswer
-                      ? const Icon(
-                          Icons.circle,
-                          color: Colors.green,
-                        )
-                      : countEnterToAnswer >= 1
-                          ? const Icon(
-                              Icons.circle,
-                              color: Colors.red,
-                            )
-                          : const Icon(
-                              Icons.circle_outlined,
-                              color: Colors.white,
-                            ),
-                  (countEnterToAnswer == 0 || countEnterToAnswer == 1) &&
-                          _isCorrectAnswer
-                      ? const Icon(
-                          Icons.circle,
-                          color: Colors.green,
-                        )
-                      : countEnterToAnswer == 2
-                          ? const Icon(
-                              Icons.circle,
-                              color: Colors.red,
-                            )
-                          : const Icon(
-                              Icons.circle_outlined,
-                              color: Colors.white,
-                            )
+                  if ((countEnterToAnswer == 0) && _isCorrectAnswer)
+                    const Icon(
+                      Icons.circle,
+                      color: Colors.green,
+                    )
+                  else
+                    countEnterToAnswer >= 1
+                        ? const Icon(
+                            Icons.circle,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.circle_outlined,
+                            color: Colors.white,
+                          ),
+                  if ((countEnterToAnswer == 0 || countEnterToAnswer == 1) &&
+                      _isCorrectAnswer)
+                    const Icon(
+                      Icons.circle,
+                      color: Colors.green,
+                    )
+                  else
+                    countEnterToAnswer == 2
+                        ? const Icon(
+                            Icons.circle,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.circle_outlined,
+                            color: Colors.white,
+                          )
                 ],
               )
             ],
@@ -167,12 +172,13 @@ class _ExamScreenState extends State<ExamScreen> {
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: _haveSummited
-                        ? _isCorrectAnswer
-                            ? Colors.green
-                            : Colors.orange
-                        : Colors.white,
-                    width: 5),
+                  color: _haveSummited
+                      ? _isCorrectAnswer
+                          ? Colors.green
+                          : Colors.orange
+                      : Colors.white,
+                  width: 5,
+                ),
               ),
             ),
             autofocus: _autofocus,
@@ -198,13 +204,16 @@ class _ExamScreenState extends State<ExamScreen> {
                       if (_pageController!.page?.toInt() ==
                           widget.listQuestion.length - 1) {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ResultExam()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ResultExam(),
+                          ),
+                        );
                       } else if (_isCorrectAnswer || countEnterToAnswer == 2) {
                         _pageController!.nextPage(
-                            duration: const Duration(milliseconds: 250),
-                            curve: Curves.easeInOut);
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.easeInOut,
+                        );
                       } else {
                         setState(() {
                           _haveSummited = false;
@@ -218,15 +227,18 @@ class _ExamScreenState extends State<ExamScreen> {
           const SizedBox(
             height: 10,
           ),
-          _haveSummited
-              ? _isCorrectAnswer
-                  ? const Text("Correct", style: TextStyle(color: Colors.green))
-                  : const Text("Incorrect",
-                      style: TextStyle(color: Colors.orange))
-              : const Text(
-                  "Fill the blank",
-                  style: TextStyle(color: Colors.white),
-                )
+          if (_haveSummited)
+            _isCorrectAnswer
+                ? const Text("Correct", style: TextStyle(color: Colors.green))
+                : const Text(
+                    "Incorrect",
+                    style: TextStyle(color: Colors.orange),
+                  )
+          else
+            const Text(
+              "Fill the blank",
+              style: TextStyle(color: Colors.white),
+            )
         ],
       ),
     );
@@ -235,7 +247,6 @@ class _ExamScreenState extends State<ExamScreen> {
   Widget buildMultiQuestion(int index) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
           width: double.infinity,
@@ -270,10 +281,11 @@ class _ExamScreenState extends State<ExamScreen> {
                 const EdgeInsets.only(bottom: 20.0, left: 12.0, right: 12.0),
             child: RawMaterialButton(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
-                  side: const BorderSide(color: Colors.white)),
+                borderRadius: BorderRadius.circular(8.0),
+                side: const BorderSide(color: Colors.white),
+              ),
               fillColor: btnPressed
-                  ? (i == selected_index
+                  ? (i == selectedIndex
                       ? (widget.listQuestion[index].answer!.values.toList()[i]
                           ? Colors.green
                           : Colors.red)
@@ -287,11 +299,11 @@ class _ExamScreenState extends State<ExamScreen> {
                           .toList()[i]) {
                         score++;
                         setState(() {
-                          selected_index = i;
+                          selectedIndex = i;
                         });
                       } else {
                         setState(() {
-                          selected_index = i;
+                          selectedIndex = i;
                         });
                       }
                       setState(() {
@@ -302,26 +314,31 @@ class _ExamScreenState extends State<ExamScreen> {
                         if (_pageController!.page?.toInt() ==
                             widget.listQuestion.length - 1) {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ResultExam()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ResultExam(),
+                            ),
+                          );
                         } else {
                           _pageController!.nextPage(
-                              duration: const Duration(milliseconds: 250),
-                              curve: Curves.easeInOut);
+                            duration: const Duration(milliseconds: 250),
+                            curve: Curves.easeInOut,
+                          );
                           setState(() {
                             btnPressed = false;
-                            selected_index = -1;
+                            selectedIndex = -1;
                           });
                         }
                       });
                     }
                   : null,
-              child: Text(widget.listQuestion[index].answer!.keys.toList()[i],
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18.0,
-                  )),
+              child: Text(
+                widget.listQuestion[index].answer!.keys.toList()[i],
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 18.0,
+                ),
+              ),
             ),
           ),
       ],

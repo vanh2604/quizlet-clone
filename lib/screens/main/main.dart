@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/widgets/qtext.dart';
-import 'package:quizlet/services/seed.services.dart';
-import 'package:quizlet/screens/main/user/user.dart';
 import 'package:quizlet/screens/main/home/home.dart';
 import 'package:quizlet/screens/main/search/search.dart';
+import 'package:quizlet/screens/main/user/user.dart';
+import 'package:quizlet/services/seed.services.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -35,7 +35,11 @@ class _MainScreenState extends State<MainScreen> {
         title: GestureDetector(
           onTap: () => seedDatabase(),
           child: const QText(
-              text: "Quizzy", color: Colors.white, size: 30, isBold: true),
+            text: "Quizzy",
+            color: Colors.white,
+            size: 30,
+            isBold: true,
+          ),
         ),
         centerTitle: false,
         elevation: 0,
@@ -46,7 +50,6 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
         selectedItemColor: const Color.fromRGBO(130, 138, 207, 1),
         unselectedItemColor: Colors.white.withOpacity(.60),
-        selectedFontSize: 14,
         unselectedFontSize: 14,
         currentIndex: currentIndex,
         onTap: (int index) {

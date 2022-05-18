@@ -21,7 +21,7 @@ Future<void> seedFolders() async {
 Future<void> seedSets() async {
   final db = FirebaseFirestore.instance;
 
-  Map vocab1 = {
+  final Map vocab1 = {
     'cat': 'a small domesticated carnivorous mammal',
     'dog': 'a domesticated carnivorous mammal',
     'bird': 'a small flightless bird',
@@ -50,7 +50,7 @@ Future<void> seedSets() async {
     'giant panda': 'a large bear-like primate',
   };
 
-  Map vocab2 = {
+  final Map vocab2 = {
     'red': 'đỏ',
     'green': 'xanh lá',
     'blue': 'xanh da trời',
@@ -75,7 +75,7 @@ Future<void> seedSets() async {
     'creamy red': 'vàng',
   };
 
-  Map aws1 = {
+  final Map aws1 = {
     'EC2': 'Elastic Compute Cloud',
     'ECS': 'Elastic Container Service',
     'EFS': 'Elastic File System',
@@ -93,7 +93,7 @@ Future<void> seedSets() async {
     'CloudFormation': 'CloudFormation',
   };
 
-  Map vocabvietnam = {
+  final Map vocabvietnam = {
     'xin chào': 'hello',
     'tạm biệt': 'goodbye',
     'cảm ơn': 'thank you',
@@ -115,10 +115,10 @@ Future<void> seedSets() async {
     'cái máy tính bảng': 'tablet',
   };
 
-  Map gcp1 = {
-    'Compute Engine': 'Virtual Machines running in Google\'s data center',
+  final Map gcp1 = {
+    'Compute Engine': "Virtual Machines running in Google's data center",
     'App Engine': 'Google App Engine',
-    'Cloud Storage': 'Object storage that\'s secure',
+    'Cloud Storage': "Object storage that's secure",
     'Cloud SQL': 'Relational database service',
     'Cloud Bigtable':
         'Bigtable is a fully-managed, scalable, high-performance, transactional, and fully-managed NoSQL database',

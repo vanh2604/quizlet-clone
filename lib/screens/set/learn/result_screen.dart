@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/data/card_data.dart';
-import 'learn_screen.dart';
+import 'package:quizlet/screens/set/learn/learn_screen.dart';
 
 void main() => runApp(ResultScreen(10));
 
@@ -25,8 +25,6 @@ class _ResultScreenState extends State<ResultScreen> {
         body: Padding(
           padding: const EdgeInsets.only(top: 15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
                 width: double.infinity,
@@ -61,12 +59,13 @@ class _ResultScreenState extends State<ResultScreen> {
               FlatButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LearnScreen(
-                          questionLearn: questions,
-                        ),
-                      ));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LearnScreen(
+                        questionLearn: questions,
+                      ),
+                    ),
+                  );
                 },
                 shape: const StadiumBorder(),
                 color: Colors.red,

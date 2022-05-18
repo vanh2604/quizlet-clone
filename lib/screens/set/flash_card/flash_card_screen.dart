@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quizlet/screens/set/flash_card/card_provider.dart';
 import 'package:quizlet/screens/set/flash_card/swipe_card.dart';
 import 'package:quizlet/widgets/qtext.dart';
-import 'card_provider.dart';
 
 class FlashCardScreen extends StatelessWidget {
   const FlashCardScreen({Key? key}) : super(key: key);
@@ -11,13 +11,13 @@ class FlashCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => CardProvider(), child: const MainPage()
-        // MaterialApp(
-        //   debugShowCheckedModeBanner: false,
-        //   title: 'Flutter Demo',
-        //   home: MainPage()
-        // ),
-        );
+      create: (context) => CardProvider(), child: const MainPage(),
+      // MaterialApp(
+      //   debugShowCheckedModeBanner: false,
+      //   title: 'Flutter Demo',
+      //   home: MainPage()
+      // ),
+    );
   }
 }
 
@@ -39,31 +39,35 @@ class _MainPageState extends State<MainPage> {
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: SafeArea(
         child: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(top: 30, bottom: 30),
-            child: Column(
-              children: [
-                // progress bar
-                Container(
-                    padding: const EdgeInsets.only(left: 40, right: 40),
-                    child: buildProgressBar()),
-                const SizedBox(
-                  height: 40,
-                ),
-                // swipe card
-                Flexible(
-                    child: !isEmpty
-                        ? buildCards()
-                        : buildEndCard(
-                            understandCount: understandCount,
-                            dontUnderstandCount: dontunderstandCount)),
-                const SizedBox(
-                  height: 30,
-                ),
-                // count when pan left or pan right
-                buildTermCount(),
-              ],
-            )),
+          alignment: Alignment.center,
+          padding: const EdgeInsets.only(top: 30, bottom: 30),
+          child: Column(
+            children: [
+              // progress bar
+              Container(
+                padding: const EdgeInsets.only(left: 40, right: 40),
+                child: buildProgressBar(),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              // swipe card
+              Flexible(
+                child: !isEmpty
+                    ? buildCards()
+                    : buildEndCard(
+                        understandCount: understandCount,
+                        dontUnderstandCount: dontunderstandCount,
+                      ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              // count when pan left or pan right
+              buildTermCount(),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -72,24 +76,31 @@ class _MainPageState extends State<MainPage> {
     final provider = Provider.of<CardProvider>(context);
     final urlImages = provider.urlImages;
     return Stack(
-        children: urlImages
-            .map((urlImage) => SwipeCard(
-                  urlImage: urlImage,
-                  isFront: urlImages.last == urlImage,
-                ))
-            .toList());
+      children: urlImages
+          .map(
+            (urlImage) => SwipeCard(
+              urlImage: urlImage,
+              isFront: urlImages.last == urlImage,
+            ),
+          )
+          .toList(),
+    );
   }
 
-  Widget buildEndCard(
-      {required understandCount, required dontUnderstandCount}) {
-    String line1 = understandCount == (understandCount + dontUnderstandCount)
-        ? "Chuc mung ban"
-        : "Ban co the lam dc";
-    String line2 = understandCount == (understandCount + dontUnderstandCount)
-        ? "Ban hoc het ca noi dung roi"
-        : "Ban vua hoc $understandCount "
-            " thuat ngu, chi con $dontUnderstandCount "
-            " thuat ngu thoi";
+  Widget buildEndCard({
+    required int understandCount,
+    required int dontUnderstandCount,
+  }) {
+    final String line1 =
+        understandCount == (understandCount + dontUnderstandCount)
+            ? "Chuc mung ban"
+            : "Ban co the lam dc";
+    final String line2 =
+        understandCount == (understandCount + dontUnderstandCount)
+            ? "Ban hoc het ca noi dung roi"
+            : "Ban vua hoc $understandCount "
+                " thuat ngu, chi con $dontUnderstandCount "
+                " thuat ngu thoi";
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.only(right: 40, left: 40),
@@ -117,19 +128,20 @@ class _MainPageState extends State<MainPage> {
                   color: const Color.fromRGBO(140, 137, 204, 1),
                 ),
                 child: TextButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>const FlashCardScreen()));
-                      final provider =
-                          Provider.of<CardProvider>(context, listen: false);
-                      provider.resetList();
-                    },
-                    child: const QText(
-                      text: 'Hoc lai',
-                      color: Colors.white,
-                    )),
+                  onPressed: () {
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>const FlashCardScreen()));
+                    final provider =
+                        Provider.of<CardProvider>(context, listen: false);
+                    provider.resetList();
+                  },
+                  child: const QText(
+                    text: 'Hoc lai',
+                    color: Colors.white,
+                  ),
+                ),
               )
             ],
           ),
@@ -147,10 +159,9 @@ class _MainPageState extends State<MainPage> {
       child: Column(
         children: [
           QText(
-              text: currentIndexCard.toString() +
-                  "/" +
-                  (totalCard - 1).toString(),
-              color: Colors.white),
+            text: "$currentIndexCard/${totalCard - 1}",
+            color: Colors.white,
+          ),
           const SizedBox(
             height: 50,
           ),
@@ -176,25 +187,29 @@ class _MainPageState extends State<MainPage> {
           width: 50,
           height: 50,
           decoration: const BoxDecoration(
-              borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
-              color: Colors.orange),
+            borderRadius: BorderRadius.horizontal(right: Radius.circular(10)),
+            color: Colors.orange,
+          ),
           child: Center(
-              child: QText(
-            color: Colors.black,
-            text: dontunderstandCount.toString(),
-          )),
+            child: QText(
+              color: Colors.black,
+              text: dontunderstandCount.toString(),
+            ),
+          ),
         ),
         Container(
           width: 50,
           height: 50,
           decoration: const BoxDecoration(
-              borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
-              color: Colors.green),
+            borderRadius: BorderRadius.horizontal(left: Radius.circular(10)),
+            color: Colors.green,
+          ),
           child: Center(
-              child: QText(
-            color: Colors.white,
-            text: understandCount.toString(),
-          )),
+            child: QText(
+              color: Colors.white,
+              text: understandCount.toString(),
+            ),
+          ),
         ),
       ],
     );
