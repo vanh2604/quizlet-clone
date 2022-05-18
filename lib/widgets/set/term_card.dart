@@ -19,7 +19,7 @@ class TermCard extends StatelessWidget {
         color: secondaryColor,
       ),
       child: Container(
-        constraints: const BoxConstraints(maxHeight: double.infinity),
+        constraints: const BoxConstraints(),
         padding:
             const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
         child: Column(

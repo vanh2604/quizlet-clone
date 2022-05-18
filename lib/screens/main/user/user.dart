@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:quizlet/services/auth.services.dart';
 import 'package:quizlet/services/storage.services.dart';
 import 'package:quizlet/widgets/user/option_card.dart';
 import 'package:quizlet/widgets/user/profile_card.dart';
-import 'package:quizlet/services/auth.services.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -18,28 +18,35 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
-              onTap: () => _showPicker(context), child: const ProfileCard()),
+            onTap: () => _showPicker(context),
+            child: const ProfileCard(),
+          ),
           GestureDetector(
             child: const OptionCard(icon: Icons.storage_rounded, text: 'Sets'),
             onTap: () async {},
           ),
           GestureDetector(
             child: const OptionCard(
-                icon: Icons.folder_copy_rounded, text: 'Folders'),
+              icon: Icons.folder_copy_rounded,
+              text: 'Folders',
+            ),
             onTap: () async {},
           ),
           GestureDetector(
             child: const OptionCard(
-                icon: Icons.door_back_door_rounded, text: 'Sign Out'),
+              icon: Icons.door_back_door_rounded,
+              text: 'Sign Out',
+            ),
             onTap: () async {
               await AuthService().signOut();
               if (mounted) {
                 Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/introduction', (Route<dynamic> route) => false);
+                  '/introduction',
+                  (Route<dynamic> route) => false,
+                );
               }
             },
           ),
@@ -72,31 +79,33 @@ class _UserScreenState extends State<UserScreen> {
     });
   }
 
-  void _showPicker(context) {
+  void _showPicker(BuildContext context) {
     showBarModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                    leading: const Icon(Icons.photo_library),
-                    title: const Text('Gallery'),
-                    onTap: () {
-                      imgFromGallery();
-                      Navigator.of(context).pop();
-                    }),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    imgFromCamera();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        });
+      context: context,
+      builder: (BuildContext bc) {
+        return SafeArea(
+          child: Wrap(
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text('Gallery'),
+                onTap: () {
+                  imgFromGallery();
+                  Navigator.of(context).pop();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.photo_camera),
+                title: const Text('Camera'),
+                onTap: () {
+                  imgFromCamera();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

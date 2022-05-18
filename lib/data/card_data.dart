@@ -1,4 +1,4 @@
-import '../model/card_model.dart';
+import 'package:quizlet/model/card_model.dart';
 
 List<CardModel> questions = [
   CardModel(

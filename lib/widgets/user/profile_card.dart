@@ -51,25 +51,29 @@ class _ProfileCardState extends State<ProfileCard> {
                 child: Container(
                   color: secondaryColor,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      avatarURL == ''
-                          ? Padding(
-                              padding: EdgeInsets.all(
-                                  MediaQuery.of(context).size.width * 0.05),
-                              child: const CircularProgressIndicator(),
-                            )
-                          : CircleAvatar(
-                              radius: 40,
-                              backgroundImage: NetworkImage(avatarURL),
-                              backgroundColor: Colors.transparent),
+                      if (avatarURL == '')
+                        Padding(
+                          padding: EdgeInsets.all(
+                            MediaQuery.of(context).size.width * 0.05,
+                          ),
+                          child: const CircularProgressIndicator(),
+                        )
+                      else
+                        CircleAvatar(
+                          radius: 40,
+                          backgroundImage: NetworkImage(avatarURL),
+                          backgroundColor: Colors.transparent,
+                        ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           QText(text: name, color: Colors.white, isBold: true),
                           QText(
-                              text: email, color: Colors.white, isBold: false),
+                            text: email,
+                            color: Colors.white,
+                          ),
                         ],
                       ),
                     ],

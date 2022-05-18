@@ -1,9 +1,8 @@
 // ignore_for_file: avoid_print
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:quizlet/utils/firestore_url.dart';
 import 'package:quizlet/services/firestore.services.dart';
+import 'package:quizlet/utils/firestore_url.dart';
 
 class AuthService {
   Future<void> googleSignUp() async {
@@ -38,7 +37,7 @@ class AuthService {
     }
   }
 
-  Future<String> emailSignup(name, email, password) async {
+  Future<String> emailSignup(String name, String email, String password) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
@@ -59,7 +58,7 @@ class AuthService {
     return '';
   }
 
-  Future<String> emailSignin(email, password) async {
+  Future<String> emailSignin(String email, String password) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);

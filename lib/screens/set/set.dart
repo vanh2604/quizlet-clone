@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizlet/data/card_data.dart';
 import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/utils/colors.dart';
@@ -6,8 +7,6 @@ import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/set/flip_term_card.dart';
 import 'package:quizlet/widgets/set/learn_custom_button.dart';
 import 'package:quizlet/widgets/set/term_card.dart';
-
-import '../../data/card_data.dart';
 
 class SetScreen extends StatefulWidget {
   const SetScreen({Key? key}) : super(key: key);
@@ -28,21 +27,22 @@ class _SetScreenState extends State<SetScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // set details
-    final arguments =
+    final Map<String, dynamic> arguments =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
-    Map<dynamic, dynamic> _setCard = arguments['setDetail'];
-    final List _question = arguments['setDetail']['cards'].entries.toList();
+    final Map<dynamic, dynamic> _setCard =
+        arguments['setDetail'] as Map<dynamic, dynamic>;
+    final List _question =
+        arguments['setDetail']['cards'].entries.toList() as List<dynamic>;
 
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: primaryColor,
-        ),
+      appBar: AppBar(
+        elevation: 0,
         backgroundColor: primaryColor,
-        body: SingleChildScrollView(
-            child: Container(
+      ),
+      backgroundColor: primaryColor,
+      body: SingleChildScrollView(
+        child: Container(
           padding: const EdgeInsets.fromLTRB(30, 10, 10, 30),
           child: Column(
             children: [
@@ -51,7 +51,6 @@ class _SetScreenState extends State<SetScreen> {
                 child: SingleChildScrollView(
                   child: Center(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Column(
@@ -64,10 +63,11 @@ class _SetScreenState extends State<SetScreen> {
                                   // print(activeQuestion);
                                 },
                                 child: PageView.builder(
-                                  itemCount:
-                                      arguments['setDetail']['cards'].length,
-                                  pageSnapping: true,
-                                  scrollDirection: Axis.horizontal,
+                                  itemCount: int.parse(
+                                    arguments['setDetail']['cards']
+                                        .length
+                                        .toString(),
+                                  ),
                                   onPageChanged: (question) {
                                     setState(() {
                                       activeQuestion = question;
@@ -81,9 +81,12 @@ class _SetScreenState extends State<SetScreen> {
                                       curve: Curves.easeInOutCubic,
                                       margin: const EdgeInsets.only(right: 20),
                                       child: FlipTermCard(
-                                        title: _question[activeQuestion].key,
-                                        definition:
-                                            _question[activeQuestion].value,
+                                        title: _question[activeQuestion]
+                                            .key
+                                            .toString(),
+                                        definition: _question[activeQuestion]
+                                            .value
+                                            .toString(),
                                       ),
                                     );
                                   },
@@ -97,16 +100,19 @@ class _SetScreenState extends State<SetScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(right: 20.0),
                                 child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: indicators(
-                                        _question.length, activeQuestion)),
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: indicators(
+                                    _question.length,
+                                    activeQuestion,
+                                  ),
+                                ),
                               ),
                             ]
                           ],
                         ),
                         const SizedBox(height: 15),
                         QText(
-                          text: _setCard['name'],
+                          text: _setCard['name'].toString(),
                           color: Colors.white,
                           size: 30,
                           isBold: true,
@@ -118,50 +124,62 @@ class _SetScreenState extends State<SetScreen> {
                               width: 10,
                             ),
                             QText(
-                                text: _setCard["username"],
-                                color: Colors.white),
+                              text: _setCard["username"].toString(),
+                              color: Colors.white,
+                            ),
                           ],
                         ),
 
                         // grid view learn button, using table
                         Table(
                           children: [
-                            TableRow(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacement(
+                            TableRow(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             const FlashCardScreen(),
-                                      ));
-                                },
-                                child: const LearnCustomButton(
+                                      ),
+                                    );
+                                  },
+                                  child: const LearnCustomButton(
                                     text: "Flashcard",
-                                    icon: Icons.card_membership_rounded),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacement(
+                                    icon: Icons.card_membership_rounded,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => LearnScreen(
                                           questionLearn: questions,
                                         ),
-                                      ));
-                                },
-                                child: const LearnCustomButton(
+                                      ),
+                                    );
+                                  },
+                                  child: const LearnCustomButton(
                                     text: "Learn",
-                                    icon: Icons.check_box_rounded),
-                              )
-                            ]),
-                            const TableRow(children: [
-                              LearnCustomButton(
-                                  text: "Write", icon: Icons.edit_rounded),
-                              LearnCustomButton(
+                                    icon: Icons.check_box_rounded,
+                                  ),
+                                )
+                              ],
+                            ),
+                            const TableRow(
+                              children: [
+                                LearnCustomButton(
+                                  text: "Write",
+                                  icon: Icons.edit_rounded,
+                                ),
+                                LearnCustomButton(
                                   text: "Exam",
-                                  icon: Icons.import_contacts_rounded),
-                            ])
+                                  icon: Icons.import_contacts_rounded,
+                                ),
+                              ],
+                            )
                           ],
                         ),
                         const SizedBox(
@@ -180,7 +198,10 @@ class _SetScreenState extends State<SetScreen> {
                         ),
 
                         for (var q in _question)
-                          TermCard(title: q.key, definition: q.value)
+                          TermCard(
+                            title: q.key.toString(),
+                            definition: q.value.toString(),
+                          )
                       ],
                     ),
                   ),
@@ -191,31 +212,36 @@ class _SetScreenState extends State<SetScreen> {
                 height: MediaQuery.of(context).size.height * 0.05,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.blue,
+                ),
                 child: const Center(
-                    child: QText(
-                  text: "Study this set",
-                  color: Colors.white,
-                )),
+                  child: QText(
+                    text: "Study this set",
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ],
           ),
-        )));
+        ),
+      ),
+    );
   }
 }
 
-List<Widget> indicators(length, currentIndex) {
+List<Widget> indicators(int length, int currentIndex) {
   return List<Widget>.generate(length, (index) {
     return Container(
       margin: const EdgeInsets.all(2),
       width: 8,
       height: 10,
       decoration: BoxDecoration(
-          color: currentIndex == index
-              ? Colors.white
-              : const Color.fromRGBO(52, 58, 85, 1),
-          shape: BoxShape.circle),
+        color: currentIndex == index
+            ? Colors.white
+            : const Color.fromRGBO(52, 58, 85, 1),
+        shape: BoxShape.circle,
+      ),
     );
   });
 }
