@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
 class FlipTermCard extends StatefulWidget {
+  bool isFront;
   final String title;
   final String definition;
 
-  const FlipTermCard({Key? key, required this.title, required this.definition})
-      : super(key: key);
+  FlipTermCard({
+    Key? key,
+    this.isFront = true,
+    required this.title,
+    required this.definition,
+  }) : super(key: key);
 
   @override
   _FlipTermCard createState() => _FlipTermCard();
@@ -40,15 +45,17 @@ class _FlipTermCard extends State<FlipTermCard> {
             alignment: Alignment.center,
             transform: Matrix4.identity()
               ..setEntry(3, 2, 0.001)
-              ..rotateX(val),
+              ..rotateY(val),
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: 200,
+              height: MediaQuery.of(context).size.height,
               child: isBack
                   ? Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
-                        color: const Color.fromRGBO(52, 58, 85, 1),
+                        color: widget.isFront
+                            ? const Color.fromRGBO(52, 58, 85, 1)
+                            : const Color.fromRGBO(62, 68, 95, 1),
                       ),
                       child: Center(
                         child: QText(
@@ -59,11 +66,13 @@ class _FlipTermCard extends State<FlipTermCard> {
                     )
                   : Transform(
                       alignment: Alignment.center,
-                      transform: Matrix4.identity()..rotateX(pi),
+                      transform: Matrix4.identity()..rotateY(pi),
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: const Color.fromRGBO(52, 58, 85, 1),
+                          color: widget.isFront
+                              ? const Color.fromRGBO(52, 58, 85, 1)
+                              : const Color.fromRGBO(62, 68, 95, 1),
                         ),
                         child: Center(
                           child: QText(

@@ -5,6 +5,7 @@ import 'package:quizlet/widgets/review_term.dart';
 import 'learn_screen.dart';
 
 
+
 class ResultScreen extends StatefulWidget {
   int score;
   ResultScreen(this.score, {Key? key}) : super(key: key);
@@ -18,15 +19,13 @@ class _ResultScreenState extends State<ResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title:Text("Result"),
-            backgroundColor: const Color.fromRGBO(52, 58, 85, 1),
+          title: const Text("Result"),
+          backgroundColor: const Color.fromRGBO(52, 58, 85, 1),
         ),
         backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
         body: Padding(
           padding: const EdgeInsets.only(top: 15.0, right: 20, left: 20),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text("You Score",
                 style: TextStyle(color: Colors.white, fontSize: 34.0),
@@ -44,6 +43,7 @@ class _ResultScreenState extends State<ResultScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(
                 height: 20.0,
               ),
@@ -87,6 +87,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       return ReviewTerm(term: index.toString(), correctAnswer: "correctAnswer");
                     },
                   ),
+            
                 ),
 
 

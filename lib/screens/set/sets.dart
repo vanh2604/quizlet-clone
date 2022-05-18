@@ -19,7 +19,7 @@ class _SetsScreenState extends State<SetsScreen> {
         title: const QText(
           color: Colors.white,
           text: 'Sets',
-          size: 35,
+          size: 30,
           isBold: true,
         ),
         centerTitle: false,
@@ -33,16 +33,19 @@ class _SetsScreenState extends State<SetsScreen> {
               ? ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
-                    DocumentSnapshot set = snapshot.data!.docs[index];
+                    final DocumentSnapshot set = snapshot.data!.docs[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/set',
-                            arguments: {'setDetail': set.data()});
+                        Navigator.pushNamed(
+                          context,
+                          '/set',
+                          arguments: {'setDetail': set.data()},
+                        );
                       },
                       child: SetCard(
-                        title: set['name'],
-                        username: set['username'],
-                        terms: set['cards'].length,
+                        title: set['name'].toString(),
+                        username: set['username'].toString(),
+                        terms: int.parse(set['cards'].length.toString()),
                       ),
                     );
                   },

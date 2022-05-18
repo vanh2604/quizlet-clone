@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:quizlet/data/card_data.dart';
-import 'package:quizlet/screens/set/write/write_screen.dart';
 
-import 'exam_screen.dart';
+import 'package:quizlet/screens/set/exam/exam_screen.dart';
 
 void main() => runApp(const SettingExam());
 
@@ -15,12 +13,12 @@ class SettingExam extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(12, 12, 48, 1),
+          backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
         ),
-        body: Center(
+        body: const Center(
           child: Setting(),
         ),
-        backgroundColor: Color.fromRGBO(12, 12, 48, 1),
+        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       ),
     );
   }
@@ -43,7 +41,6 @@ class _Setting extends State<Setting> {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -53,26 +50,29 @@ class _Setting extends State<Setting> {
                 width: MediaQuery.of(context).size.width,
                 child: TextButton(
                   style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(16.0),
-                      primary: Colors.white,
-                      textStyle: const TextStyle(fontSize: 20),
-                      backgroundColor: Colors.blue),
+                    padding: const EdgeInsets.all(16.0),
+                    primary: Colors.white,
+                    textStyle: const TextStyle(fontSize: 20),
+                    backgroundColor: Colors.blue,
+                  ),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ExamScreen(
-                                  listQuestion: questions,
-                                  isMultichoice: _multichoice,
-                                  isWrite: _write,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExamScreen(
+                          listQuestion: questions,
+                          isMultichoice: _multichoice,
+                          isWrite: _write,
+                        ),
+                      ),
+                    );
                   },
                   child: const Text('Bat dau lam bai kiem tra'),
                 ),
               ),
             ),
           ),
-          Text(
+          const Text(
             "General",
             style: TextStyle(color: Colors.grey),
           ),
@@ -91,7 +91,7 @@ class _Setting extends State<Setting> {
               });
             },
           ),
-          Text(
+          const Text(
             "Question type",
             style: TextStyle(color: Colors.grey),
           ),
@@ -107,18 +107,20 @@ class _Setting extends State<Setting> {
             onChanged: (bool value) {
               if (!_write && !value) {
                 showDialog(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                          title: Text("Khong the thay doi cai dat"),
-                          content: Text(
-                              "Ban phai kich hoat it nhat mot loai cau hoi"),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ));
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: const Text("Khong the thay doi cai dat"),
+                    content: const Text(
+                      "Ban phai kich hoat it nhat mot loai cau hoi",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
               } else {
                 setState(() {
                   _multichoice = value;
@@ -138,18 +140,20 @@ class _Setting extends State<Setting> {
             onChanged: (bool value) {
               if (!_multichoice && !value) {
                 showDialog(
-                    context: context,
-                    builder: (_) => AlertDialog(
-                          title: Text("Khong the thay doi cai dat"),
-                          content: Text(
-                              "Ban phai kich hoat it nhat mot loai cau hoi"),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context, 'OK'),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ));
+                  context: context,
+                  builder: (_) => AlertDialog(
+                    title: const Text("Khong the thay doi cai dat"),
+                    content: const Text(
+                      "Ban phai kich hoat it nhat mot loai cau hoi",
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
               } else {
                 setState(() {
                   _write = value;

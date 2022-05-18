@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:flutter/material.dart';
+import 'package:quizlet/firebase_options.dart';
 import 'package:quizlet/routes.dart';
 import 'package:quizlet/theme.dart';
 

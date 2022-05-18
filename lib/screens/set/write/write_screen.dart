@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../data/card_data.dart';
+import 'package:quizlet/data/card_data.dart';
 
 void main() => runApp(const WriteScreen());
 
@@ -22,7 +22,7 @@ class _WriteScreen extends State<WriteScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 0);
+    _pageController = PageController();
     questions.shuffle();
 
     _focusNode.addListener(() {
@@ -68,59 +68,62 @@ class _WriteScreen extends State<WriteScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
-                  width: 300,
-                  height: 200,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                width: 300,
+                height: 200,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${questions[index].question}",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22.0,
+                      ),
+                    ),
+                    for (int i = 0; i < questions[index].answer!.length; i++)
                       Text(
-                        "${questions[index].question}",
+                        questions[index].answer!.keys.toList()[i],
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
                         ),
-                      ),
-                      for (int i = 0; i < questions[index].answer!.length; i++)
-                        Text(
-                          questions[index].answer!.keys.toList()[i],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22.0,
-                          ),
-                        )
-                    ],
-                  )),
+                      )
+                  ],
+                ),
+              ),
               Row(
                 children: [
-                  (countEnterToAnswer == 0) && _isCorrectAnswer
-                      ? const Icon(
-                          Icons.circle,
-                          color: Colors.green,
-                        )
-                      : countEnterToAnswer >= 1
-                          ? const Icon(
-                              Icons.circle,
-                              color: Colors.red,
-                            )
-                          : const Icon(
-                              Icons.circle_outlined,
-                              color: Colors.white,
-                            ),
-                  (countEnterToAnswer == 0 || countEnterToAnswer == 1) &&
-                          _isCorrectAnswer
-                      ? const Icon(
-                          Icons.circle,
-                          color: Colors.green,
-                        )
-                      : countEnterToAnswer == 2
-                          ? const Icon(
-                              Icons.circle,
-                              color: Colors.red,
-                            )
-                          : const Icon(
-                              Icons.circle_outlined,
-                              color: Colors.white,
-                            )
+                  if ((countEnterToAnswer == 0) && _isCorrectAnswer)
+                    const Icon(
+                      Icons.circle,
+                      color: Colors.green,
+                    )
+                  else
+                    countEnterToAnswer >= 1
+                        ? const Icon(
+                            Icons.circle,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.circle_outlined,
+                            color: Colors.white,
+                          ),
+                  if ((countEnterToAnswer == 0 || countEnterToAnswer == 1) &&
+                      _isCorrectAnswer)
+                    const Icon(
+                      Icons.circle,
+                      color: Colors.green,
+                    )
+                  else
+                    countEnterToAnswer == 2
+                        ? const Icon(
+                            Icons.circle,
+                            color: Colors.red,
+                          )
+                        : const Icon(
+                            Icons.circle_outlined,
+                            color: Colors.white,
+                          )
                 ],
               )
             ],
@@ -132,12 +135,13 @@ class _WriteScreen extends State<WriteScreen> {
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                    color: _haveSummited
-                        ? _isCorrectAnswer
-                            ? Colors.green
-                            : Colors.orange
-                        : Colors.white,
-                    width: 5),
+                  color: _haveSummited
+                      ? _isCorrectAnswer
+                          ? Colors.green
+                          : Colors.orange
+                      : Colors.white,
+                  width: 5,
+                ),
               ),
             ),
             autofocus: _autofocus,
@@ -162,8 +166,9 @@ class _WriteScreen extends State<WriteScreen> {
                     Future.delayed(const Duration(seconds: 3), () {
                       if (_isCorrectAnswer || countEnterToAnswer == 2) {
                         _pageController!.nextPage(
-                            duration: const Duration(milliseconds: 250),
-                            curve: Curves.easeInOut);
+                          duration: const Duration(milliseconds: 250),
+                          curve: Curves.easeInOut,
+                        );
                       } else {
                         setState(() {
                           _haveSummited = false;
@@ -177,15 +182,18 @@ class _WriteScreen extends State<WriteScreen> {
           const SizedBox(
             height: 10,
           ),
-          _haveSummited
-              ? _isCorrectAnswer
-                  ? const Text("Correct", style: TextStyle(color: Colors.green))
-                  : const Text("Incorrect",
-                      style: TextStyle(color: Colors.orange))
-              : const Text(
-                  "Fill the blank",
-                  style: TextStyle(color: Colors.white),
-                )
+          if (_haveSummited)
+            _isCorrectAnswer
+                ? const Text("Correct", style: TextStyle(color: Colors.green))
+                : const Text(
+                    "Incorrect",
+                    style: TextStyle(color: Colors.orange),
+                  )
+          else
+            const Text(
+              "Fill the blank",
+              style: TextStyle(color: Colors.white),
+            )
         ],
       ),
     );
