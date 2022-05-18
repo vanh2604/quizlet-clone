@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 
 import 'card_provider.dart';
-import 'flip_Y_term_card.dart';
+import 'flip_term_card.dart';
 
 class SwipeCard extends StatefulWidget {
   final String urlImage;
@@ -45,12 +44,10 @@ class _SwipeCardState extends State<SwipeCard> {
       padding: const EdgeInsets.only(right: 40, left: 40),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: Container(
-          child: FlipYTermCard(
-            definition: widget.urlImage + "_____",
-            title: widget.urlImage,
-            isFront: widget.isFront,
-          ),
+        child: FlipTermCard(
+          definition: widget.urlImage + "_____",
+          title: widget.urlImage,
+          isFront: widget.isFront,
         ),
       ),
     );

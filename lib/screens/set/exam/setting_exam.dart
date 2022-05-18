@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:quizlet/data/card_data.dart';
-import 'package:quizlet/screens/set/write/write_screen.dart';
 
 import 'exam_screen.dart';
 
@@ -15,12 +13,12 @@ class SettingExam extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromRGBO(12, 12, 48, 1),
+          backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
         ),
-        body: Center(
+        body: const Center(
           child: Setting(),
         ),
-        backgroundColor: Color.fromRGBO(12, 12, 48, 1),
+        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       ),
     );
   }
@@ -72,7 +70,7 @@ class _Setting extends State<Setting> {
               ),
             ),
           ),
-          Text(
+          const Text(
             "General",
             style: TextStyle(color: Colors.grey),
           ),
@@ -91,7 +89,7 @@ class _Setting extends State<Setting> {
               });
             },
           ),
-          Text(
+          const Text(
             "Question type",
             style: TextStyle(color: Colors.grey),
           ),
@@ -109,8 +107,8 @@ class _Setting extends State<Setting> {
                 showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                          title: Text("Khong the thay doi cai dat"),
-                          content: Text(
+                          title: const Text("Khong the thay doi cai dat"),
+                          content: const Text(
                               "Ban phai kich hoat it nhat mot loai cau hoi"),
                           actions: [
                             TextButton(
@@ -140,8 +138,8 @@ class _Setting extends State<Setting> {
                 showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                          title: Text("Khong the thay doi cai dat"),
-                          content: Text(
+                          title: const Text("Khong the thay doi cai dat"),
+                          content: const Text(
                               "Ban phai kich hoat it nhat mot loai cau hoi"),
                           actions: [
                             TextButton(

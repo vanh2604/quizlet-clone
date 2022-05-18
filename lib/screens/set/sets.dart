@@ -19,7 +19,7 @@ class _SetsScreenState extends State<SetsScreen> {
         title: const QText(
           color: Colors.white,
           text: 'Sets',
-          size: 35,
+          size: 30,
           isBold: true,
         ),
         centerTitle: false,

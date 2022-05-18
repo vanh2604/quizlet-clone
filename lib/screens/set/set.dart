@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
+import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/set/flip_term_card.dart';
 import 'package:quizlet/widgets/set/learn_custom_button.dart';
@@ -16,13 +17,13 @@ class SetScreen extends StatefulWidget {
 }
 
 class _SetScreenState extends State<SetScreen> {
-  late PageController _questionController;
+  // late PageController _questionController;
   int activeQuestion = 0;
 
   @override
   void initState() {
     super.initState();
-    _questionController = PageController(viewportFraction: 0.8, initialPage: 1);
+    // _questionController = PageController(viewportFraction: 0.8, initialPage: 1);
   }
 
   @override
@@ -37,9 +38,9 @@ class _SetScreenState extends State<SetScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+          backgroundColor: primaryColor,
         ),
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+        backgroundColor: primaryColor,
         body: SingleChildScrollView(
             child: Container(
           padding: const EdgeInsets.fromLTRB(30, 10, 10, 30),
@@ -48,123 +49,140 @@ class _SetScreenState extends State<SetScreen> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.9,
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // carousel card
-                      SizedBox(
-                        height: 200,
-                        width: MediaQuery.of(context).size.width,
-                        child: GestureDetector(
-                          onTap: () {
-                            print(activeQuestion);
-                          },
-                          child: PageView.builder(
-                            itemCount: arguments['setDetail']['cards'].length,
-                            pageSnapping: true,
-                            scrollDirection: Axis.horizontal,
-                            onPageChanged: (question) {
-                              setState(() {
-                                activeQuestion = question;
-                              });
-                            },
-                            itemBuilder: (BuildContext context, int index) {
-                              return AnimatedContainer(
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeInOutCubic,
-                                margin: const EdgeInsets.only(right: 20),
-                                child: FlipTermCard(
-                                  title: _question[activeQuestion].key,
-                                  definition: _question[activeQuestion].value,
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              child: GestureDetector(
+                                onTap: () {
+                                  // print(activeQuestion);
+                                },
+                                child: PageView.builder(
+                                  itemCount:
+                                      arguments['setDetail']['cards'].length,
+                                  pageSnapping: true,
+                                  scrollDirection: Axis.horizontal,
+                                  onPageChanged: (question) {
+                                    setState(() {
+                                      activeQuestion = question;
+                                    });
+                                  },
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeInOutCubic,
+                                      margin: const EdgeInsets.only(right: 20),
+                                      child: FlipTermCard(
+                                        title: _question[activeQuestion].key,
+                                        definition:
+                                            _question[activeQuestion].value,
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-
-                      // indicator
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:
-                              indicators(_question.length, activeQuestion)),
-
-                      //title of set
-                      QText(
-                        text: _setCard['name'],
-                        color: Colors.white,
-                        size: 30,
-                        isBold: true,
-                      ),
-
-                      // username and number of terms
-                      Row(
-                        children: [
-                          const Icon(Icons.build),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          QText(
-                              text: _setCard["username"], color: Colors.white),
-                        ],
-                      ),
-
-                      // grid view learn button, using table
-                      Table(
-                        children:  [
-                          TableRow(children: [
-                            GestureDetector(
-                              onTap:(){
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => FlashCardScreen(),
-                                    ));
-                              },
-                              child: LearnCustomButton(
-                                  text: "Flashcard", icon: Icons.favorite),
+                              ),
                             ),
-                            GestureDetector(
-                              onTap:(){
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => LearnScreen(questionLearn: questions,),
-                                    ));
-                              },
-                              child: LearnCustomButton(
-                                  text: "Learn", icon: Icons.favorite),
-                            )
-                          ]),
-                          TableRow(children: [
-                            LearnCustomButton(
-                                text: "Write", icon: Icons.favorite),
-                            LearnCustomButton(
-                                text: "Exam", icon: Icons.favorite)
-                          ])
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                            if (_question.length < 30) ...[
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 20.0),
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: indicators(
+                                        _question.length, activeQuestion)),
+                              ),
+                            ]
+                          ],
+                        ),
+                        const SizedBox(height: 15),
+                        QText(
+                          text: _setCard['name'],
+                          color: Colors.white,
+                          size: 30,
+                          isBold: true,
+                        ),
+                        Row(
+                          children: [
+                            const Icon(Icons.build),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            QText(
+                                text: _setCard["username"],
+                                color: Colors.white),
+                          ],
+                        ),
 
-                      const QText(
-                        text: "Terms",
-                        color: Colors.white,
-                        isBold: true,
-                        size: 20,
-                      ),
+                        // grid view learn button, using table
+                        Table(
+                          children: [
+                            TableRow(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const FlashCardScreen(),
+                                      ));
+                                },
+                                child: const LearnCustomButton(
+                                    text: "Flashcard",
+                                    icon: Icons.card_membership_rounded),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LearnScreen(
+                                          questionLearn: questions,
+                                        ),
+                                      ));
+                                },
+                                child: const LearnCustomButton(
+                                    text: "Learn",
+                                    icon: Icons.check_box_rounded),
+                              )
+                            ]),
+                            const TableRow(children: [
+                              LearnCustomButton(
+                                  text: "Write", icon: Icons.edit_rounded),
+                              LearnCustomButton(
+                                  text: "Exam",
+                                  icon: Icons.import_contacts_rounded),
+                            ])
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
 
-                      const SizedBox(
-                        height: 10,
-                      ),
+                        const QText(
+                          text: "Terms",
+                          color: Colors.white,
+                          isBold: true,
+                          size: 20,
+                        ),
 
-                      for (var q in _question)
-                        TermCard(title: q.key, definition: q.value)
-                    ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+
+                        for (var q in _question)
+                          TermCard(title: q.key, definition: q.value)
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -180,18 +198,18 @@ class _SetScreenState extends State<SetScreen> {
                   text: "Study this set",
                   color: Colors.white,
                 )),
-              )
+              ),
             ],
           ),
         )));
   }
 }
 
-List<Widget> indicators(imagesLength, currentIndex) {
-  return List<Widget>.generate(imagesLength, (index) {
+List<Widget> indicators(length, currentIndex) {
+  return List<Widget>.generate(length, (index) {
     return Container(
-      margin: const EdgeInsets.all(3),
-      width: 10,
+      margin: const EdgeInsets.all(2),
+      width: 8,
       height: 10,
       decoration: BoxDecoration(
           color: currentIndex == index
