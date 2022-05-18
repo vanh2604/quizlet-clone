@@ -51,7 +51,6 @@ class _SetScreenState extends State<SetScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // carousel card
                       SizedBox(
                         height: 200,
                         width: MediaQuery.of(context).size.width,
@@ -86,13 +85,11 @@ class _SetScreenState extends State<SetScreen> {
                         height: 10,
                       ),
 
-                      // indicator
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:
                               indicators(_question.length, activeQuestion)),
 
-                      //title of set
                       QText(
                         text: _setCard['name'],
                         color: Colors.white,
@@ -100,7 +97,6 @@ class _SetScreenState extends State<SetScreen> {
                         isBold: true,
                       ),
 
-                      // username and number of terms
                       Row(
                         children: [
                           const Icon(Icons.build),
@@ -114,10 +110,10 @@ class _SetScreenState extends State<SetScreen> {
 
                       // grid view learn button, using table
                       Table(
-                        children:  [
+                        children: [
                           TableRow(children: [
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -125,25 +121,29 @@ class _SetScreenState extends State<SetScreen> {
                                     ));
                               },
                               child: LearnCustomButton(
-                                  text: "Flashcard", icon: Icons.favorite),
+                                  text: "Flashcard",
+                                  icon: Icons.card_membership_rounded),
                             ),
                             GestureDetector(
-                              onTap:(){
+                              onTap: () {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => LearnScreen(questionLearn: questions,),
+                                      builder: (context) => LearnScreen(
+                                        questionLearn: questions,
+                                      ),
                                     ));
                               },
                               child: LearnCustomButton(
-                                  text: "Learn", icon: Icons.favorite),
+                                  text: "Learn", icon: Icons.check_box_rounded),
                             )
                           ]),
                           TableRow(children: [
                             LearnCustomButton(
-                                text: "Write", icon: Icons.favorite),
+                                text: "Write", icon: Icons.edit_rounded),
                             LearnCustomButton(
-                                text: "Exam", icon: Icons.favorite)
+                                text: "Exam",
+                                icon: Icons.import_contacts_rounded),
                           ])
                         ],
                       ),
