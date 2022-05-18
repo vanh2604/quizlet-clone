@@ -70,8 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: SetCardBig(
                                 title: set['name'].toString(),
                                 username: set['username'].toString(),
-                                terms:
-                                    int.parse(set['cards'].length.toString()),
+                                terms: int.parse(
+                                  set['cards'].length.toString(),
+                                ),
                               ),
                             );
                           },

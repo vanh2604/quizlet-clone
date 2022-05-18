@@ -2,6 +2,7 @@
 
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:quizlet/screens/introduction/introduction.dart';
+import 'package:quizlet/screens/main/create/create.dart';
 import 'package:quizlet/screens/main/main.dart';
 import 'package:quizlet/screens/set/set.dart';
 import 'package:quizlet/screens/set/sets.dart';
@@ -16,6 +17,7 @@ Map<String, Widget Function(dynamic context)> appRoutes = {
   '/signup': (context) => const SignUpScreen(),
   '/signin': (context) => const SignInScreen(),
   '/main': (context) => const MainScreen(),
+  '/create': (context) => const CreateScreen(),
   '/set': (context) => const SetScreen(),
   '/sets': (context) => const SetsScreen(),
   //'/folder': (context) => const FolderScreen(),

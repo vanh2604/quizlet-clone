@@ -11,17 +11,20 @@ dependencies:
   carousel_slider: ^4.0.0
   cloud_firestore: ^3.1.11
   cupertino_icons: ^1.0.2
+  file_picker: ^4.5.1
   firebase_auth: ^3.3.12
   firebase_core: ^1.14.0
   firebase_storage: ^10.2.15
   flutter:
     sdk: flutter
+  google_ml_kit: ^0.11.0
   google_sign_in: ^5.3.0
   image_picker: ^0.8.5+3
   lint: ^1.8.2
   modal_bottom_sheet: ^2.0.1
   path: ^1.8.1
   provider: ^6.0.2 #to be removed
+  responsive_framework: ^0.1.9
 
 dev_dependencies:
   flutter_lints: ^1.0.0
