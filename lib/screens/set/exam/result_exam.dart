@@ -10,8 +10,6 @@ class ResultExam extends StatefulWidget {
 class _ResultExamState extends State<ResultExam> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("This is final res"),
-    );
+    return const Text("This is final res");
   }
 }

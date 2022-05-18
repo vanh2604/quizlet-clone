@@ -88,7 +88,7 @@ class _LearnScreenState extends State<LearnScreen> {
                         child: RawMaterialButton(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
-                              side: BorderSide(color: Colors.white)),
+                              side: const BorderSide(color: Colors.white)),
                           fillColor: btnPressed
                               ? (i == selected_index
                                   ? (widget.questionLearn[index].answer!.values

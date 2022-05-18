@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:quizlet/utils/colors.dart';
 
 class TermCard extends StatelessWidget {
   final String title;
@@ -15,7 +16,7 @@ class TermCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: const Color.fromRGBO(52, 58, 85, 1),
+        color: secondaryColor,
       ),
       child: Container(
         constraints: const BoxConstraints(maxHeight: double.infinity),
@@ -34,7 +35,6 @@ class TermCard extends StatelessWidget {
                     style: const TextStyle(fontSize: 20),
                   ),
                 ),
-                const Icon(Icons.favorite_border),
               ],
             ),
             const SizedBox(

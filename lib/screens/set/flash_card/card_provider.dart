@@ -1,13 +1,12 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-enum CardStatus{like, dislike}
+enum CardStatus { like, dislike }
 
 class CardProvider extends ChangeNotifier {
   List<String> urlImages = [];
-  bool isDragging =  false;
+  bool isDragging = false;
   double angle = 0;
   Offset _position = Offset.zero;
   Offset get position => _position;
@@ -60,14 +59,14 @@ class CardProvider extends ChangeNotifier {
       default:
         resetPosition();
     }
-
   }
 
   void like() {
     angle = 20;
-    _position+=Offset(2*_screenSize.width/2,0);
-    if(urlImages.isEmpty) {
-      isListEmpty = true;}
+    _position += Offset(2 * _screenSize.width / 2, 0);
+    if (urlImages.isEmpty) {
+      isListEmpty = true;
+    }
     _nextCard();
     understandCount++;
     notifyListeners();
@@ -75,22 +74,23 @@ class CardProvider extends ChangeNotifier {
 
   void dislike() {
     angle = -20;
-    _position -= Offset(2*_screenSize.width,0);
-    if(urlImages.isEmpty) {
-      isListEmpty = true;}
+    _position -= Offset(2 * _screenSize.width, 0);
+    if (urlImages.isEmpty) {
+      isListEmpty = true;
+    }
     _nextCard();
     dontUnderstandCount++;
     notifyListeners();
   }
 
   Future _nextCard() async {
-    if(urlImages.isEmpty) {
+    if (urlImages.isEmpty) {
       isListEmpty = true;
       return;
     }
-      await Future.delayed(const Duration(milliseconds:  100));
-      urlImages.removeLast();
-      resetPosition();
+    await Future.delayed(const Duration(milliseconds: 100));
+    urlImages.removeLast();
+    resetPosition();
   }
 
   int getCurrentNumberOfCard() {
@@ -98,7 +98,7 @@ class CardProvider extends ChangeNotifier {
   }
 
   int getOrderCurrentIndexCard() {
-    return  totalCard-getCurrentNumberOfCard();
+    return totalCard - getCurrentNumberOfCard();
   }
 
   bool isEmptyListData() {
@@ -107,33 +107,33 @@ class CardProvider extends ChangeNotifier {
 
   double getStatusOpacity() {
     const delta = 100;
-    final pos = max(_position.dx.abs(),_position.dy.abs());
-    final opacity = pos/delta;
-    return min(opacity,1);
+    final pos = max(_position.dx.abs(), _position.dy.abs());
+    final opacity = pos / delta;
+    return min(opacity, 1);
   }
 
   CardStatus? getStatus({bool force = false}) {
     final x = _position.dx;
     if (force) {
-      final delta = 100;
-      if (x>=delta) {
+      const delta = 100;
+      if (x >= delta) {
         return CardStatus.like;
-      } else if(x<=-delta) {
+      } else if (x <= -delta) {
         return CardStatus.dislike;
       }
     } else {
-      final delta = 20;
-      if (x>=delta) {
+      const delta = 20;
+      if (x >= delta) {
         return CardStatus.like;
-      } else if (x<=-delta) {
+      } else if (x <= -delta) {
         return CardStatus.dislike;
       }
     }
-
+    return null;
   }
 
   void resetPosition() {
-    isDragging =false;
+    isDragging = false;
     _position = Offset.zero;
     angle = 0;
     notifyListeners();

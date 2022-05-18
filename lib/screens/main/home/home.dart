@@ -123,11 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                   size: 14,
                   isBold: true,
-                ),
-                QText(
-                    text: 'View all',
-                    color: Color.fromRGBO(103, 108, 168, 1),
-                    size: 14),
+                )
               ],
             ),
           ),

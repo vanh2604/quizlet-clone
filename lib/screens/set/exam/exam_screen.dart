@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:quizlet/data/card_data.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
@@ -46,7 +45,6 @@ class _ExamScreenState extends State<ExamScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController = PageController(initialPage: 0);
     widget.listQuestion.shuffle();
@@ -202,7 +200,7 @@ class _ExamScreenState extends State<ExamScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ResultExam()));
+                                builder: (context) => const ResultExam()));
                       } else if (_isCorrectAnswer || countEnterToAnswer == 2) {
                         _pageController!.nextPage(
                             duration: const Duration(milliseconds: 250),
@@ -273,7 +271,7 @@ class _ExamScreenState extends State<ExamScreen> {
             child: RawMaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
-                  side: BorderSide(color: Colors.white)),
+                  side: const BorderSide(color: Colors.white)),
               fillColor: btnPressed
                   ? (i == selected_index
                       ? (widget.listQuestion[index].answer!.values.toList()[i]
@@ -306,7 +304,7 @@ class _ExamScreenState extends State<ExamScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ResultExam()));
+                                  builder: (context) => const ResultExam()));
                         } else {
                           _pageController!.nextPage(
                               duration: const Duration(milliseconds: 250),
