@@ -1,20 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-Future<void> createUserDB() async {
+Future createUserDB() async {
   final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
   final uid = user.uid;
   final name = user.displayName;
   final data = {
-    'name': name,
+    'username': name,
     'folders': ['Uncategorized'],
   };
   await db.collection('users').doc(uid).set(data, SetOptions(merge: true));
 }
 
-Future<void> createSet(
-    String name, String folder, Map cards, Map resources) async {
+Future createSet(String name, String folder, Map cards, Map resources) async {
   final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
   final uid = user.uid;
@@ -27,7 +26,7 @@ Future<void> createSet(
   });
 }
 
-Future<void> createFolder(String name) async {
+Future createFolder(String name) async {
   final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
   final uid = user.uid;
@@ -35,3 +34,22 @@ Future<void> createFolder(String name) async {
     'folders': FieldValue.arrayUnion([name]),
   });
 }
+
+Future<DocumentSnapshot> getUserInfo() async {
+  final db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser!;
+  final uid = user.uid;
+  final snapshot = db.collection('users').doc(uid).get();
+  return snapshot;
+}
+
+Stream<QuerySnapshot> getUserSetsStream() {
+  final db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser!;
+  final uid = user.uid;
+  return db.collection('sets').where('uid', isEqualTo: uid).snapshots();
+}
+
+
+
+// Stream<dynamic> getRecommendedSetsStream() {}

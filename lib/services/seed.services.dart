@@ -133,7 +133,8 @@ Future<void> seedSets() async {
   };
 
   await db.collection('sets').add({
-    'user': user1,
+    'uid': user1,
+    'username': 'Nguyen Duy Ngoc',
     'name': 'Vocabulary 1',
     'folder': 'English',
     'cards': vocab1,
@@ -141,7 +142,8 @@ Future<void> seedSets() async {
   });
 
   await db.collection('sets').add({
-    'user': user1,
+    'uid': user1,
+    'username': 'Nguyen Duy Ngoc',
     'name': 'Vocabulary 2',
     'folder': 'English',
     'cards': vocab2,
@@ -149,7 +151,8 @@ Future<void> seedSets() async {
   });
 
   await db.collection('sets').add({
-    'user': user1,
+    'uid': user1,
+    'username': 'Nguyen Duy Ngoc',
     'name': 'AWS Terms',
     'folder': 'AWS',
     'cards': aws1,
@@ -157,7 +160,8 @@ Future<void> seedSets() async {
   });
 
   await db.collection('sets').add({
-    'user': user2,
+    'uid': user2,
+    'username': 'Ngoc Nguyen',
     'name': 'Vietnamese Vocab',
     'folder': 'Vietnamese',
     'cards': vocabvietnam,
@@ -165,7 +169,8 @@ Future<void> seedSets() async {
   });
 
   await db.collection('sets').add({
-    'user': user2,
+    'uid': user2,
+    'username': 'Ngoc Nguyen',
     'name': 'GCP Terms',
     'folder': 'GCP',
     'cards': gcp1,

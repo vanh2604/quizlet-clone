@@ -49,12 +49,12 @@ class SetCardBig extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(Icons.search), // Thay bằng ảnh
+                      const Icon(Icons.person_rounded),
                       const SizedBox(
                         width: 10,
                       ),
                       QText(
-                        text: title,
+                        text: username.toString(),
                         color: textColor,
                         size: 13,
                       )
