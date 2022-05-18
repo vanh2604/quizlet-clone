@@ -53,12 +53,12 @@ class FolderCardBig extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(Icons.search), // Thay bằng ảnh
+                      const Icon(Icons.person_rounded), // Thay bằng ảnh
                       const SizedBox(
                         width: 10,
                       ),
                       QText(
-                        text: title,
+                        text: username,
                         color: textColor,
                         size: 13,
                       )
