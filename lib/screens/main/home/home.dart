@@ -23,17 +23,23 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: const EdgeInsets.only(top: 10, left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                QText(
+              children: [
+                const QText(
                   text: 'Sets',
                   color: Colors.white,
                   size: 14,
                   isBold: true,
                 ),
-                QText(
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/sets');
+                  },
+                  child: const QText(
                     text: 'View all',
                     color: Color.fromRGBO(103, 108, 168, 1),
-                    size: 14),
+                    size: 14,
+                  ),
+                ),
               ],
             ),
           ),
@@ -49,11 +55,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           scrollDirection: Axis.horizontal,
                           controller: PageController(viewportFraction: 0.93),
                           itemBuilder: (context, index) {
-                            DocumentSnapshot sets = snapshot.data!.docs[index];
-                            return SetCardBig(
-                              title: sets['name'],
-                              username: sets['username'],
-                              terms: sets['cards'].length,
+                            DocumentSnapshot set = snapshot.data!.docs[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/set',
+                                    arguments: {'setDetail': set.data()});
+                              },
+                              child: SetCardBig(
+                                title: set['name'],
+                                username: set['username'],
+                                terms: set['cards'].length,
+                              ),
                             );
                           },
                         )
@@ -97,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     );
                   } else {
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   }
                 }),
           ),
@@ -130,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () => {
                     Navigator.pushNamed(context, '/set'),
                   },
-                  child: SetCardBig(
+                  child: const SetCardBig(
                     title: '',
                     username: '',
                     terms: 1,

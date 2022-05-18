@@ -50,6 +50,4 @@ Stream<QuerySnapshot> getUserSetsStream() {
   return db.collection('sets').where('uid', isEqualTo: uid).snapshots();
 }
 
-
-
 // Stream<dynamic> getRecommendedSetsStream() {}

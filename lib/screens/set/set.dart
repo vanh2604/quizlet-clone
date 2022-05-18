@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/set/flip_term_card.dart';
@@ -24,21 +23,12 @@ class _SetScreenState extends State<SetScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Fake data
-    final List<Map<String, dynamic>> _question = List.generate(
-        10,
-        (index) => {
-              'username': 'Person #$index',
-              'terms': Random().nextInt(100) + 1,
-              'title': 'Title $index',
-              'definition': 'Definition $index'
-            });
+    // set details
+    final arguments =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
-    Map<String, dynamic> _setCard = {
-      'username': 'abc',
-      'nameSet': 'Vocabulary',
-      'avatar': ''
-    };
+    Map<dynamic, dynamic> _setCard = arguments['setDetail'];
+    final List _question = arguments['setDetail']['cards'].entries.toList();
 
     return Scaffold(
         appBar: AppBar(
@@ -66,7 +56,7 @@ class _SetScreenState extends State<SetScreen> {
                             print(activeQuestion);
                           },
                           child: PageView.builder(
-                            itemCount: _question.length,
+                            itemCount: arguments['setDetail']['cards'].length,
                             pageSnapping: true,
                             scrollDirection: Axis.horizontal,
                             onPageChanged: (question) {
@@ -80,9 +70,8 @@ class _SetScreenState extends State<SetScreen> {
                                 curve: Curves.easeInOutCubic,
                                 margin: const EdgeInsets.only(right: 20),
                                 child: FlipTermCard(
-                                  title: _question[activeQuestion]['title'],
-                                  definition: _question[activeQuestion]
-                                      ['definition'],
+                                  title: _question[activeQuestion].key,
+                                  definition: _question[activeQuestion].value,
                                 ),
                               );
                             },
@@ -101,7 +90,7 @@ class _SetScreenState extends State<SetScreen> {
 
                       //title of set
                       QText(
-                        text: _setCard['nameSet'],
+                        text: _setCard['name'],
                         color: Colors.white,
                         size: 30,
                         isBold: true,
@@ -152,7 +141,7 @@ class _SetScreenState extends State<SetScreen> {
                       ),
 
                       for (var q in _question)
-                        TermCard(title: q['title'], definition: q['definition'])
+                        TermCard(title: q.key, definition: q.value)
                     ],
                   ),
                 ),

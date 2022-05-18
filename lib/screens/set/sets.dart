@@ -1,21 +1,19 @@
-import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:quizlet/services/firestore.services.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/sets/set_card.dart';
 
-class SetsScreen extends StatelessWidget {
+class SetsScreen extends StatefulWidget {
   const SetsScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> _setCard = List.generate(
-        100,
-        (index) => {
-              'username': 'Person #$index',
-              'terms': Random().nextInt(100) + 1,
-              'title': 'Title $index',
-            });
+  State<SetsScreen> createState() => _SetsScreenState();
+}
 
+class _SetsScreenState extends State<SetsScreen> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const QText(
@@ -28,19 +26,28 @@ class SetsScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       ),
-      body: ListView.builder(
-        itemCount: _setCard.length,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/set');
-            },
-            child: SetCard(
-              title: _setCard[index]['title'],
-              username: _setCard[index]['username'],
-              terms: _setCard[index]['terms'],
-            ),
-          );
+      body: StreamBuilder<QuerySnapshot>(
+        stream: getUserSetsStream(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          return snapshot.hasData
+              ? ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    DocumentSnapshot set = snapshot.data!.docs[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/set',
+                            arguments: {'setDetail': set.data()});
+                      },
+                      child: SetCard(
+                        title: set['name'],
+                        username: set['username'],
+                        terms: set['cards'].length,
+                      ),
+                    );
+                  },
+                )
+              : const CircularProgressIndicator();
         },
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
