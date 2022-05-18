@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
+import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/set/flip_term_card.dart';
 import 'package:quizlet/widgets/set/learn_custom_button.dart';
 import 'package:quizlet/widgets/set/term_card.dart';
+
+import '../../data/card_data.dart';
 
 class SetScreen extends StatefulWidget {
   const SetScreen({Key? key}) : super(key: key);
@@ -110,12 +114,30 @@ class _SetScreenState extends State<SetScreen> {
 
                       // grid view learn button, using table
                       Table(
-                        children: const [
+                        children:  [
                           TableRow(children: [
-                            LearnCustomButton(
-                                text: "Flashcard", icon: Icons.favorite),
-                            LearnCustomButton(
-                                text: "Learn", icon: Icons.favorite)
+                            GestureDetector(
+                              onTap:(){
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FlashCardScreen(),
+                                    ));
+                              },
+                              child: LearnCustomButton(
+                                  text: "Flashcard", icon: Icons.favorite),
+                            ),
+                            GestureDetector(
+                              onTap:(){
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LearnScreen(questionLearn: questions,),
+                                    ));
+                              },
+                              child: LearnCustomButton(
+                                  text: "Learn", icon: Icons.favorite),
+                            )
                           ]),
                           TableRow(children: [
                             LearnCustomButton(

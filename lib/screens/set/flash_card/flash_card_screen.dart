@@ -5,9 +5,9 @@ import 'package:quizlet/widgets/qtext.dart';
 
 import 'card_provider.dart';
 
-void main() {
-  runApp(const FlashCardScreen());
-}
+// void main() {
+//   runApp(const FlashCardScreen());
+// }
 
 class FlashCardScreen extends StatelessWidget {
   const FlashCardScreen({Key? key}) : super(key: key);
@@ -17,11 +17,12 @@ class FlashCardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context)=> CardProvider(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        home: MainPage()
-      ),
+      child: MainPage()
+      // MaterialApp(
+      //   debugShowCheckedModeBanner: false,
+      //   title: 'Flutter Demo',
+      //   home: MainPage()
+      // ),
     );
   }
 }
