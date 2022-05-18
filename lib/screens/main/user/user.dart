@@ -37,6 +37,13 @@ class _UserScreenState extends State<UserScreen> {
           ),
           GestureDetector(
             child: const OptionCard(
+              icon: Icons.settings_rounded,
+              text: 'Settings',
+            ),
+            onTap: () async {},
+          ),
+          GestureDetector(
+            child: const OptionCard(
               icon: Icons.door_back_door_rounded,
               text: 'Sign Out',
             ),

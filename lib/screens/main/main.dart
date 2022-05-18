@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizlet/screens/main/create/create.dart';
 import 'package:quizlet/screens/main/home/home.dart';
 import 'package:quizlet/screens/main/search/search.dart';
 import 'package:quizlet/screens/main/user/user.dart';
@@ -20,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
       case 1:
         return const SearchScreen();
       case 2:
-        return const HomeScreen();
+        return const CreateScreen();
       case 3:
         return const UserScreen();
       default:
