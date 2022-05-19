@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/fake_data.dart';
 
+import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
 
-void main() => runApp(const SettingExam());
+// void main() => runApp(const SettingExam());
 
 class SettingExam extends StatelessWidget {
-  const SettingExam({Key? key}) : super(key: key);
+  final List<CardModel2> listQuestion;
+  const SettingExam({Key? key, required this.listQuestion}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +16,8 @@ class SettingExam extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
         ),
-        body: const Center(
-          child: Setting(),
+        body: Center(
+          child: Setting(listQuestion: listQuestion),
         ),
         backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       ),
@@ -25,7 +26,8 @@ class SettingExam extends StatelessWidget {
 }
 
 class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+  final List<CardModel2> listQuestion;
+  const Setting({Key? key, required this.listQuestion}) : super(key: key);
 
   @override
   State<Setting> createState() => _Setting();
@@ -60,7 +62,7 @@ class _Setting extends State<Setting> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExamScreen(
-                          listQuestion: question2s,
+                          listQuestion: widget.listQuestion,
                           isMultichoice: _multichoice,
                           isWrite: _write,
                         ),

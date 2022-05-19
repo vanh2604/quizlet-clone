@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/fake_data.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
 
-void main() => runApp(
-      ExamScreen(
-        listQuestion: question2s,
-      ),
-    );
+// void main() => runApp(
+//       ExamScreen(
+//         listQuestion: question2s,
+//       ),
+//     );
 
 class ExamScreen extends StatefulWidget {
   bool isMultichoice;

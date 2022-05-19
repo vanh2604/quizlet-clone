@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
+import 'package:quizlet/screens/set/exam/setting_exam.dart';
 import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/screens/set/write/write_screen.dart';
@@ -220,8 +221,9 @@ class _SetScreenState extends State<SetScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => ExamScreen(
-                                            listQuestion: questionList),
+                                        builder: (context) => SettingExam(
+                                          listQuestion: questionList,
+                                        ),
                                       ),
                                     ),
                                   },
