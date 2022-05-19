@@ -140,8 +140,8 @@ class _LearnScreenState extends State<LearnScreen> {
                                             q,
                                             correctAns,
                                             incorrectAns,
-                                            questionLearn:
-                                                widget.questionLearn),
+                                            questionLearn: widget.questionLearn,
+                                        ),
                                       ),
                                     );
                                   } else {

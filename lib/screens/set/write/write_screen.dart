@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
+import 'package:quizlet/screens/set/write/result_write_screen.dart';
 import 'package:quizlet/utils/colors.dart';
 
 import '../learn/result_screen.dart';
@@ -184,16 +185,18 @@ class _WriteScreen extends State<WriteScreen> {
 
                     Future.delayed(const Duration(seconds: 3), () {
                       if (_pageController!.page?.toInt()==widget.question2s.length-1) {
+                        q.add(widget.question2s[index].question.toString());
+
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ResultScreen(
+                              builder: (context) => ResultWScreen(
                                   score,
                                   q,
                                   correctAns,
                                   incorrectAns,
-                                  questionLearn:
-                                  widget.question2s),
+                                  questionLearn: widget.question2s,
+                              ),
                             ));
                       } else if (_isCorrectAnswer || countEnterToAnswer == 2) {
                         _pageController!.nextPage(
