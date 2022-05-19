@@ -17,8 +17,10 @@ Future createSet(String name, String folder, Map cards, Map resources) async {
   final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
   final uid = user.uid;
+  final username = user.displayName;
   await db.collection('sets').add({
-    'user': uid,
+    'uid': uid,
+    'username': username,
     'name': name,
     'folder': folder,
     'cards': cards,
@@ -33,6 +35,18 @@ Future createFolder(String name) async {
   await db.collection('users').doc(uid).update({
     'folders': FieldValue.arrayUnion([name]),
   });
+}
+
+Future<List<String>> getFoldersSuggestion() async {
+  final List<String> folders = [];
+  final db = FirebaseFirestore.instance;
+  final user = FirebaseAuth.instance.currentUser!;
+  final uid = user.uid;
+  final query = await db.collection('users').doc(uid).get();
+  query.data()!['folders'].forEach((item) {
+    folders.add(item.toString());
+  });
+  return folders;
 }
 
 Future<DocumentSnapshot> getUserInfo() async {
