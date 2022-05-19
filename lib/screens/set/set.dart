@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
+import 'package:quizlet/screens/set/exam/exam_screen.dart';
 import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
+import 'package:quizlet/screens/set/write/write_screen.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/utils/random.dart';
 import 'package:quizlet/widgets/qtext.dart';
@@ -193,16 +195,41 @@ class _SetScreenState extends State<SetScreen> {
                                 )
                               ],
                             ),
-                            const TableRow(
+                            TableRow(
                               children: [
-                                LearnCustomButton(
-                                  text: "Write",
-                                  icon: Icons.edit_rounded,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return WriteScreen(
+                                            question2s: questionList,
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  child: const LearnCustomButton(
+                                    text: "Write",
+                                    icon: Icons.edit_rounded,
+                                  ),
                                 ),
-                                LearnCustomButton(
-                                  text: "Exam",
-                                  icon: Icons.import_contacts_rounded,
-                                ),
+                                GestureDetector(
+                                  onTap: () => {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ExamScreen(
+                                            listQuestion: questionList),
+                                      ),
+                                    ),
+                                  },
+                                  child: const LearnCustomButton(
+                                    text: "Exam",
+                                    icon: Icons.import_contacts_rounded,
+                                  ),
+                                )
                               ],
                             )
                           ],
