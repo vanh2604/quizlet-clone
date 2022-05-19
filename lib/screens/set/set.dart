@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/data/card_data.dart';
+import 'package:quizlet/data/fake_data.dart';
 import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/utils/colors.dart';
@@ -156,7 +157,7 @@ class _SetScreenState extends State<SetScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => LearnScreen(
-                                          questionLearn: questions,
+                                          questionLearn: question2s,
                                         ),
                                       ),
                                     );

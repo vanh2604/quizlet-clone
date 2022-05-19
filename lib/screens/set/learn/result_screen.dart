@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/data/card_data.dart';
+import 'package:quizlet/data/fake_data.dart';
 import 'package:quizlet/widgets/review_term.dart';
 
 import 'learn_screen.dart';
@@ -62,7 +63,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => LearnScreen(
-                            questionLearn: questions,
+                            questionLearn: question2s,
                           ),
                         ));
                   },
