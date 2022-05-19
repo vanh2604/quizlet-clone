@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/card_data.dart';
 
+import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
+import 'package:quizlet/utils/colors.dart';
 
+<<<<<<<<< Temporary merge branch 1
 // void main() => runApp(const SettingExam());
+=========
+import '../../../data/fake_data.dart';
+
+void main() => runApp(const SettingExam());
+>>>>>>>>> Temporary merge branch 2
 
 class SettingExam extends StatelessWidget {
   final List<CardModel2> listQuestion;
@@ -61,7 +68,11 @@ class _Setting extends State<Setting> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExamScreen(
+<<<<<<<<< Temporary merge branch 1
                           listQuestion: widget.listQuestion,
+=========
+                          listQuestion: question2s,
+>>>>>>>>> Temporary merge branch 2
                           isMultichoice: _multichoice,
                           isWrite: _write,
                         ),
