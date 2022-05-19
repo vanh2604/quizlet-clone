@@ -24,6 +24,11 @@ class _LearnScreenState extends State<LearnScreen> {
   PageController? _controller;
   String btnText = "Next Question";
   bool answered = false;
+
+  List<String> q = [];
+  List<String> correctAns = [];
+  List<String> incorrectAns = [];
+
   @override
   void initState() {
     super.initState();
@@ -105,14 +110,17 @@ class _LearnScreenState extends State<LearnScreen> {
                             : const Color.fromRGBO(12, 12, 48, 1),
                         onPressed: !answered
                             ? () {
-                                if (widget
-                                        .questionLearn[index].listAnswer![i] ==
-                                    widget.questionLearn[index].answer) {
+                                q.add(widget.questionLearn[index].question.toString());
+                                correctAns.add(widget.questionLearn[index].answer.toString());
+
+                                if (widget.questionLearn[index].listAnswer![i] == widget.questionLearn[index].answer) {
                                   score++;
+                                  incorrectAns.add("");
                                   setState(() {
                                     selectedIndex = i;
                                   });
                                 } else {
+                                  incorrectAns.add(widget.questionLearn[index].listAnswer![i]);
                                   setState(() {
                                     selectedIndex = i;
                                   });
@@ -121,7 +129,7 @@ class _LearnScreenState extends State<LearnScreen> {
                                   btnPressed = true;
                                   answered = true;
                                 });
-                                Future.delayed(const Duration(seconds: 3), () {
+                                Future.delayed(const Duration(seconds: 1), () {
                                   if (_controller!.page?.toInt() ==
                                       widget.questionLearn.length - 1) {
                                     Navigator.push(
@@ -129,8 +137,11 @@ class _LearnScreenState extends State<LearnScreen> {
                                       MaterialPageRoute(
                                         builder: (context) => ResultScreen(
                                             score,
-                                            questionLearn:
-                                                widget.questionLearn),
+                                            q,
+                                            correctAns,
+                                            incorrectAns,
+                                            questionLearn: widget.questionLearn,
+                                        ),
                                       ),
                                     );
                                   } else {

@@ -108,7 +108,7 @@ class CardProvider extends ChangeNotifier {
   }
 
   bool isEmptyListData() {
-    return listQuestion.length == 1 || listQuestion.isEmpty;
+    return listQuestion.length == 0 || listQuestion.isEmpty;
   }
 
   double getStatusOpacity() {

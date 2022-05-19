@@ -4,13 +4,13 @@ import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/screens/set/write/write_screen.dart';
 import 'package:quizlet/widgets/review_term.dart';
 
-class ResultScreen extends StatefulWidget {
+class ResultWScreen extends StatefulWidget {
   int score;
   List<String> q;
   List<String> correctAns;
   List<String> incorrectAns;
   final List<CardModel2> questionLearn;
-  ResultScreen(
+  ResultWScreen(
     this.score,
     this.q,
     this.correctAns,
@@ -19,10 +19,10 @@ class ResultScreen extends StatefulWidget {
     {Key? key, required this.questionLearn}): super(key: key);
 
   @override
-  _ResultScreenState createState() => _ResultScreenState();
+  _ResultWScreenState createState() => _ResultWScreenState();
 }
 
-class _ResultScreenState extends State<ResultScreen> {
+class _ResultWScreenState extends State<ResultWScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,11 +65,12 @@ class _ResultScreenState extends State<ResultScreen> {
                     backgroundColor: Colors.blueAccent,
                   ),
                   onPressed: () {
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>LearnScreen(
-                          questionLearn: widget.questionLearn,
+                        builder: (context) =>WriteScreen(
+                          question2s: widget.questionLearn,
                         ),
                       ),
                     );
