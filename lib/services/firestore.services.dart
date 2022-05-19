@@ -53,3 +53,11 @@ Stream<QuerySnapshot> getUserSetsStream() {
   final uid = user.uid;
   return db.collection('sets').where('uid', isEqualTo: uid).snapshots();
 }
+
+Stream<QuerySnapshot> findSetsStream(String query) {
+  final db = FirebaseFirestore.instance;
+  return db
+      .collection('sets')
+      .where('name', isGreaterThanOrEqualTo: query)
+      .snapshots();
+}
