@@ -165,23 +165,53 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(
               height: 150,
-              child: PageView.builder(
-                itemCount: 7,
-                controller: PageController(viewportFraction: 0.93),
-                itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () => {
-                      Navigator.pushNamed(context, '/set'),
-                    },
-                    child: const SetCardBig(
-                      title: '',
-                      username: '',
-                      terms: 1,
-                    ),
+              child: StreamBuilder<QuerySnapshot>(
+                stream: getRecommendedSetsStream(),
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot,
+                ) {
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    child: snapshot.hasData
+                        ? PageView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            controller: PageController(viewportFraction: 0.93),
+                            itemBuilder: (context, index) {
+                              final DocumentSnapshot set =
+                                  snapshot.data!.docs[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/set',
+                                    arguments: {'setDetail': set.data()},
+                                  );
+                                },
+                                child: SetCardBig(
+                                  title: set['name'].toString(),
+                                  username: set['username'].toString(),
+                                  terms: int.parse(
+                                    set['cards'].length.toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                          )
+                        : const Center(
+                            child: SizedBox(
+                              height: 50,
+                              child: LoadingIndicator(
+                                indicatorType: Indicator.lineScaleParty,
+                                colors: [Colors.white],
+                                strokeWidth: 2,
+                              ),
+                            ),
+                          ),
                   );
                 },
               ),
-            ),
+            )
           ],
         ),
       ),
