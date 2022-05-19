@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
-
-// void main() => runApp(
-//       ExamScreen(
-//         listQuestion: question2s,
-//       ),
-//     );
+import 'package:quizlet/utils/colors.dart';
 
 class ExamScreen extends StatefulWidget {
   bool isMultichoice;
@@ -59,34 +54,35 @@ class _ExamScreenState extends State<ExamScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        //appBar: AppBar(title: const Text('Focus Example')),
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        body: PageView.builder(
-          controller: _pageController,
-          onPageChanged: (page) {
-            setState(() {
-              _haveSummited = false;
-              _isCorrectAnswer = false;
-              _autofocus = true;
-              countEnterToAnswer = 0;
-              btnPressed = false;
-              answered = false;
-            });
-          },
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return widget.isWrite && widget.isMultichoice
-                ? (index.isOdd
-                    ? buildWriteScreen(index)
-                    : buildMultiQuestion(index))
-                : widget.isWrite
-                    ? buildWriteScreen(index)
-                    : buildMultiQuestion(index);
-          },
-          //itemCount: widget.listQuestion.length,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+      ),
+      backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+      body: PageView.builder(
+        controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            _haveSummited = false;
+            _isCorrectAnswer = false;
+            _autofocus = true;
+            countEnterToAnswer = 0;
+            btnPressed = false;
+            answered = false;
+          });
+        },
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return widget.isWrite && widget.isMultichoice
+              ? (index.isOdd
+                  ? buildWriteScreen(index)
+                  : buildMultiQuestion(index))
+              : widget.isWrite
+                  ? buildWriteScreen(index)
+                  : buildMultiQuestion(index);
+        },
+        //itemCount: widget.listQuestion.length,
       ),
     );
   }

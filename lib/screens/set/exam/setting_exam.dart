@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
+import 'package:quizlet/utils/colors.dart';
 
 // void main() => runApp(const SettingExam());
 
@@ -11,16 +12,15 @@ class SettingExam extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        ),
-        body: Center(
-          child: Setting(listQuestion: listQuestion),
-        ),
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
       ),
+      body: Center(
+        child: Setting(listQuestion: listQuestion),
+      ),
+      backgroundColor: primaryColor,
     );
   }
 }
