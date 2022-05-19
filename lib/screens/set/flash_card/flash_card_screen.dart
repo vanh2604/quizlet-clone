@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:quizlet/data/fake_data.dart';
 import 'package:quizlet/screens/set/flash_card/card_provider.dart';
 import 'package:quizlet/screens/set/flash_card/swipe_card.dart';
+import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
 import '../../../model/card_model.dart';
@@ -16,16 +17,11 @@ class FlashCardScreen extends StatelessWidget {
   List<CardModel2> listQuestions;
   FlashCardScreen({Key? key, required this.listQuestions}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => CardProvider(), child: const MainPage(),
-      // MaterialApp(
-      //   debugShowCheckedModeBanner: false,
-      //   title: 'Flutter Demo',
-      //   home: MainPage()
-      // ),
+      create: (context) => CardProvider(),
+      child: const MainPage(),
     );
   }
 }
@@ -47,6 +43,10 @@ class _MainPageState extends State<MainPage> {
     final dontunderstandCount = provider.dontUnderstandCount;
 
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+      ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: SafeArea(
         child: Container(

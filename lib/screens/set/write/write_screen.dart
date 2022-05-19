@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-
-import 'package:quizlet/data/card_data.dart';
-
-import '../../../data/fake_data.dart';
-
-void main() => runApp(const WriteScreen());
+import 'package:quizlet/model/card_model.dart';
+import 'package:quizlet/utils/colors.dart';
 
 class WriteScreen extends StatefulWidget {
-  const WriteScreen({Key? key}) : super(key: key);
+  final List<CardModel2> question2s;
+  const WriteScreen({Key? key, required this.question2s}) : super(key: key);
 
   @override
   _WriteScreen createState() => _WriteScreen();
@@ -25,7 +22,7 @@ class _WriteScreen extends State<WriteScreen> {
   void initState() {
     super.initState();
     _pageController = PageController();
-    questions.shuffle();
+    widget.question2s.shuffle();
 
     _focusNode.addListener(() {
       if (!_focusNode.hasFocus) {
@@ -36,25 +33,26 @@ class _WriteScreen extends State<WriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        //appBar: AppBar(title: const Text('Focus Example')),
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        body: PageView.builder(
-          controller: _pageController,
-          onPageChanged: (page) {
-            setState(() {
-              _haveSummited = false;
-              _isCorrectAnswer = false;
-              _autofocus = true;
-              countEnterToAnswer = 0;
-            });
-          },
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return buildCardWrite(index);
-          },
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+      ),
+      backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+      body: PageView.builder(
+        controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            _haveSummited = false;
+            _isCorrectAnswer = false;
+            _autofocus = true;
+            countEnterToAnswer = 0;
+          });
+        },
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return buildCardWrite(index);
+        },
       ),
     );
   }
@@ -76,15 +74,17 @@ class _WriteScreen extends State<WriteScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${question2s[index].question}",
+                      "${widget.question2s[index].question}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22.0,
                       ),
                     ),
-                    for (int i = 0; i < question2s[index].listAnswer!.length; i++)
+                    for (int i = 0;
+                        i < widget.question2s[index].listAnswer!.length;
+                        i++)
                       Text(
-                        question2s[index].listAnswer![i],
+                        widget.question2s[index].listAnswer![i],
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
@@ -149,7 +149,8 @@ class _WriteScreen extends State<WriteScreen> {
             autofocus: _autofocus,
             onFieldSubmitted: !_haveSummited
                 ? (String? value) {
-                    if (question2s[index].answer!.contains(value!) && questions[index].answer! == value) {
+                    if (widget.question2s[index].answer!.contains(value!) &&
+                        widget.question2s[index].answer! == value) {
                       setState(() {
                         _haveSummited = true;
                         _isCorrectAnswer = true;

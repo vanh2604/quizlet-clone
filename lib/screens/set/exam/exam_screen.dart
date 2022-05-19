@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/card_data.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
-
-import '../../../data/fake_data.dart';
-
-void main() => runApp(
-      ExamScreen(
-        listQuestion: question2s,
-      ),
-    );
+import 'package:quizlet/utils/colors.dart';
 
 class ExamScreen extends StatefulWidget {
   bool isMultichoice;
@@ -62,34 +54,35 @@ class _ExamScreenState extends State<ExamScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        //appBar: AppBar(title: const Text('Focus Example')),
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        body: PageView.builder(
-          controller: _pageController,
-          onPageChanged: (page) {
-            setState(() {
-              _haveSummited = false;
-              _isCorrectAnswer = false;
-              _autofocus = true;
-              countEnterToAnswer = 0;
-              btnPressed = false;
-              answered = false;
-            });
-          },
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return widget.isWrite && widget.isMultichoice
-                ? (index.isOdd
-                    ? buildWriteScreen(index)
-                    : buildMultiQuestion(index))
-                : widget.isWrite
-                    ? buildWriteScreen(index)
-                    : buildMultiQuestion(index);
-          },
-          //itemCount: widget.listQuestion.length,
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+      ),
+      backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+      body: PageView.builder(
+        controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            _haveSummited = false;
+            _isCorrectAnswer = false;
+            _autofocus = true;
+            countEnterToAnswer = 0;
+            btnPressed = false;
+            answered = false;
+          });
+        },
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return widget.isWrite && widget.isMultichoice
+              ? (index.isOdd
+                  ? buildWriteScreen(index)
+                  : buildMultiQuestion(index))
+              : widget.isWrite
+                  ? buildWriteScreen(index)
+                  : buildMultiQuestion(index);
+        },
+        //itemCount: widget.listQuestion.length,
       ),
     );
   }
@@ -118,7 +111,7 @@ class _ExamScreenState extends State<ExamScreen> {
                       ),
                     ),
                     for (int i = 0;
-                        i < widget.listQuestion[index].answer!.length;
+                        i < widget.listQuestion[index].listAnswer!.length;
                         i++)
                       Text(
                         widget.listQuestion[index].listAnswer![i],
@@ -253,7 +246,7 @@ class _ExamScreenState extends State<ExamScreen> {
         SizedBox(
           width: double.infinity,
           child: Text(
-            "Question ${index + 1}/10",
+            "Question ${index + 1}/${widget.listQuestion.length}",
             textAlign: TextAlign.start,
             style: const TextStyle(
               color: Colors.white,
@@ -275,7 +268,7 @@ class _ExamScreenState extends State<ExamScreen> {
             ),
           ),
         ),
-        for (int i = 0; i < widget.listQuestion[index].answer!.length; i++)
+        for (int i = 0; i < widget.listQuestion[index].listAnswer!.length; i++)
           Container(
             width: double.infinity,
             height: 50.0,
@@ -288,16 +281,19 @@ class _ExamScreenState extends State<ExamScreen> {
               ),
               fillColor: btnPressed
                   ? (i == selectedIndex
-                      ? (widget.listQuestion[index].listAnswer![i] == widget.listQuestion[index].answer
+                      ? (widget.listQuestion[index].listAnswer![i] ==
+                              widget.listQuestion[index].answer
                           ? Colors.green
                           : Colors.red)
-                      : (widget.listQuestion[index].listAnswer![i] == widget.listQuestion[index].answer
+                      : (widget.listQuestion[index].listAnswer![i] ==
+                              widget.listQuestion[index].answer
                           ? Colors.green
                           : const Color.fromRGBO(12, 12, 48, 1)))
                   : const Color.fromRGBO(12, 12, 48, 1),
               onPressed: !answered
                   ? () {
-                      if (widget.listQuestion[index].listAnswer![i] == widget.listQuestion[index].answer) {
+                      if (widget.listQuestion[index].listAnswer![i] ==
+                          widget.listQuestion[index].answer) {
                         score++;
                         setState(() {
                           selectedIndex = i;
