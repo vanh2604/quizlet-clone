@@ -53,28 +53,31 @@ class _ProfileCardState extends State<ProfileCard> {
                   color: secondaryColor,
                   child: Row(
                     children: [
-                      if (avatarURL == '')
-                        Padding(
-                          padding: EdgeInsets.all(
-                            MediaQuery.of(context).size.width * 0.05,
-                          ),
-                          child: const Center(
-                            child: SizedBox(
-                              height: 50,
-                              child: LoadingIndicator(
-                                indicatorType: Indicator.lineScaleParty,
-                                colors: [Colors.white],
-                                strokeWidth: 2,
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        child: avatarURL == ''
+                            ? Padding(
+                                padding: EdgeInsets.all(
+                                  MediaQuery.of(context).size.width * 0.05,
+                                ),
+                                child: const Center(
+                                  child: SizedBox(
+                                    height: 50,
+                                    width: 50,
+                                    child: LoadingIndicator(
+                                      indicatorType: Indicator.lineScaleParty,
+                                      colors: [Colors.white],
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : CircleAvatar(
+                                radius: 40,
+                                backgroundImage: NetworkImage(avatarURL),
+                                backgroundColor: Colors.transparent,
                               ),
-                            ),
-                          ),
-                        )
-                      else
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundImage: NetworkImage(avatarURL),
-                          backgroundColor: Colors.transparent,
-                        ),
+                      ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
