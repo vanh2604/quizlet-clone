@@ -8,7 +8,7 @@ import '../../../model/card_model.dart';
 enum CardStatus { like, dislike }
 
 class CardProvider extends ChangeNotifier {
-  List<CardModel2> listQuestion=[];
+  List<CardModel2> listQuestion = [];
   bool isDragging = false;
   double angle = 0;
   Offset _position = Offset.zero;
@@ -18,13 +18,13 @@ class CardProvider extends ChangeNotifier {
   int understandCount = 0;
   int dontUnderstandCount = 0;
   bool isListEmpty = false;
-  bool isStarted= false;
+  bool isStarted = false;
   CardProvider() {
     resetList();
   }
 
-  void setListQuestion(List <CardModel2> question) {
-    if(!isStarted) {
+  void setListQuestion(List<CardModel2> question) {
+    if (!isStarted) {
       listQuestion = question.reversed.toList();
       totalCard = listQuestion.length;
     }
