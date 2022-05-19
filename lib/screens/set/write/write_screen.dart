@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
-
-// void main() => runApp(const WriteScreen());
+import 'package:quizlet/utils/colors.dart';
 
 class WriteScreen extends StatefulWidget {
   final List<CardModel2> question2s;
@@ -34,25 +33,26 @@ class _WriteScreen extends State<WriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        //appBar: AppBar(title: const Text('Focus Example')),
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        body: PageView.builder(
-          controller: _pageController,
-          onPageChanged: (page) {
-            setState(() {
-              _haveSummited = false;
-              _isCorrectAnswer = false;
-              _autofocus = true;
-              countEnterToAnswer = 0;
-            });
-          },
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (BuildContext context, int index) {
-            return buildCardWrite(index);
-          },
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+      ),
+      backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+      body: PageView.builder(
+        controller: _pageController,
+        onPageChanged: (page) {
+          setState(() {
+            _haveSummited = false;
+            _isCorrectAnswer = false;
+            _autofocus = true;
+            countEnterToAnswer = 0;
+          });
+        },
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return buildCardWrite(index);
+        },
       ),
     );
   }
