@@ -127,8 +127,10 @@ class _LearnScreenState extends State<LearnScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            ResultScreen(score),
+                                        builder: (context) => ResultScreen(
+                                            score,
+                                            questionLearn:
+                                                widget.questionLearn),
                                       ),
                                     );
                                   } else {
