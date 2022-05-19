@@ -6,6 +6,7 @@ import 'package:quizlet/utils/colors.dart';
 
 // void main() => runApp(const SettingExam());
 
+
 class SettingExam extends StatelessWidget {
   final List<CardModel2> listQuestion;
   const SettingExam({Key? key, required this.listQuestion}) : super(key: key);
@@ -62,7 +63,9 @@ class _Setting extends State<Setting> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExamScreen(
+
                           listQuestion: widget.listQuestion,
+
                           isMultichoice: _multichoice,
                           isWrite: _write,
                         ),

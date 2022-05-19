@@ -8,11 +8,13 @@ import 'package:quizlet/screens/set/flash_card/flip_term_card.dart';
 
 class SwipeCard extends StatefulWidget {
   final String urlImage;
+  final String answer;
   final bool isFront;
   bool isLast;
   SwipeCard({
     Key? key,
     required this.urlImage,
+    required this.answer,
     required this.isFront,
     this.isLast = false,
   }) : super(key: key);
@@ -47,7 +49,7 @@ class _SwipeCardState extends State<SwipeCard> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: FlipTermCard(
-          definition: "${widget.urlImage}_____",
+          definition: widget.answer,
           title: widget.urlImage,
           isFront: widget.isFront,
         ),
