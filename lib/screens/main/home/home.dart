@@ -128,7 +128,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               snapshot.data!['folders'].length.toString(),
                             ),
                             itemBuilder: (_, index) {
-                              print(snapshot.data!['folders'].length);
                               return FolderCardBig(
                                 title:
                                     snapshot.data!['folders'][index].toString(),
