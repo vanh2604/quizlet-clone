@@ -155,7 +155,8 @@ class _MainPageState extends State<MainPage> {
                     //         builder: (context) =>const FlashCardScreen()));
                     final provider =
                         Provider.of<CardProvider>(context, listen: false);
-                    provider.isStarted ? provider.isStarted = false : null;
+                    if (provider.isStarted) provider.isStarted = false;
+                    // provider.isStarted ? provider.isStarted = false : null;
                     provider.setListQuestion(listQuestions);
                     provider.resetList();
                   },
@@ -185,7 +186,7 @@ class _MainPageState extends State<MainPage> {
       child: Column(
         children: [
           QText(
-            text: "$currentIndexCard/${totalCard}",
+            text: "$currentIndexCard/$totalCard",
             color: Colors.white,
           ),
           const SizedBox(
@@ -195,7 +196,7 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: const Color.fromRGBO(71, 71, 94, 1),
             valueColor:
                 const AlwaysStoppedAnimation(Color.fromRGBO(140, 137, 204, 1)),
-            value: currentIndexCard / (totalCard),
+            value: currentIndexCard / totalCard,
           )
         ],
       ),

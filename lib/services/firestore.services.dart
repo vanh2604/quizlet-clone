@@ -42,6 +42,11 @@ Future<DocumentSnapshot> getUserInfo() async {
   return db.collection('users').doc(uid).get();
 }
 
+Stream<QuerySnapshot> getRecommendedSetsStream() {
+  final db = FirebaseFirestore.instance;
+  return db.collection('sets').limit(3).snapshots();
+}
+
 Stream<QuerySnapshot> getUserSetsStream() {
   final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
@@ -49,4 +54,10 @@ Stream<QuerySnapshot> getUserSetsStream() {
   return db.collection('sets').where('uid', isEqualTo: uid).snapshots();
 }
 
-// Stream<dynamic> getRecommendedSetsStream() {}
+Stream<QuerySnapshot> findSetsStream(String query) {
+  final db = FirebaseFirestore.instance;
+  return db
+      .collection('sets')
+      .where('name', isGreaterThanOrEqualTo: query)
+      .snapshots();
+}

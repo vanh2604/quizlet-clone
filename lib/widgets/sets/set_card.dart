@@ -8,7 +8,6 @@ class SetCard extends StatelessWidget {
   final int terms;
   final double width;
   final double height;
-  // thêm một biến để lưu ảnh thay cho icon
 
   const SetCard({
     Key? key,
@@ -34,7 +33,12 @@ class SetCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  title: QText(text: title, color: Colors.white, size: 22.5),
+                  title: QText(
+                    text: title,
+                    color: Colors.white,
+                    size: 22.5,
+                    isBold: true,
+                  ),
                   subtitle: QText(
                     text: "$terms terms",
                     color: termTextColor,
@@ -48,12 +52,12 @@ class SetCard extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(12, 0, 0, 10),
                   child: Row(
                     children: [
-                      const Icon(Icons.search), // Thay bằng ảnh
+                      const Icon(Icons.person_rounded),
                       const SizedBox(
                         width: 10,
                       ),
                       QText(
-                        text: title,
+                        text: username,
                         color: textColor,
                         size: 13,
                       )

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-
 class ReviewTerm extends StatelessWidget {
   final String term;
   final String correctAnswer;
@@ -10,46 +9,68 @@ class ReviewTerm extends StatelessWidget {
     Key? key,
     required this.term,
     required this.correctAnswer,
-    this.incorrectAnswer = ""
+    this.incorrectAnswer = "",
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const  EdgeInsets.fromLTRB(10, 10, 10, 10),
-      height: MediaQuery.of(context).size.height*0.7,
-      decoration: BoxDecoration(
-        color: const Color.fromRGBO(52, 58, 85, 1)
+      margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+      height: MediaQuery.of(context).size.height * 0.7,
+      decoration: const BoxDecoration(
+        color: Color.fromRGBO(52, 58, 85, 1),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
         children: [
-          SizedBox(height: 20,),
-          Center(
-            child: QText(text: term, color: Colors.white,)
+          const SizedBox(
+            height: 20,
           ),
-          SizedBox(height: 20,),
-          incorrectAnswer == ""?
-            Center(child: QText(text: correctAnswer, color: Colors.green,),):
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, right: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(child: QText(text: correctAnswer, color: Colors.green)),
-                    SizedBox(width: 100,),
-                    Center(child: QText(text: incorrectAnswer, color: Colors.red))
-                  ],
-                ),
+          Center(
+            child: QText(
+              text: term,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          if (incorrectAnswer == "")
+            Center(
+              child: QText(
+                text: correctAnswer,
+                color: Colors.green,
               ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: QText(text: correctAnswer, color: Colors.green),
+                  ),
+                  const SizedBox(
+                    width: 100,
+                  ),
+                  Center(child: QText(text: incorrectAnswer, color: Colors.red))
+                ],
+              ),
+            ),
           Container(
             width: MediaQuery.of(context).size.width,
             height: 50,
             decoration: BoxDecoration(
-              color: incorrectAnswer==""? Colors.green: Colors.orange
+              color: incorrectAnswer == "" ? Colors.green : Colors.orange,
             ),
-            child: incorrectAnswer!=""? Center(child: QText(text: "Incorrect", color: Colors.white)):Center(child: QText(text: "Correct", color: Colors.white))
+            child: incorrectAnswer != ""
+                ? const Center(
+                    child: QText(text: "Incorrect", color: Colors.white),
+                  )
+                : const Center(
+                    child: QText(text: "Correct", color: Colors.white),
+                  ),
           )
         ],
       ),

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/learn/result_screen.dart';
-
-// void main() => runApp(
-//       LearnScreen(
-//         questionLearn: question2s,
-//       ),
-//     );
+import 'package:quizlet/utils/colors.dart';
 
 class LearnScreen extends StatefulWidget {
   List<CardModel2> questionLearn;
@@ -38,140 +33,148 @@ class _LearnScreenState extends State<LearnScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        body: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: PageView.builder(
-            controller: _controller,
-            onPageChanged: (page) {
-              setState(() {
-                btnPressed = false;
-                answered = false;
-              });
-            },
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (context, index) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      "Question ${index + 1}/${widget.questionLearn.length}",
-                      textAlign: TextAlign.start,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 28.0,
-                      ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
+      ),
+      backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+      body: Padding(
+        padding: const EdgeInsets.all(18.0),
+        child: PageView.builder(
+          controller: _controller,
+          onPageChanged: (page) {
+            setState(() {
+              btnPressed = false;
+              answered = false;
+            });
+          },
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    "Question ${index + 1}/${widget.questionLearn.length}",
+                    textAlign: TextAlign.start,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 28.0,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 200.0,
-                    child: Text(
-                      "${widget.questionLearn[index].question}",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22.0,
-                      ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 200.0,
+                  child: Text(
+                    "${widget.questionLearn[index].question}",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22.0,
                     ),
                   ),
-                  for (int i = 0;
-                      i < widget.questionLearn[index].listAnswer!.length;
-                      i++)
-                    Container(
-                      width: double.infinity,
-                      height: 50.0,
-                      margin: const EdgeInsets.only(
-                        bottom: 20.0,
-                        left: 12.0,
-                        right: 12.0,
+                ),
+                for (int i = 0;
+                    i < widget.questionLearn[index].listAnswer!.length;
+                    i++)
+                  Container(
+                    width: double.infinity,
+                    height: 50.0,
+                    margin: const EdgeInsets.only(
+                      bottom: 20.0,
+                      left: 12.0,
+                      right: 12.0,
+                    ),
+                    child: RawMaterialButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                        side: const BorderSide(color: Colors.white),
                       ),
-                      child: RawMaterialButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                          side: const BorderSide(color: Colors.white),
-                        ),
-                        fillColor: btnPressed
-                            ? (i == selectedIndex
-                                ? (widget.questionLearn[index].listAnswer![i] ==
-                                        widget.questionLearn[index].answer
-                                    ? Colors.green
-                                    : Colors.red)
-                                : (widget.questionLearn[index].listAnswer![i] ==
-                                        widget.questionLearn[index].answer
-                                    ? Colors.green
-                                    : const Color.fromRGBO(12, 12, 48, 1)))
-                            : const Color.fromRGBO(12, 12, 48, 1),
-                        onPressed: !answered
-                            ? () {
-                                q.add(widget.questionLearn[index].question.toString());
-                                correctAns.add(widget.questionLearn[index].answer.toString());
+                      fillColor: btnPressed
+                          ? (i == selectedIndex
+                              ? (widget.questionLearn[index].listAnswer![i] ==
+                                      widget.questionLearn[index].answer
+                                  ? Colors.green
+                                  : Colors.red)
+                              : (widget.questionLearn[index].listAnswer![i] ==
+                                      widget.questionLearn[index].answer
+                                  ? Colors.green
+                                  : const Color.fromRGBO(12, 12, 48, 1)))
+                          : const Color.fromRGBO(12, 12, 48, 1),
+                      onPressed: !answered
+                          ? () {
+                              q.add(
+                                widget.questionLearn[index].question.toString(),
+                              );
+                              correctAns.add(
+                                widget.questionLearn[index].answer.toString(),
+                              );
 
-                                if (widget.questionLearn[index].listAnswer![i] == widget.questionLearn[index].answer) {
-                                  score++;
-                                  incorrectAns.add("");
-                                  setState(() {
-                                    selectedIndex = i;
-                                  });
-                                } else {
-                                  incorrectAns.add(widget.questionLearn[index].listAnswer![i]);
-                                  setState(() {
-                                    selectedIndex = i;
-                                  });
-                                }
+                              if (widget.questionLearn[index].listAnswer![i] ==
+                                  widget.questionLearn[index].answer) {
+                                score++;
+                                incorrectAns.add("");
                                 setState(() {
-                                  btnPressed = true;
-                                  answered = true;
+                                  selectedIndex = i;
                                 });
-                                Future.delayed(const Duration(seconds: 1), () {
-                                  if (_controller!.page?.toInt() ==
-                                      widget.questionLearn.length - 1) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ResultScreen(
-                                            score,
-                                            q,
-                                            correctAns,
-                                            incorrectAns,
-                                            questionLearn: widget.questionLearn,
-                                        ),
-                                      ),
-                                    );
-                                  } else {
-                                    _controller!.nextPage(
-                                      duration:
-                                          const Duration(milliseconds: 250),
-                                      curve: Curves.easeInOut,
-                                    );
-                                    setState(() {
-                                      btnPressed = false;
-                                      selectedIndex = -1;
-                                    });
-                                  }
+                              } else {
+                                incorrectAns.add(
+                                  widget.questionLearn[index].listAnswer![i],
+                                );
+                                setState(() {
+                                  selectedIndex = i;
                                 });
                               }
-                            : null,
-                        child: Text(
-                          widget.questionLearn[index].listAnswer![i],
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                          ),
+                              setState(() {
+                                btnPressed = true;
+                                answered = true;
+                              });
+                              Future.delayed(const Duration(seconds: 1), () {
+                                if (_controller!.page?.toInt() ==
+                                    widget.questionLearn.length - 1) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ResultScreen(
+                                        score,
+                                        q,
+                                        correctAns,
+                                        incorrectAns,
+                                        questionLearn: widget.questionLearn,
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  _controller!.nextPage(
+                                    duration: const Duration(milliseconds: 250),
+                                    curve: Curves.easeInOut,
+                                  );
+                                  setState(() {
+                                    btnPressed = false;
+                                    selectedIndex = -1;
+                                  });
+                                }
+                              });
+                            }
+                          : null,
+                      child: Text(
+                        widget.questionLearn[index].listAnswer![i],
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
                         ),
                       ),
                     ),
-                ],
-              );
-            },
-            itemCount: widget.questionLearn.length,
-          ),
+                  ),
+              ],
+            );
+          },
+          itemCount: widget.questionLearn.length,
         ),
       ),
     );
