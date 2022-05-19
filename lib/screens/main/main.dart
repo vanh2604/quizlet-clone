@@ -14,6 +14,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
+  String appBarText = "Quizzy";
+
   Widget getBody() {
     switch (currentIndex) {
       case 0:
@@ -35,8 +37,8 @@ class _MainScreenState extends State<MainScreen> {
       appBar: AppBar(
         title: GestureDetector(
           onTap: () => seedDatabase(),
-          child: const QText(
-            text: "Quizzy",
+          child: QText(
+            text: appBarText,
             color: Colors.white,
             size: 30,
             isBold: true,
@@ -57,6 +59,20 @@ class _MainScreenState extends State<MainScreen> {
           if (mounted) {
             setState(() {
               currentIndex = index;
+              switch (currentIndex) {
+                case 0:
+                  appBarText = "Quizzy";
+                  break;
+                case 1:
+                  appBarText = "Search";
+                  break;
+                case 2:
+                  appBarText = "Create";
+                  break;
+                case 3:
+                  appBarText = "User";
+                  break;
+              }
             });
           }
         },
