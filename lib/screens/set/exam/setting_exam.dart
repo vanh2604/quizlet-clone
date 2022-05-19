@@ -3,31 +3,30 @@ import 'package:quizlet/data/card_data.dart';
 
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
 
-import '../../../data/fake_data.dart';
-
-void main() => runApp(const SettingExam());
+// void main() => runApp(const SettingExam());
 
 class SettingExam extends StatelessWidget {
-  const SettingExam({Key? key}) : super(key: key);
+  final List<CardModel2> listQuestion;
+  const SettingExam({Key? key, required this.listQuestion}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        ),
-        body: const Center(
-          child: Setting(),
-        ),
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: primaryColor,
       ),
+      body: Center(
+        child: Setting(listQuestion: listQuestion),
+      ),
+      backgroundColor: primaryColor,
     );
   }
 }
 
 class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+  final List<CardModel2> listQuestion;
+  const Setting({Key? key, required this.listQuestion}) : super(key: key);
 
   @override
   State<Setting> createState() => _Setting();
@@ -62,7 +61,7 @@ class _Setting extends State<Setting> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExamScreen(
-                          listQuestion: question2s,
+                          listQuestion: widget.listQuestion,
                           isMultichoice: _multichoice,
                           isWrite: _write,
                         ),

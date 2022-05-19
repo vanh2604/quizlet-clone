@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/card_data.dart';
-import 'package:quizlet/data/fake_data.dart';
+import 'package:quizlet/model/card_model.dart';
+import 'package:quizlet/screens/set/exam/exam_screen.dart';
+import 'package:quizlet/screens/set/exam/setting_exam.dart';
 import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
+import 'package:quizlet/screens/set/write/write_screen.dart';
 import 'package:quizlet/utils/colors.dart';
+import 'package:quizlet/utils/random.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/set/flip_term_card.dart';
 import 'package:quizlet/widgets/set/learn_custom_button.dart';
@@ -28,6 +31,29 @@ class _SetScreenState extends State<SetScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<CardModel2> getQuestion(List question) {
+      final List<CardModel2> questionList = [];
+      for (int i = 0; i < question.length; i++) {
+        final randomNumber =
+            getRandomDifferentThreeNumberInRange(0, question.length, i);
+        final List<String> answers = [
+          question[i].key.toString(),
+          question[randomNumber[0]].key.toString(),
+          question[randomNumber[1]].key.toString(),
+          question[randomNumber[2]].key.toString(),
+        ];
+        answers.shuffle();
+        questionList.add(
+          CardModel2(
+            question[i].value.toString(),
+            question[i].key.toString(),
+            answers,
+          ),
+        );
+      }
+      return questionList;
+    }
+
     final Map<String, dynamic> arguments =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
 
@@ -35,6 +61,7 @@ class _SetScreenState extends State<SetScreen> {
         arguments['setDetail'] as Map<dynamic, dynamic>;
     final List _question =
         arguments['setDetail']['cards'].entries.toList() as List<dynamic>;
+    final List<CardModel2> questionList = getQuestion(_question);
 
     return Scaffold(
       appBar: AppBar(
@@ -157,7 +184,7 @@ class _SetScreenState extends State<SetScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => LearnScreen(
-                                          questionLearn: question2s,
+                                          questionLearn: questionList,
                                         ),
                                       ),
                                     );
@@ -169,16 +196,42 @@ class _SetScreenState extends State<SetScreen> {
                                 )
                               ],
                             ),
-                            const TableRow(
+                            TableRow(
                               children: [
-                                LearnCustomButton(
-                                  text: "Write",
-                                  icon: Icons.edit_rounded,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return WriteScreen(
+                                            question2s: questionList,
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  child: const LearnCustomButton(
+                                    text: "Write",
+                                    icon: Icons.edit_rounded,
+                                  ),
                                 ),
-                                LearnCustomButton(
-                                  text: "Exam",
-                                  icon: Icons.import_contacts_rounded,
-                                ),
+                                GestureDetector(
+                                  onTap: () => {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SettingExam(
+                                          listQuestion: questionList,
+                                        ),
+                                      ),
+                                    ),
+                                  },
+                                  child: const LearnCustomButton(
+                                    text: "Exam",
+                                    icon: Icons.import_contacts_rounded,
+                                  ),
+                                )
                               ],
                             )
                           ],
