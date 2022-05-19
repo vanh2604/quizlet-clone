@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/card_data.dart';
+import 'package:quizlet/data/fake_data.dart';
 
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
 
@@ -60,7 +60,7 @@ class _Setting extends State<Setting> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExamScreen(
-                          listQuestion: questions,
+                          listQuestion: question2s,
                           isMultichoice: _multichoice,
                           isWrite: _write,
                         ),

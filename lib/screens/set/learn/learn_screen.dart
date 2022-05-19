@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/card_data.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/learn/result_screen.dart';
 
-import '../../../data/fake_data.dart';
-
-void main() => runApp(
-      LearnScreen(
-        questionLearn: question2s,
-      ),
-    );
+// void main() => runApp(
+//       LearnScreen(
+//         questionLearn: question2s,
+//       ),
+//     );
 
 class LearnScreen extends StatefulWidget {
   List<CardModel2> questionLearn;
@@ -57,7 +54,7 @@ class _LearnScreenState extends State<LearnScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: Text(
-                      "Question ${index + 1}/10",
+                      "Question ${index + 1}/${widget.questionLearn.length}",
                       textAlign: TextAlign.start,
                       style: const TextStyle(
                         color: Colors.white,
@@ -79,7 +76,9 @@ class _LearnScreenState extends State<LearnScreen> {
                       ),
                     ),
                   ),
-                  for (int i = 0; i < widget.questionLearn[index].listAnswer!.length; i++)
+                  for (int i = 0;
+                      i < widget.questionLearn[index].listAnswer!.length;
+                      i++)
                     Container(
                       width: double.infinity,
                       height: 50.0,
@@ -95,17 +94,20 @@ class _LearnScreenState extends State<LearnScreen> {
                         ),
                         fillColor: btnPressed
                             ? (i == selectedIndex
-                                ? (widget.questionLearn[index].listAnswer![i] == widget.questionLearn[index].answer
+                                ? (widget.questionLearn[index].listAnswer![i] ==
+                                        widget.questionLearn[index].answer
                                     ? Colors.green
                                     : Colors.red)
-                                : (widget.questionLearn[index].listAnswer![i] == widget.questionLearn[index].answer
+                                : (widget.questionLearn[index].listAnswer![i] ==
+                                        widget.questionLearn[index].answer
                                     ? Colors.green
                                     : const Color.fromRGBO(12, 12, 48, 1)))
                             : const Color.fromRGBO(12, 12, 48, 1),
-
                         onPressed: !answered
                             ? () {
-                                if (widget.questionLearn[index].listAnswer![i] == widget.questionLearn[index].answer) {
+                                if (widget
+                                        .questionLearn[index].listAnswer![i] ==
+                                    widget.questionLearn[index].answer) {
                                   score++;
                                   setState(() {
                                     selectedIndex = i;
@@ -147,7 +149,8 @@ class _LearnScreenState extends State<LearnScreen> {
                           widget.questionLearn[index].listAnswer![i],
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 18.0,                          ),
+                            fontSize: 18.0,
+                          ),
                         ),
                       ),
                     ),
