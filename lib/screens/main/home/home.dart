@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:quizlet/services/firestore.services.dart';
 import 'package:quizlet/widgets/home/folder_card_home.dart';
 import 'package:quizlet/widgets/home/set_card_home.dart';
@@ -52,32 +53,44 @@ class _HomeScreenState extends State<HomeScreen> {
                   BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot,
                 ) {
-                  return snapshot.hasData
-                      ? PageView.builder(
-                          itemCount: snapshot.data!.docs.length,
-                          controller: PageController(viewportFraction: 0.93),
-                          itemBuilder: (context, index) {
-                            final DocumentSnapshot set =
-                                snapshot.data!.docs[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/set',
-                                  arguments: {'setDetail': set.data()},
-                                );
-                              },
-                              child: SetCardBig(
-                                title: set['name'].toString(),
-                                username: set['username'].toString(),
-                                terms: int.parse(
-                                  set['cards'].length.toString(),
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    child: snapshot.hasData
+                        ? PageView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            controller: PageController(viewportFraction: 0.93),
+                            itemBuilder: (context, index) {
+                              final DocumentSnapshot set =
+                                  snapshot.data!.docs[index];
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/set',
+                                    arguments: {'setDetail': set.data()},
+                                  );
+                                },
+                                child: SetCardBig(
+                                  title: set['name'].toString(),
+                                  username: set['username'].toString(),
+                                  terms: int.parse(
+                                    set['cards'].length.toString(),
+                                  ),
                                 ),
+                              );
+                            },
+                          )
+                        : const Center(
+                            child: SizedBox(
+                              height: 50,
+                              child: LoadingIndicator(
+                                indicatorType: Indicator.lineScaleParty,
+                                colors: [Colors.white],
+                                strokeWidth: 2,
                               ),
-                            );
-                          },
-                        )
-                      : const CircularProgressIndicator();
+                            ),
+                          ),
+                  );
                 },
               ),
             ),
@@ -105,22 +118,33 @@ class _HomeScreenState extends State<HomeScreen> {
               child: FutureBuilder<DocumentSnapshot>(
                 future: getUserInfo(),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return PageView.builder(
-                      itemCount: int.parse(
-                        snapshot.data!['folders'].length.toString(),
-                      ),
-                      controller: PageController(viewportFraction: 0.93),
-                      itemBuilder: (context, index) {
-                        return FolderCardBig(
-                          title: snapshot.data!['folders'][index].toString(),
-                          username: snapshot.data!['username'].toString(),
-                        );
-                      },
-                    );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 250),
+                    child: snapshot.hasData
+                        ? PageView.builder(
+                            itemCount: int.parse(
+                              snapshot.data!['folders'].length.toString(),
+                            ),
+                            controller: PageController(viewportFraction: 0.93),
+                            itemBuilder: (context, index) {
+                              return FolderCardBig(
+                                title:
+                                    snapshot.data!['folders'][index].toString(),
+                                username: snapshot.data!['username'].toString(),
+                              );
+                            },
+                          )
+                        : const Center(
+                            child: SizedBox(
+                              height: 50,
+                              child: LoadingIndicator(
+                                indicatorType: Indicator.lineScaleParty,
+                                colors: [Colors.white],
+                                strokeWidth: 2,
+                              ),
+                            ),
+                          ),
+                  );
                 },
               ),
             ),

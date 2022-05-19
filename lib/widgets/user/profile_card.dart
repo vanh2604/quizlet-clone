@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:quizlet/services/user.services.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
@@ -57,7 +58,16 @@ class _ProfileCardState extends State<ProfileCard> {
                           padding: EdgeInsets.all(
                             MediaQuery.of(context).size.width * 0.05,
                           ),
-                          child: const CircularProgressIndicator(),
+                          child: const Center(
+                            child: SizedBox(
+                              height: 50,
+                              child: LoadingIndicator(
+                                indicatorType: Indicator.lineScaleParty,
+                                colors: [Colors.white],
+                                strokeWidth: 2,
+                              ),
+                            ),
+                          ),
                         )
                       else
                         CircleAvatar(
