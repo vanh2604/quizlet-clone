@@ -1,5 +1,7 @@
+import 'dart:convert' show utf8;
 import 'dart:io';
 import 'dart:math';
+import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -29,6 +31,19 @@ class _CreateScreenState extends State<CreateScreen> {
     setState(() {
       termControllers.add(TextEditingController());
       defControllers.add(TextEditingController());
+      widgets.add(
+        AddTerm(
+          termController: termControllers.last,
+          defController: defControllers.last,
+        ),
+      );
+    });
+  }
+
+  void _addWidgetWithData(String term, String def) {
+    setState(() {
+      termControllers.add(TextEditingController(text: term));
+      defControllers.add(TextEditingController(text: def));
       widgets.add(
         AddTerm(
           termController: termControllers.last,
@@ -71,6 +86,26 @@ class _CreateScreenState extends State<CreateScreen> {
     });
   }
 
+  Future<void> _csv() async {
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      withData: true,
+      type: FileType.custom,
+      allowedExtensions: ['csv'],
+    );
+    if (result != null) {
+      final PlatformFile file = result.files.first;
+      final input = File(file.path.toString()).openRead();
+      final fields = await input
+          .transform(utf8.decoder)
+          .transform(const CsvToListConverter())
+          .toList();
+      for (final field in fields) {
+        final List<String> temp = field[0].toString().split(';');
+        _addWidgetWithData(temp[0], temp[1]);
+      }
+    }
+  }
+
   Future<void> _ocr() async {
     final FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
@@ -80,7 +115,13 @@ class _CreateScreenState extends State<CreateScreen> {
       final RecognizedText recognizedText =
           await textRecognizer.processImage(inputImage);
       final String text = recognizedText.text;
-      print(text);
+      final List<String> words = text.split("\n");
+      if (words.length.isEven) {
+        words.add("");
+      }
+      for (var i = 0; i < words.length; i += 2) {
+        _addWidgetWithData(words[i], words[i + 1]);
+      }
       textRecognizer.close();
     }
   }
@@ -173,11 +214,34 @@ class _CreateScreenState extends State<CreateScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                _addWidget();
-              },
-              child: const Icon(Icons.add_circle_rounded, size: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      _ocr();
+                    },
+                    child: const Icon(Icons.camera_rounded, size: 30),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      _addWidget();
+                    },
+                    child: const Icon(Icons.add_circle_rounded, size: 30),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    _csv();
+                  },
+                  child: const Icon(Icons.adf_scanner_rounded, size: 30),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             ElevatedButton(
