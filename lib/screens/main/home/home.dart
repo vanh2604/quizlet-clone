@@ -117,16 +117,17 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 170,
               child: FutureBuilder<DocumentSnapshot>(
                 future: getUserInfo(),
-                builder: (context, snapshot) {
+                builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   return AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
-                    child: snapshot.hasData
+                    child: snapshot.hasData &&
+                            snapshot.connectionState == ConnectionState.done
                         ? PageView.builder(
+                            controller: PageController(viewportFraction: 0.93),
                             itemCount: int.parse(
                               snapshot.data!['folders'].length.toString(),
                             ),
-                            controller: PageController(viewportFraction: 0.93),
-                            itemBuilder: (context, index) {
+                            itemBuilder: (_, index) {
                               return FolderCardBig(
                                 title:
                                     snapshot.data!['folders'][index].toString(),

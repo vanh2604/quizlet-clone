@@ -6,10 +6,6 @@ import 'package:quizlet/screens/set/flash_card/swipe_card.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-// void main() => runApp(
-//   FlashCardScreen(listQuestions: question2s),
-// );
-
 class FlashCardScreen extends StatelessWidget {
   List<CardModel2> listQuestions;
   FlashCardScreen({Key? key, required this.listQuestions}) : super(key: key);
@@ -180,7 +176,7 @@ class _MainPageState extends State<MainPage> {
   Widget buildProgressBar() {
     final provider = Provider.of<CardProvider>(context);
     final totalCard = provider.totalCard;
-    int currentIndexCard = provider.getOrderCurrentIndexCard()+1;
+    int currentIndexCard = provider.getOrderCurrentIndexCard() + 1;
     if (currentIndexCard >= totalCard) {
       currentIndexCard = totalCard;
     }

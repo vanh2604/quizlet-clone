@@ -40,10 +40,10 @@ class FolderCardBig extends StatelessWidget {
                     size: 12.5,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(12, 0, 0, 20),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 0, 20),
                   child: QText(
-                    text: "English",
+                    text: title,
                     color: textColor,
                     isBold: true,
                     size: 18,

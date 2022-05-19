@@ -39,8 +39,7 @@ Future<DocumentSnapshot> getUserInfo() async {
   final db = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
   final uid = user.uid;
-  final snapshot = db.collection('users').doc(uid).get();
-  return snapshot;
+  return db.collection('users').doc(uid).get();
 }
 
 Stream<QuerySnapshot> getUserSetsStream() {
