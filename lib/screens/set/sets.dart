@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:quizlet/services/firestore.services.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/sets/set_card.dart';
@@ -50,7 +51,16 @@ class _SetsScreenState extends State<SetsScreen> {
                     );
                   },
                 )
-              : const CircularProgressIndicator();
+              : const Center(
+                  child: SizedBox(
+                    height: 50,
+                    child: LoadingIndicator(
+                      indicatorType: Indicator.lineScaleParty,
+                      colors: [Colors.white],
+                      strokeWidth: 2,
+                    ),
+                  ),
+                );
         },
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
