@@ -11,8 +11,6 @@ import 'package:quizlet/widgets/set/flip_term_card.dart';
 import 'package:quizlet/widgets/set/learn_custom_button.dart';
 import 'package:quizlet/widgets/set/term_card.dart';
 
-import '../../data/fake_data.dart';
-
 class SetScreen extends StatefulWidget {
   const SetScreen({Key? key}) : super(key: key);
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
-import 'package:quizlet/screens/set/write/write_screen.dart';
 import 'package:quizlet/widgets/review_term.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -14,9 +13,10 @@ class ResultScreen extends StatefulWidget {
     this.score,
     this.q,
     this.correctAns,
-    this.incorrectAns,
-
-    {Key? key, required this.questionLearn}): super(key: key);
+    this.incorrectAns, {
+    Key? key,
+    required this.questionLearn,
+  }) : super(key: key);
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -43,7 +43,7 @@ class _ResultScreenState extends State<ResultScreen> {
               SizedBox(
                 width: double.infinity,
                 child: Text(
-                  "${((widget.score / widget.questionLearn.length)* 100).round()}%",
+                  "${((widget.score / widget.questionLearn.length) * 100).round()}%",
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
@@ -68,7 +68,7 @@ class _ResultScreenState extends State<ResultScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>LearnScreen(
+                        builder: (context) => LearnScreen(
                           questionLearn: widget.questionLearn,
                         ),
                       ),

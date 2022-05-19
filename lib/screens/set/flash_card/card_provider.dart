@@ -1,9 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/fake_data.dart';
-
-import '../../../model/card_model.dart';
+import 'package:quizlet/model/card_model.dart';
 
 enum CardStatus { like, dislike }
 
@@ -108,7 +105,7 @@ class CardProvider extends ChangeNotifier {
   }
 
   bool isEmptyListData() {
-    return listQuestion.length == 0 || listQuestion.isEmpty;
+    return listQuestion.isEmpty || listQuestion.isEmpty;
   }
 
   double getStatusOpacity() {

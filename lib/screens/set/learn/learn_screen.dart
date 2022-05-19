@@ -108,10 +108,12 @@ class _LearnScreenState extends State<LearnScreen> {
                           : const Color.fromRGBO(12, 12, 48, 1),
                       onPressed: !answered
                           ? () {
-                              q.add(widget.questionLearn[index].question
-                                  .toString());
-                              correctAns.add(widget.questionLearn[index].answer
-                                  .toString());
+                              q.add(
+                                widget.questionLearn[index].question.toString(),
+                              );
+                              correctAns.add(
+                                widget.questionLearn[index].answer.toString(),
+                              );
 
                               if (widget.questionLearn[index].listAnswer![i] ==
                                   widget.questionLearn[index].answer) {
@@ -122,7 +124,8 @@ class _LearnScreenState extends State<LearnScreen> {
                                 });
                               } else {
                                 incorrectAns.add(
-                                    widget.questionLearn[index].listAnswer![i]);
+                                  widget.questionLearn[index].listAnswer![i],
+                                );
                                 setState(() {
                                   selectedIndex = i;
                                 });

@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quizlet/data/card_data.dart';
-
+import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
-
-import '../../../model/card_model.dart';
-import '../../../utils/colors.dart';
+import 'package:quizlet/utils/colors.dart';
 
 // void main() => runApp(const SettingExam());
 
