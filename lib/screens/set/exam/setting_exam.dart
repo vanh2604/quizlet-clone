@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:quizlet/data/card_data.dart';
 
-import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
-import 'package:quizlet/utils/colors.dart';
+
+import '../../../model/card_model.dart';
+import '../../../utils/colors.dart';
 
 // void main() => runApp(const SettingExam());
-
 
 class SettingExam extends StatelessWidget {
   final List<CardModel2> listQuestion;
@@ -63,9 +64,7 @@ class _Setting extends State<Setting> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => ExamScreen(
-
                           listQuestion: widget.listQuestion,
-
                           isMultichoice: _multichoice,
                           isWrite: _write,
                         ),
