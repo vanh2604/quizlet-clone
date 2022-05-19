@@ -180,12 +180,16 @@ class _MainPageState extends State<MainPage> {
   Widget buildProgressBar() {
     final provider = Provider.of<CardProvider>(context);
     final totalCard = provider.totalCard;
-    final currentIndexCard = provider.getOrderCurrentIndexCard();
+    int currentIndexCard = provider.getOrderCurrentIndexCard()+1;
+    if (currentIndexCard >= totalCard) {
+      currentIndexCard = totalCard;
+    }
+
     return Center(
       child: Column(
         children: [
           QText(
-            text: "$currentIndexCard/${totalCard - 1}",
+            text: "$currentIndexCard/${totalCard}",
             color: Colors.white,
           ),
           const SizedBox(
@@ -195,7 +199,7 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: const Color.fromRGBO(71, 71, 94, 1),
             valueColor:
                 const AlwaysStoppedAnimation(Color.fromRGBO(140, 137, 204, 1)),
-            value: currentIndexCard / (totalCard - 1),
+            value: currentIndexCard / (totalCard),
           )
         ],
       ),

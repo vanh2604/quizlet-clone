@@ -17,7 +17,7 @@ class ReviewTerm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const  EdgeInsets.fromLTRB(10, 10, 10, 10),
-      height: MediaQuery.of(context).size.height,
+      height: MediaQuery.of(context).size.height*0.7,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(52, 58, 85, 1)
       ),
@@ -32,11 +32,16 @@ class ReviewTerm extends StatelessWidget {
           SizedBox(height: 20,),
           incorrectAnswer == ""?
             Center(child: QText(text: correctAnswer, color: Colors.green,),):
-              Row(
-                children: [
-                  QText(text: "text", color: Colors.green),
-                  QText(text: "text", color: Colors.red)
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Center(child: QText(text: correctAnswer, color: Colors.green)),
+                    SizedBox(width: 100,),
+                    Center(child: QText(text: incorrectAnswer, color: Colors.red))
+                  ],
+                ),
               ),
           Container(
             width: MediaQuery.of(context).size.width,

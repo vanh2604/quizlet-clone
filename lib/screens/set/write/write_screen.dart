@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/utils/colors.dart';
 
+import '../learn/result_screen.dart';
+
 class WriteScreen extends StatefulWidget {
   final List<CardModel2> question2s;
   const WriteScreen({Key? key, required this.question2s}) : super(key: key);
@@ -17,6 +19,11 @@ class _WriteScreen extends State<WriteScreen> {
   bool _isCorrectAnswer = false;
   bool _autofocus = true;
   int countEnterToAnswer = 0;
+  int score = 0;
+
+  List<String> q = [];
+  List<String> correctAns = [];
+  List<String> incorrectAns = [];
 
   @override
   void initState() {
@@ -149,24 +156,46 @@ class _WriteScreen extends State<WriteScreen> {
             autofocus: _autofocus,
             onFieldSubmitted: !_haveSummited
                 ? (String? value) {
+                    if(countEnterToAnswer==0) q.add(widget.question2s[index].question.toString());
                     if (widget.question2s[index].answer!.contains(value!) &&
                         widget.question2s[index].answer! == value) {
+                      score++;
+                      incorrectAns.add("");
+                      correctAns.add(widget.question2s[index].answer!);
+
                       setState(() {
                         _haveSummited = true;
                         _isCorrectAnswer = true;
                         _autofocus = true;
                       });
                     } else {
+
                       setState(() {
                         _haveSummited = true;
                         _isCorrectAnswer = false;
                         countEnterToAnswer++;
                         _autofocus = true;
                       });
+                      if(countEnterToAnswer==2) {
+                        incorrectAns.add(value);
+                        correctAns.add(widget.question2s[index].answer!);
+                      }
                     }
 
                     Future.delayed(const Duration(seconds: 3), () {
-                      if (_isCorrectAnswer || countEnterToAnswer == 2) {
+                      if (_pageController!.page?.toInt()==widget.question2s.length-1) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultScreen(
+                                  score,
+                                  q,
+                                  correctAns,
+                                  incorrectAns,
+                                  questionLearn:
+                                  widget.question2s),
+                            ));
+                      } else if (_isCorrectAnswer || countEnterToAnswer == 2) {
                         _pageController!.nextPage(
                           duration: const Duration(milliseconds: 250),
                           curve: Curves.easeInOut,
