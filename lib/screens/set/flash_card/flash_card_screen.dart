@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:quizlet/data/fake_data.dart';
+import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/flash_card/card_provider.dart';
 import 'package:quizlet/screens/set/flash_card/swipe_card.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-import '../../../model/card_model.dart';
-
-
-void main() => runApp(
-  FlashCardScreen(listQuestions: question2s),
-);
+// void main() => runApp(
+//   FlashCardScreen(listQuestions: question2s),
+// );
 
 class FlashCardScreen extends StatelessWidget {
   List<CardModel2> listQuestions;
@@ -21,13 +18,16 @@ class FlashCardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => CardProvider(),
-      child: const MainPage(),
+      child: MainPage(
+        listQuestions: listQuestions,
+      ),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  List<CardModel2> listQuestions;
+  MainPage({Key? key, required this.listQuestions}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<CardProvider>(context);
-    provider.setListQuestion(question2s);
+    provider.setListQuestion(widget.listQuestions);
     final isEmpty = provider.isEmptyListData();
     final understandCount = provider.understandCount;
     final dontunderstandCount = provider.dontUnderstandCount;
@@ -69,6 +69,7 @@ class _MainPageState extends State<MainPage> {
                     : buildEndCard(
                         understandCount: understandCount,
                         dontUnderstandCount: dontunderstandCount,
+                        listQuestions: widget.listQuestions,
                       ),
               ),
               const SizedBox(
@@ -87,7 +88,15 @@ class _MainPageState extends State<MainPage> {
     final provider = Provider.of<CardProvider>(context);
     final listQuestion = provider.listQuestion;
     return Stack(
-      children: listQuestion.map((q) => SwipeCard(urlImage: q.question.toString(), answer:q.answer.toString(),isFront: listQuestion.last==q)).toList(),
+      children: listQuestion
+          .map(
+            (q) => SwipeCard(
+              urlImage: q.question.toString(),
+              answer: q.answer.toString(),
+              isFront: listQuestion.last == q,
+            ),
+          )
+          .toList(),
     );
     // return Stack(
     //   children: urlImages
@@ -104,6 +113,7 @@ class _MainPageState extends State<MainPage> {
   Widget buildEndCard({
     required int understandCount,
     required int dontUnderstandCount,
+    required List<CardModel2> listQuestions,
   }) {
     final String line1 =
         understandCount == (understandCount + dontUnderstandCount)
@@ -149,8 +159,8 @@ class _MainPageState extends State<MainPage> {
                     //         builder: (context) =>const FlashCardScreen()));
                     final provider =
                         Provider.of<CardProvider>(context, listen: false);
-                    provider.isStarted?provider.isStarted = false:null;
-                    provider.setListQuestion(question2s);
+                    provider.isStarted ? provider.isStarted = false : null;
+                    provider.setListQuestion(listQuestions);
                     provider.resetList();
                   },
                   child: const QText(
