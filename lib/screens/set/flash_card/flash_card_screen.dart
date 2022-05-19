@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:quizlet/data/fake_data.dart';
 import 'package:quizlet/screens/set/flash_card/card_provider.dart';
 import 'package:quizlet/screens/set/flash_card/swipe_card.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
+import '../../../model/card_model.dart';
+
+
+void main() => runApp(
+  FlashCardScreen(listQuestions: question2s),
+);
+
 class FlashCardScreen extends StatelessWidget {
-  const FlashCardScreen({Key? key}) : super(key: key);
+  List<CardModel2> listQuestions;
+  FlashCardScreen({Key? key, required this.listQuestions}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +37,11 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<CardProvider>(context);
+    provider.setListQuestion(question2s);
     final isEmpty = provider.isEmptyListData();
     final understandCount = provider.understandCount;
     final dontunderstandCount = provider.dontUnderstandCount;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -74,17 +85,20 @@ class _MainPageState extends State<MainPage> {
 
   Widget buildCards() {
     final provider = Provider.of<CardProvider>(context);
-    final urlImages = provider.urlImages;
+    final listQuestion = provider.listQuestion;
     return Stack(
-      children: urlImages
-          .map(
-            (urlImage) => SwipeCard(
-              urlImage: urlImage,
-              isFront: urlImages.last == urlImage,
-            ),
-          )
-          .toList(),
+      children: listQuestion.map((q) => SwipeCard(urlImage: q.question.toString(), answer:q.answer.toString(),isFront: listQuestion.last==q)).toList(),
     );
+    // return Stack(
+    //   children: urlImages
+    //       .map(
+    //         (urlImage) => SwipeCard(
+    //           urlImage: urlImage,
+    //           isFront: urlImages.last == urlImage,
+    //         ),
+    //       )
+    //       .toList(),
+    // );
   }
 
   Widget buildEndCard({
@@ -135,6 +149,8 @@ class _MainPageState extends State<MainPage> {
                     //         builder: (context) =>const FlashCardScreen()));
                     final provider =
                         Provider.of<CardProvider>(context, listen: false);
+                    provider.isStarted?provider.isStarted = false:null;
+                    provider.setListQuestion(question2s);
                     provider.resetList();
                   },
                   child: const QText(

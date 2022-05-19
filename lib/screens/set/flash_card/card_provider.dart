@@ -1,11 +1,14 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:quizlet/data/fake_data.dart';
+
+import '../../../model/card_model.dart';
 
 enum CardStatus { like, dislike }
 
 class CardProvider extends ChangeNotifier {
-  List<String> urlImages = [];
+  List<CardModel2> listQuestion=[];
   bool isDragging = false;
   double angle = 0;
   Offset _position = Offset.zero;
@@ -15,19 +18,22 @@ class CardProvider extends ChangeNotifier {
   int understandCount = 0;
   int dontUnderstandCount = 0;
   bool isListEmpty = false;
+  bool isStarted= false;
   CardProvider() {
     resetList();
   }
 
+  void setListQuestion(List <CardModel2> question) {
+    if(!isStarted) {
+      listQuestion = question.reversed.toList();
+      totalCard = listQuestion.length;
+    }
+    isStarted = true;
+  }
+
   void resetList() {
-    urlImages = <String>[
-      "img/gri.jpeg",
-      "img/img_14.jpeg",
-      "img/img_15.jpeg",
-      "img/img_16.jpeg",
-      ""
-    ].reversed.toList();
-    totalCard = urlImages.length;
+    //listQuestion = question2s.reversed.toList();
+    totalCard = listQuestion.length;
     understandCount = 0;
     dontUnderstandCount = 0;
     notifyListeners();
@@ -64,7 +70,7 @@ class CardProvider extends ChangeNotifier {
   void like() {
     angle = 20;
     _position += Offset(2 * _screenSize.width / 2, 0);
-    if (urlImages.isEmpty) {
+    if (listQuestion.isEmpty) {
       isListEmpty = true;
     }
     _nextCard();
@@ -75,7 +81,7 @@ class CardProvider extends ChangeNotifier {
   void dislike() {
     angle = -20;
     _position -= Offset(2 * _screenSize.width, 0);
-    if (urlImages.isEmpty) {
+    if (listQuestion.isEmpty) {
       isListEmpty = true;
     }
     _nextCard();
@@ -84,17 +90,17 @@ class CardProvider extends ChangeNotifier {
   }
 
   Future _nextCard() async {
-    if (urlImages.isEmpty) {
+    if (listQuestion.isEmpty) {
       isListEmpty = true;
       return;
     }
     await Future.delayed(const Duration(milliseconds: 100));
-    urlImages.removeLast();
+    listQuestion.removeLast();
     resetPosition();
   }
 
   int getCurrentNumberOfCard() {
-    return urlImages.length;
+    return listQuestion.length;
   }
 
   int getOrderCurrentIndexCard() {
@@ -102,7 +108,7 @@ class CardProvider extends ChangeNotifier {
   }
 
   bool isEmptyListData() {
-    return urlImages.length == 1 || urlImages.isEmpty;
+    return listQuestion.length == 1 || listQuestion.isEmpty;
   }
 
   double getStatusOpacity() {
