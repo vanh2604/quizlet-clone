@@ -142,7 +142,7 @@ class _SetScreenState extends State<SetScreen> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const FlashCardScreen(),
+                                             FlashCardScreen(listQuestions: question2s),
                                       ),
                                     );
                                   },
