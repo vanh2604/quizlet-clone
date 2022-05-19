@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:quizlet/data/card_data.dart';
 
+import '../../../data/fake_data.dart';
+
 void main() => runApp(const WriteScreen());
 
 class WriteScreen extends StatefulWidget {
@@ -74,15 +76,15 @@ class _WriteScreen extends State<WriteScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${questions[index].question}",
+                      "${question2s[index].question}",
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 22.0,
                       ),
                     ),
-                    for (int i = 0; i < questions[index].answer!.length; i++)
+                    for (int i = 0; i < question2s[index].listAnswer!.length; i++)
                       Text(
-                        questions[index].answer!.keys.toList()[i],
+                        question2s[index].listAnswer![i],
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
@@ -147,8 +149,7 @@ class _WriteScreen extends State<WriteScreen> {
             autofocus: _autofocus,
             onFieldSubmitted: !_haveSummited
                 ? (String? value) {
-                    if (questions[index].answer!.containsKey(value) &&
-                        questions[index].answer![value] == true) {
+                    if (question2s[index].answer!.contains(value!) && questions[index].answer! == value) {
                       setState(() {
                         _haveSummited = true;
                         _isCorrectAnswer = true;

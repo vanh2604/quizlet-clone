@@ -1,6 +1,6 @@
 import 'package:quizlet/model/card_model.dart';
 
-List<CardModel2> questions = [
+List<CardModel2> question2s = [
   CardModel2(
     "How Many Whiskers does the average cat have on each side of its face ?",
     "12",

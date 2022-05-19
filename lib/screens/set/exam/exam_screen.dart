@@ -3,16 +3,18 @@ import 'package:quizlet/data/card_data.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
 
+import '../../../data/fake_data.dart';
+
 void main() => runApp(
       ExamScreen(
-        listQuestion: questions,
+        listQuestion: question2s,
       ),
     );
 
 class ExamScreen extends StatefulWidget {
   bool isMultichoice;
   bool isWrite;
-  List<CardModel> listQuestion;
+  List<CardModel2> listQuestion;
 
   ExamScreen({
     Key? key,
@@ -119,7 +121,7 @@ class _ExamScreenState extends State<ExamScreen> {
                         i < widget.listQuestion[index].answer!.length;
                         i++)
                       Text(
-                        widget.listQuestion[index].answer!.keys.toList()[i],
+                        widget.listQuestion[index].listAnswer![i],
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
@@ -184,8 +186,8 @@ class _ExamScreenState extends State<ExamScreen> {
             autofocus: _autofocus,
             onFieldSubmitted: !_haveSummited
                 ? (String? value) {
-                    if (widget.listQuestion[index].answer!.containsKey(value) &&
-                        widget.listQuestion[index].answer![value] == true) {
+                    if (widget.listQuestion[index].answer!.contains(value!) &&
+                        widget.listQuestion[index].answer! == value) {
                       setState(() {
                         _haveSummited = true;
                         _isCorrectAnswer = true;
@@ -286,17 +288,16 @@ class _ExamScreenState extends State<ExamScreen> {
               ),
               fillColor: btnPressed
                   ? (i == selectedIndex
-                      ? (widget.listQuestion[index].answer!.values.toList()[i]
+                      ? (widget.listQuestion[index].listAnswer![i] == widget.listQuestion[index].answer
                           ? Colors.green
                           : Colors.red)
-                      : (widget.listQuestion[index].answer!.values.toList()[i]
+                      : (widget.listQuestion[index].listAnswer![i] == widget.listQuestion[index].answer
                           ? Colors.green
                           : const Color.fromRGBO(12, 12, 48, 1)))
                   : const Color.fromRGBO(12, 12, 48, 1),
               onPressed: !answered
                   ? () {
-                      if (widget.listQuestion[index].answer!.values
-                          .toList()[i]) {
+                      if (widget.listQuestion[index].listAnswer![i] == widget.listQuestion[index].answer) {
                         score++;
                         setState(() {
                           selectedIndex = i;
@@ -333,7 +334,7 @@ class _ExamScreenState extends State<ExamScreen> {
                     }
                   : null,
               child: Text(
-                widget.listQuestion[index].answer!.keys.toList()[i],
+                widget.listQuestion[index].listAnswer![i],
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18.0,
