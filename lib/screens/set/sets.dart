@@ -13,6 +13,8 @@ class SetsScreen extends StatefulWidget {
 }
 
 class _SetsScreenState extends State<SetsScreen> {
+  final FirestoreService firestoreService = FirestoreService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,7 @@ class _SetsScreenState extends State<SetsScreen> {
         backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: getUserSetsStream(),
+        stream: firestoreService.getUserSetsStream(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           return snapshot.hasData
               ? ListView.builder(

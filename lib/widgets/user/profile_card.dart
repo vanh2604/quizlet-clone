@@ -16,19 +16,21 @@ class _ProfileCardState extends State<ProfileCard> {
   String name = '';
   String email = '';
 
+  final UserService userService = UserService();
+
   @override
   void initState() {
-    getAvatarURL().then((String result) {
+    userService.getAvatarURL().then((String result) {
       setState(() {
         avatarURL = result;
       });
     });
-    getDisplayName().then((String result) {
+    userService.getDisplayName().then((String result) {
       setState(() {
         name = result;
       });
     });
-    getEmail().then((String result) {
+    userService.getEmail().then((String result) {
       setState(() {
         email = result;
       });
@@ -72,10 +74,13 @@ class _ProfileCardState extends State<ProfileCard> {
                                   ),
                                 ),
                               )
-                            : CircleAvatar(
-                                radius: 40,
-                                backgroundImage: NetworkImage(avatarURL),
-                                backgroundColor: Colors.transparent,
+                            : Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(avatarURL),
+                                  backgroundColor: Colors.transparent,
+                                ),
                               ),
                       ),
                       Column(

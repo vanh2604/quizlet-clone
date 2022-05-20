@@ -15,6 +15,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
   String appBarText = "Quizzy";
+  SeedService seedService = SeedService();
 
   Widget getBody() {
     switch (currentIndex) {
@@ -36,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(
-          onTap: () => seedDatabase(),
+          onTap: () => seedService.seedDatabase(),
           child: QText(
             text: appBarText,
             color: Colors.white,

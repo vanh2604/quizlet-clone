@@ -27,6 +27,8 @@ class _CreateScreenState extends State<CreateScreen> {
   final List<TextEditingController> termControllers = [];
   final List<TextEditingController> defControllers = [];
 
+  final FirestoreService firestoreService = FirestoreService();
+
   void _addWidget() {
     setState(() {
       termControllers.add(TextEditingController());
@@ -63,27 +65,41 @@ class _CreateScreenState extends State<CreateScreen> {
 
   Future<void> _submitData() async {
     final Map<String, String> cards = {};
-    for (final widget in widgets) {
-      if (widget is AddTerm) {
-        cards[widget.termController.text] = widget.defController.text;
+    if (widgets.length >= 4) {
+      for (final widget in widgets) {
+        if (widget is AddTerm) {
+          cards[widget.termController.text] = widget.defController.text;
+        }
       }
-    }
-    await createSet(nameController.text, folderController.text, cards, {});
-    setState(() {
-      widgets.clear();
-      termControllers.clear();
-      defControllers.clear();
+      await firestoreService
+          .createSet(nameController.text, folderController.text, cards, {});
+      setState(() {
+        widgets.clear();
+        termControllers.clear();
+        defControllers.clear();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: QText(
+              text: "Your set has been created successfully!",
+              color: Colors.white,
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: snackBarColor,
+          ),
+        );
+      });
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: QText(
-            text: "Your set has been created successfully!",
+            text: "Please add at least 4 terms!",
             color: Colors.white,
           ),
           behavior: SnackBarBehavior.floating,
           backgroundColor: snackBarColor,
         ),
       );
-    });
+    }
   }
 
   Future<void> _csv() async {
@@ -107,7 +123,11 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Future<void> _ocr() async {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles();
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      withData: true,
+      type: FileType.custom,
+      allowedExtensions: ['jpeg', 'png', 'jpg'],
+    );
     if (result != null) {
       final File file = File(result.files.single.path.toString());
       final inputImage = InputImage.fromFile(file);
@@ -168,7 +188,7 @@ class _CreateScreenState extends State<CreateScreen> {
                 ),
               ),
               suggestionsCallback: (pattern) {
-                return getFoldersSuggestion();
+                return firestoreService.getFoldersSuggestion();
               },
               itemBuilder: (context, String suggestion) {
                 return ListTile(
@@ -249,8 +269,15 @@ class _CreateScreenState extends State<CreateScreen> {
                 _submitData();
               },
               child: const Padding(
-                padding: EdgeInsets.only(left: 175, right: 175),
+                padding: EdgeInsets.only(left: 137, right: 137),
                 child: QText(text: "Create", color: textColor),
+              ),
+            ),
+            const SizedBox(height: 10),
+            const Center(
+              child: QText(
+                color: textColor,
+                text: "Hint: At least 4 cards must be created within a set.",
               ),
             ),
           ],

@@ -14,10 +14,11 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   Stream<QuerySnapshot> _stream = const Stream<QuerySnapshot>.empty();
+  final FirestoreService firestoreService = FirestoreService();
 
   @override
   void initState() {
-    _stream = findSetsStream("");
+    _stream = firestoreService.findSetsStream("");
     super.initState();
   }
 
@@ -45,7 +46,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          _stream = findSetsStream(value);
+                          _stream = firestoreService.findSetsStream(value);
                           return;
                         });
                       },
