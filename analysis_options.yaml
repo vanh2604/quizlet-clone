@@ -10,3 +10,4 @@ linter:
     use_setters_to_change_properties: false
     cast_nullable_to_non_nullable: false
     depend_on_referenced_packages: false
+    must_be_immutable: false
