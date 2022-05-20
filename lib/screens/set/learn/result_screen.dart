@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
+import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/review_term.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -30,7 +31,8 @@ class _ResultScreenState extends State<ResultScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Result"),
-        backgroundColor: const Color.fromRGBO(52, 58, 85, 1),
+        backgroundColor: primaryColor,
+        elevation: 0,
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: SingleChildScrollView(
@@ -57,33 +59,11 @@ class _ResultScreenState extends State<ResultScreen> {
               const SizedBox(
                 height: 20.0,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.all(16.0),
-                    primary: Colors.white,
-                    textStyle: const TextStyle(fontSize: 20),
-                    backgroundColor: Colors.blueAccent,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LearnScreen(
-                          questionLearn: widget.questionLearn,
-                        ),
-                      ),
-                    );
-                  },
-                  child: const Text('Repeat the set'),
-                ),
-              ),
               const SizedBox(
                 height: 20,
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.7,
+                height: MediaQuery.of(context).size.height * 0.5,
                 child: PageView.builder(
                   itemCount: widget.questionLearn.length,
                   controller: PageController(viewportFraction: 0.93),
@@ -100,6 +80,32 @@ class _ResultScreenState extends State<ResultScreen> {
                       incorrectAnswer: widget.incorrectAns[index],
                     );
                   },
+                ),
+              ),
+              const SizedBox(height: 50),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(16.0),
+                      primary: Colors.white,
+                      textStyle: const TextStyle(fontSize: 20),
+                      backgroundColor: Colors.blueAccent,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LearnScreen(
+                            questionLearn: widget.questionLearn,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text('Repeat the set'),
+                  ),
                 ),
               ),
             ],

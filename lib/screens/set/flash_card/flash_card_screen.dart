@@ -49,7 +49,7 @@ class _MainPageState extends State<MainPage> {
       body: SafeArea(
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 30, bottom: 30),
+          padding: const EdgeInsets.only(bottom: 30),
           child: Column(
             children: [
               // progress bar
@@ -115,14 +115,12 @@ class _MainPageState extends State<MainPage> {
   }) {
     final String line1 =
         understandCount == (understandCount + dontUnderstandCount)
-            ? "Chuc mung ban"
-            : "Ban co the lam dc";
+            ? "Congrats!"
+            : "You can do it!";
     final String line2 =
         understandCount == (understandCount + dontUnderstandCount)
-            ? "Ban hoc het ca noi dung roi"
-            : "Ban vua hoc $understandCount "
-                " thuat ngu, chi con $dontUnderstandCount "
-                " thuat ngu thoi";
+            ? "You've learnt everything"
+            : "$understandCount down, $dontUnderstandCount to go.";
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.only(right: 40, left: 40),
@@ -135,9 +133,9 @@ class _MainPageState extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              QText(text: line1, color: Colors.white),
+              QText(text: line1, color: Colors.white, isBold: true),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               QText(text: line2, color: Colors.white),
               const SizedBox(
@@ -163,7 +161,7 @@ class _MainPageState extends State<MainPage> {
                     provider.resetList();
                   },
                   child: const QText(
-                    text: 'Hoc lai',
+                    text: 'Retry',
                     color: Colors.white,
                   ),
                 ),
@@ -187,13 +185,6 @@ class _MainPageState extends State<MainPage> {
     return Center(
       child: Column(
         children: [
-          QText(
-            text: "$currentIndexCard/$totalCard",
-            color: Colors.white,
-          ),
-          const SizedBox(
-            height: 50,
-          ),
           LinearProgressIndicator(
             backgroundColor: const Color.fromRGBO(71, 71, 94, 1),
             valueColor:
@@ -201,6 +192,28 @@ class _MainPageState extends State<MainPage> {
             value: currentIndexCard / totalCard,
           )
         ],
+      ),
+    );
+  }
+
+  Widget buildCurrent() {
+    final provider = Provider.of<CardProvider>(context);
+    final totalCard = provider.totalCard;
+    int currentIndexCard = provider.getOrderCurrentIndexCard() + 1;
+    if (currentIndexCard >= totalCard) {
+      currentIndexCard = totalCard;
+    }
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        color: secondaryColor,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(30, 15, 30, 15),
+          child: QText(
+            text: "$currentIndexCard/$totalCard",
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -226,6 +239,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
+        buildCurrent(),
         Container(
           width: 50,
           height: 50,
