@@ -46,29 +46,32 @@ class _Setting extends State<Setting> {
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: Center(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.all(16.0),
-                    primary: Colors.white,
-                    textStyle: const TextStyle(fontSize: 20),
-                    backgroundColor: Colors.blue,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ExamScreen(
-                          listQuestion: widget.listQuestion,
-                          isMultichoice: _multichoice,
-                          isWrite: _write,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Center(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(16.0),
+                      primary: Colors.white,
+                      textStyle: const TextStyle(fontSize: 20),
+                      backgroundColor: Colors.blue,
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ExamScreen(
+                            listQuestion: widget.listQuestion,
+                            isMultichoice: _multichoice,
+                            isWrite: _write,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  child: const Text('Bat dau lam bai kiem tra'),
+                      );
+                    },
+                    child: const Text('Begin the exam'),
+                  ),
                 ),
               ),
             ),
@@ -79,7 +82,7 @@ class _Setting extends State<Setting> {
           ),
           SwitchListTile(
             title: const Text(
-              "Hien thi dap an ngay",
+              "Show answer",
               style: TextStyle(color: Colors.white),
             ),
             value: _isShowAnswer,
@@ -93,12 +96,12 @@ class _Setting extends State<Setting> {
             },
           ),
           const Text(
-            "Question type",
+            "Mode",
             style: TextStyle(color: Colors.grey),
           ),
           SwitchListTile(
             title: const Text(
-              "Multichoice question",
+              "Multiple choices",
               style: TextStyle(color: Colors.white),
             ),
             value: _multichoice,
@@ -109,17 +112,21 @@ class _Setting extends State<Setting> {
               if (!_write && !value) {
                 showDialog(
                   context: context,
-                  builder: (_) => AlertDialog(
-                    title: const Text("Khong the thay doi cai dat"),
-                    content: const Text(
-                      "Ban phai kich hoat it nhat mot loai cau hoi",
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'OK'),
-                        child: const Text('OK'),
+                  builder: (_) => ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: AlertDialog(
+                      backgroundColor: primaryColor,
+                      title: const Text("Not Allowed"),
+                      content: const Text(
+                        "At least one type of question must be activated",
                       ),
-                    ],
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'OK'),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               } else {
@@ -131,7 +138,7 @@ class _Setting extends State<Setting> {
           ),
           SwitchListTile(
             title: const Text(
-              "Tu luan",
+              "Writing",
               style: TextStyle(color: Colors.white),
             ),
             value: _write,

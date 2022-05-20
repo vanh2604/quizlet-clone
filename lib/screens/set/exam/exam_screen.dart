@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
 import 'package:quizlet/utils/colors.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 class ExamScreen extends StatefulWidget {
   bool isMultichoice;
@@ -91,10 +92,9 @@ class _ExamScreenState extends State<ExamScreen> {
 
   Widget buildWriteScreen(int index) {
     return Container(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
+      padding: const EdgeInsets.fromLTRB(20, 40, 20, 20),
+      child: ListView(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -115,13 +115,11 @@ class _ExamScreenState extends State<ExamScreen> {
                     for (int i = 0;
                         i < widget.listQuestion[index].listAnswer!.length;
                         i++)
-                      Text(
-                        widget.listQuestion[index].listAnswer![i],
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22.0,
-                        ),
-                      )
+                      QText(
+                        text: widget.listQuestion[index].listAnswer![i],
+                        color: Colors.white,
+                        size: 22,
+                      ),
                   ],
                 ),
               ),
@@ -242,105 +240,115 @@ class _ExamScreenState extends State<ExamScreen> {
   }
 
   Widget buildMultiQuestion(int index) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: double.infinity,
-          child: Text(
-            "Question ${index + 1}/${widget.listQuestion.length}",
-            textAlign: TextAlign.start,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 28.0,
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 10.0,
-        ),
-        SizedBox(
-          width: double.infinity,
-          height: 200.0,
-          child: Text(
-            "${widget.listQuestion[index].question}",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 22.0,
-            ),
-          ),
-        ),
-        for (int i = 0; i < widget.listQuestion[index].listAnswer!.length; i++)
-          Container(
-            width: double.infinity,
-            height: 50.0,
-            margin:
-                const EdgeInsets.only(bottom: 20.0, left: 12.0, right: 12.0),
-            child: RawMaterialButton(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                side: const BorderSide(color: Colors.white),
-              ),
-              fillColor: btnPressed
-                  ? (i == selectedIndex
-                      ? (widget.listQuestion[index].listAnswer![i] ==
-                              widget.listQuestion[index].answer
-                          ? Colors.green
-                          : Colors.red)
-                      : (widget.listQuestion[index].listAnswer![i] ==
-                              widget.listQuestion[index].answer
-                          ? Colors.green
-                          : const Color.fromRGBO(12, 12, 48, 1)))
-                  : const Color.fromRGBO(12, 12, 48, 1),
-              onPressed: !answered
-                  ? () {
-                      if (widget.listQuestion[index].listAnswer![i] ==
-                          widget.listQuestion[index].answer) {
-                        score++;
-                        setState(() {
-                          selectedIndex = i;
-                        });
-                      } else {
-                        setState(() {
-                          selectedIndex = i;
-                        });
-                      }
-                      setState(() {
-                        btnPressed = true;
-                        answered = true;
-                      });
-                      Future.delayed(const Duration(seconds: 3), () {
-                        if (_pageController!.page?.toInt() ==
-                            widget.listQuestion.length - 1) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ResultExam(),
-                            ),
-                          );
-                        } else {
-                          _pageController!.nextPage(
-                            duration: const Duration(milliseconds: 250),
-                            curve: Curves.easeInOut,
-                          );
-                          setState(() {
-                            btnPressed = false;
-                            selectedIndex = -1;
-                          });
-                        }
-                      });
-                    }
-                  : null,
-              child: Text(
-                widget.listQuestion[index].listAnswer![i],
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Container(
+              width: 400,
+              color: secondaryColor,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    QText(
+                      text:
+                          "Question ${index + 1}/${widget.listQuestion.length}",
+                      size: 28,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    QText(
+                      text: "${widget.listQuestion[index].question}",
+                      color: Colors.white,
+                      size: 22.0,
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-      ],
+          const SizedBox(height: 250),
+          for (int i = 0;
+              i < widget.listQuestion[index].listAnswer!.length;
+              i++)
+            Container(
+              width: double.infinity,
+              height: 50.0,
+              margin:
+                  const EdgeInsets.only(bottom: 20.0, left: 12.0, right: 12.0),
+              child: RawMaterialButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  side: const BorderSide(color: Colors.white),
+                ),
+                fillColor: btnPressed
+                    ? (i == selectedIndex
+                        ? (widget.listQuestion[index].listAnswer![i] ==
+                                widget.listQuestion[index].answer
+                            ? Colors.green
+                            : Colors.red)
+                        : (widget.listQuestion[index].listAnswer![i] ==
+                                widget.listQuestion[index].answer
+                            ? Colors.green
+                            : const Color.fromRGBO(12, 12, 48, 1)))
+                    : const Color.fromRGBO(12, 12, 48, 1),
+                onPressed: !answered
+                    ? () {
+                        if (widget.listQuestion[index].listAnswer![i] ==
+                            widget.listQuestion[index].answer) {
+                          score++;
+                          setState(() {
+                            selectedIndex = i;
+                          });
+                        } else {
+                          setState(() {
+                            selectedIndex = i;
+                          });
+                        }
+                        setState(() {
+                          btnPressed = true;
+                          answered = true;
+                        });
+                        Future.delayed(const Duration(seconds: 3), () {
+                          if (_pageController!.page?.toInt() ==
+                              widget.listQuestion.length - 1) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ResultExam(),
+                              ),
+                            );
+                          } else {
+                            _pageController!.nextPage(
+                              duration: const Duration(milliseconds: 250),
+                              curve: Curves.easeInOut,
+                            );
+                            setState(() {
+                              btnPressed = false;
+                              selectedIndex = -1;
+                            });
+                          }
+                        });
+                      }
+                    : null,
+                child: Text(
+                  widget.listQuestion[index].listAnswer![i],
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

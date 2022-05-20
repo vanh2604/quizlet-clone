@@ -19,6 +19,9 @@ class FirestoreService {
     final user = FirebaseAuth.instance.currentUser!;
     final uid = user.uid;
     final username = user.displayName;
+    await db.collection('users').doc(uid).update({
+      'folders': FieldValue.arrayUnion([folder])
+    });
     await db.collection('sets').add({
       'uid': uid,
       'username': username,

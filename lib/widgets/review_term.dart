@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
 class ReviewTerm extends StatelessWidget {
@@ -18,7 +19,8 @@ class ReviewTerm extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(10, 10, 10, 10),
       height: MediaQuery.of(context).size.height * 0.7,
       decoration: const BoxDecoration(
-        color: Color.fromRGBO(52, 58, 85, 1),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: secondaryColor,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +46,7 @@ class ReviewTerm extends StatelessWidget {
             )
           else
             Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8),
+              padding: const EdgeInsets.only(left: 8, right: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -58,19 +60,22 @@ class ReviewTerm extends StatelessWidget {
                 ],
               ),
             ),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50,
-            decoration: BoxDecoration(
-              color: incorrectAnswer == "" ? Colors.green : Colors.orange,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: 50,
+              decoration: BoxDecoration(
+                color: incorrectAnswer == "" ? Colors.green : Colors.orange,
+              ),
+              child: incorrectAnswer != ""
+                  ? const Center(
+                      child: QText(text: "Incorrect", color: Colors.white),
+                    )
+                  : const Center(
+                      child: QText(text: "Correct", color: Colors.white),
+                    ),
             ),
-            child: incorrectAnswer != ""
-                ? const Center(
-                    child: QText(text: "Incorrect", color: Colors.white),
-                  )
-                : const Center(
-                    child: QText(text: "Correct", color: Colors.white),
-                  ),
           )
         ],
       ),

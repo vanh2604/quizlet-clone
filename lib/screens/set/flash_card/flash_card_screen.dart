@@ -49,7 +49,7 @@ class _MainPageState extends State<MainPage> {
       body: SafeArea(
         child: Container(
           alignment: Alignment.center,
-          padding: const EdgeInsets.only(top: 0, bottom: 30),
+          padding: const EdgeInsets.only(bottom: 30),
           child: Column(
             children: [
               // progress bar
@@ -120,8 +120,7 @@ class _MainPageState extends State<MainPage> {
     final String line2 =
         understandCount == (understandCount + dontUnderstandCount)
             ? "You've learnt everything"
-            : "$understandCount down"
-                ", $dontUnderstandCount to go.";
+            : "$understandCount down, $dontUnderstandCount to go.";
     return Container(
       alignment: Alignment.center,
       padding: const EdgeInsets.only(right: 40, left: 40),

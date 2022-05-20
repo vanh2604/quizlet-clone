@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/write/result_write_screen.dart';
 import 'package:quizlet/utils/colors.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 class WriteScreen extends StatefulWidget {
   final List<CardModel2> question2s;
@@ -14,9 +15,9 @@ class WriteScreen extends StatefulWidget {
 class _WriteScreen extends State<WriteScreen> {
   final FocusNode _focusNode = FocusNode();
   PageController? _pageController;
+  bool _autofocus = true;
   bool _haveSummited = false;
   bool _isCorrectAnswer = false;
-  bool _autofocus = true;
   int countEnterToAnswer = 0;
   int score = 0;
 
@@ -51,7 +52,6 @@ class _WriteScreen extends State<WriteScreen> {
           setState(() {
             _haveSummited = false;
             _isCorrectAnswer = false;
-            _autofocus = true;
             countEnterToAnswer = 0;
           });
         },
@@ -79,12 +79,11 @@ class _WriteScreen extends State<WriteScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "${widget.question2s[index].question}",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22.0,
-                      ),
+                    QText(
+                      text: "${widget.question2s[index].question}",
+                      color: Colors.white,
+                      size: 22,
+                      isBold: true,
                     ),
                     for (int i = 0;
                         i < widget.question2s[index].listAnswer!.length;
@@ -167,14 +166,12 @@ class _WriteScreen extends State<WriteScreen> {
                       setState(() {
                         _haveSummited = true;
                         _isCorrectAnswer = true;
-                        _autofocus = true;
                       });
                     } else {
                       setState(() {
                         _haveSummited = true;
                         _isCorrectAnswer = false;
                         countEnterToAnswer++;
-                        _autofocus = true;
                       });
                       if (countEnterToAnswer == 2) {
                         incorrectAns.add(value);
@@ -186,7 +183,10 @@ class _WriteScreen extends State<WriteScreen> {
                       if (_pageController!.page?.toInt() ==
                           widget.question2s.length - 1) {
                         q.add(widget.question2s[index].question.toString());
-
+                        setState(() {
+                          _autofocus = false;
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        });
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -226,7 +226,7 @@ class _WriteScreen extends State<WriteScreen> {
                   )
           else
             const Text(
-              "Fill the blank",
+              "Fill in the blank",
               style: TextStyle(color: Colors.white),
             )
         ],
