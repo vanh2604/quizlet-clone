@@ -69,7 +69,10 @@ class _SearchScreenState extends State<SearchScreen> {
                               Navigator.pushNamed(
                                 context,
                                 '/set',
-                                arguments: {'setDetail': set.data()},
+                                arguments: {
+                                  'setDetail': set.data(),
+                                  'setId': set.id
+                                },
                               );
                             },
                             child: SetCard(

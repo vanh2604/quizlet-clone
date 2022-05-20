@@ -42,7 +42,7 @@ class _SetsScreenState extends State<SetsScreen> {
                         Navigator.pushNamed(
                           context,
                           '/set',
-                          arguments: {'setDetail': set.data()},
+                          arguments: {'setDetail': set.data(), 'setId': set.id},
                         );
                       },
                       child: SetCard(

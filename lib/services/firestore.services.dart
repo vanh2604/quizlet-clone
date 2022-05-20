@@ -29,6 +29,27 @@ class FirestoreService {
     });
   }
 
+  Future updateSet(
+    String setId,
+    String name,
+    String folder,
+    Map cards,
+    Map resources,
+  ) async {
+    final db = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser!;
+    final uid = user.uid;
+    final username = user.displayName;
+    await db.collection('sets').doc(setId).set({
+      'uid': uid,
+      'username': username,
+      'name': name,
+      'folder': folder,
+      'cards': cards,
+      'resources': resources,
+    });
+  }
+
   Future createFolder(String name) async {
     final db = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser!;
@@ -81,6 +102,12 @@ class FirestoreService {
       folders.add(item.toString());
     });
     return folders;
+  }
+
+  Future<Map<dynamic, dynamic>> getSet(String setId) async {
+    final db = FirebaseFirestore.instance;
+    final query = await db.collection('sets').doc(setId).get();
+    return query.data() as Map<dynamic, dynamic>;
   }
 
   Future<DocumentSnapshot> getUserInfo() async {

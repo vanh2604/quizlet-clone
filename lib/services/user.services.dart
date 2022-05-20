@@ -42,4 +42,10 @@ class UserService {
     final user = FirebaseAuth.instance.currentUser!;
     await user.updatePhotoURL(path);
   }
+
+  Future<bool> userVerify(String uid) async {
+    final user = FirebaseAuth.instance.currentUser!;
+    final userUid = user.uid;
+    return userUid == uid;
+  }
 }

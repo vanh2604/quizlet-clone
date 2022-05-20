@@ -88,7 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Navigator.pushNamed(
                                     context,
                                     '/set',
-                                    arguments: {'setDetail': set.data()},
+                                    arguments: {
+                                      'setDetail': set.data(),
+                                      'setId': set.id
+                                    },
                                   );
                                 },
                                 child: SetCardBig(
@@ -226,7 +229,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Navigator.pushNamed(
                                     context,
                                     '/set',
-                                    arguments: {'setDetail': set.data()},
+                                    arguments: {
+                                      'setDetail': set.data(),
+                                      'setId': set.id
+                                    },
                                   );
                                 },
                                 child: SetCardBig(

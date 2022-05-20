@@ -12,6 +12,7 @@ import 'package:quizlet/screens/set/sets.dart';
 import 'package:quizlet/screens/sign_in/sign_in.dart';
 import 'package:quizlet/screens/sign_up/sign_up.dart';
 import 'package:quizlet/screens/standby/standby.dart';
+import 'package:quizlet/screens/update/update.dart';
 
 Map<String, Widget Function(dynamic context)> appRoutes = {
   '/': (context) => const StandbyScreen(),
@@ -25,4 +26,5 @@ Map<String, Widget Function(dynamic context)> appRoutes = {
   '/sets': (context) => const SetsScreen(),
   '/folder': (context) => const FolderScreen(),
   '/folders': (context) => const FoldersScreen(),
+  '/update': (context) => const UpdateScreen(),
 };

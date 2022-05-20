@@ -4,6 +4,8 @@ import 'package:quizlet/screens/set/exam/setting_exam.dart';
 import 'package:quizlet/screens/set/flash_card/flash_card_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/screens/set/write/write_screen.dart';
+import 'package:quizlet/services/firestore.services.dart';
+import 'package:quizlet/services/user.services.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/utils/random.dart';
 import 'package:quizlet/widgets/qtext.dart';
@@ -22,45 +24,77 @@ class _SetScreenState extends State<SetScreen> {
   // late PageController _questionController;
   int activeQuestion = 0;
 
+  bool initialized = false;
+  bool userVerified = false;
+  Map<dynamic, dynamic> _setCard = {};
+  String _setId = '';
+  List _question = [];
+  List<CardModel2> questionList = [];
+  Map<String, dynamic> arguments = {};
+
+  final FirestoreService firestoreService = FirestoreService();
+  final UserService userService = UserService();
+
+  List<CardModel2> getQuestion(List question) {
+    final List<CardModel2> questionList = [];
+    for (int i = 0; i < question.length; i++) {
+      final randomNumber =
+          getRandomDifferentThreeNumberInRange(0, question.length, i);
+      final List<String> answers = [
+        question[i].key.toString(),
+        question[randomNumber[0]].key.toString(),
+        question[randomNumber[1]].key.toString(),
+        question[randomNumber[2]].key.toString(),
+      ];
+      answers.shuffle();
+      questionList.add(
+        CardModel2(
+          question[i].value.toString(),
+          question[i].key.toString(),
+          answers,
+        ),
+      );
+    }
+    return questionList;
+  }
+
   @override
   void initState() {
     super.initState();
-    // _questionController = PageController(viewportFraction: 0.8, initialPage: 1);
+    Future.delayed(Duration.zero, () {
+      setState(() {
+        arguments =
+            ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+      });
+      initialized = true;
+      _setCard = arguments['setDetail'] as Map<dynamic, dynamic>;
+      _setId = arguments['setId'] as String;
+      _question =
+          arguments['setDetail']['cards'].entries.toList() as List<dynamic>;
+      questionList = getQuestion(_question);
+      userService
+          .userVerify(_setCard['uid'].toString())
+          .then((value) => userVerified = value);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    List<CardModel2> getQuestion(List question) {
-      final List<CardModel2> questionList = [];
-      for (int i = 0; i < question.length; i++) {
-        final randomNumber =
-            getRandomDifferentThreeNumberInRange(0, question.length, i);
-        final List<String> answers = [
-          question[i].key.toString(),
-          question[randomNumber[0]].key.toString(),
-          question[randomNumber[1]].key.toString(),
-          question[randomNumber[2]].key.toString(),
-        ];
-        answers.shuffle();
-        questionList.add(
-          CardModel2(
-            question[i].value.toString(),
-            question[i].key.toString(),
-            answers,
-          ),
-        );
-      }
-      return questionList;
-    }
-
-    final Map<String, dynamic> arguments =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
-
-    final Map<dynamic, dynamic> _setCard =
-        arguments['setDetail'] as Map<dynamic, dynamic>;
-    final List _question =
-        arguments['setDetail']['cards'].entries.toList() as List<dynamic>;
-    final List<CardModel2> questionList = getQuestion(_question);
+    // if (!initialized) {
+    //   setState(() {
+    //     initialized = true;
+    //     final Map<String, dynamic> arguments =
+    //         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    //     _setCard = arguments['setDetail'] as Map<dynamic, dynamic>;
+    //     _setId = arguments['setId'] as String;
+    //     _question =
+    //         arguments['setDetail']['cards'].entries.toList() as List<dynamic>;
+    //     questionList = getQuestion(_question);
+    //     userService
+    //         .userVerify(_setCard['uid'].toString())
+    //         .then((value) => userVerified = value);
+    //   });
+    // }
 
     return Scaffold(
       appBar: AppBar(
@@ -91,9 +125,7 @@ class _SetScreenState extends State<SetScreen> {
                                 },
                                 child: PageView.builder(
                                   itemCount: int.parse(
-                                    arguments['setDetail']['cards']
-                                        .length
-                                        .toString(),
+                                    _question.length.toString(),
                                   ),
                                   onPageChanged: (question) {
                                     setState(() {
@@ -138,11 +170,46 @@ class _SetScreenState extends State<SetScreen> {
                           ],
                         ),
                         const SizedBox(height: 15),
-                        QText(
-                          text: _setCard['name'].toString(),
-                          color: Colors.white,
-                          size: 30,
-                          isBold: true,
+                        Row(
+                          children: [
+                            QText(
+                              text: _setCard['name'].toString(),
+                              color: Colors.white,
+                              size: 30,
+                              isBold: true,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            if (userVerified)
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/update',
+                                    arguments: {
+                                      'setDetail': _setCard,
+                                      'setId': _setId
+                                    },
+                                  ).then((value) {
+                                    setState(() {
+                                      firestoreService.getSet(_setId).then(
+                                        (value) {
+                                          _setCard = value;
+                                          _question = _setCard['cards']
+                                              .entries
+                                              .toList() as List<dynamic>;
+                                          questionList = getQuestion(_question);
+                                        },
+                                      );
+                                    });
+                                  });
+                                },
+                                child: const Icon(Icons.edit),
+                              )
+                            else
+                              Container()
+                          ],
                         ),
                         Row(
                           children: [
