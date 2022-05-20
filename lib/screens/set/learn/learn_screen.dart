@@ -144,7 +144,7 @@ class _LearnScreenState extends State<LearnScreen> {
                                 btnPressed = true;
                                 answered = true;
                               });
-                              Future.delayed(const Duration(seconds: 1), () {
+                              Future.delayed(const Duration(seconds: 250), () {
                                 if (_controller!.page?.toInt() ==
                                     widget.questionLearn.length - 1) {
                                   Navigator.push(

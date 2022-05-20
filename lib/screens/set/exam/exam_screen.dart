@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
@@ -41,6 +43,10 @@ class _ExamScreenState extends State<ExamScreen> {
 
   // Custom variable
   int countQuestion = 0;
+
+  List<String> q = [];
+  List<String> correctAns = [];
+  List<String> incorrectAns = [];
 
   @override
   void initState() {
@@ -123,41 +129,41 @@ class _ExamScreenState extends State<ExamScreen> {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  if ((countEnterToAnswer == 0) && _isCorrectAnswer)
-                    const Icon(
-                      Icons.circle,
-                      color: Colors.green,
-                    )
-                  else
-                    countEnterToAnswer >= 1
-                        ? const Icon(
-                            Icons.circle,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.circle_outlined,
-                            color: Colors.white,
-                          ),
-                  if ((countEnterToAnswer == 0 || countEnterToAnswer == 1) &&
-                      _isCorrectAnswer)
-                    const Icon(
-                      Icons.circle,
-                      color: Colors.green,
-                    )
-                  else
-                    countEnterToAnswer == 2
-                        ? const Icon(
-                            Icons.circle,
-                            color: Colors.red,
-                          )
-                        : const Icon(
-                            Icons.circle_outlined,
-                            color: Colors.white,
-                          )
-                ],
-              )
+              // Row(
+              //   children: [
+              //     if ((countEnterToAnswer == 0) && _isCorrectAnswer)
+              //       const Icon(
+              //         Icons.circle,
+              //         color: Colors.green,
+              //       )
+              //     else
+              //       countEnterToAnswer >= 1
+              //           ? const Icon(
+              //               Icons.circle,
+              //               color: Colors.red,
+              //             )
+              //           : const Icon(
+              //               Icons.circle_outlined,
+              //               color: Colors.white,
+              //             ),
+              //     if ((countEnterToAnswer == 0 || countEnterToAnswer == 1) &&
+              //         _isCorrectAnswer)
+              //       const Icon(
+              //         Icons.circle,
+              //         color: Colors.green,
+              //       )
+              //     else
+              //       countEnterToAnswer == 2
+              //           ? const Icon(
+              //               Icons.circle,
+              //               color: Colors.red,
+              //             )
+              //           : const Icon(
+              //               Icons.circle_outlined,
+              //               color: Colors.white,
+              //             )
+              //   ],
+              // )
             ],
           ),
           TextFormField(
@@ -167,11 +173,7 @@ class _ExamScreenState extends State<ExamScreen> {
             decoration: InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
-                  color: _haveSummited
-                      ? _isCorrectAnswer
-                          ? Colors.green
-                          : Colors.orange
-                      : Colors.white,
+                  color: Colors.white,
                   width: 5,
                 ),
               ),
@@ -179,37 +181,64 @@ class _ExamScreenState extends State<ExamScreen> {
             autofocus: _autofocus,
             onFieldSubmitted: !_haveSummited
                 ? (String? value) {
-                    if (widget.listQuestion[index].answer!.contains(value!) &&
-                        widget.listQuestion[index].answer! == value) {
-                      setState(() {
-                        _haveSummited = true;
-                        _isCorrectAnswer = true;
-                        _autofocus = true;
-                      });
+                    setState(() {
+                      _haveSummited = true;
+                    });
+                    q.add(widget.listQuestion[index].question.toString());
+                    correctAns.add(widget.listQuestion[index].answer.toString());
+                    if (value == widget.listQuestion[index].answer) {
+                      score++;
+                      incorrectAns.add("");
                     } else {
-                      setState(() {
-                        _haveSummited = true;
-                        _isCorrectAnswer = false;
-                        countEnterToAnswer++;
-                        _autofocus = true;
-                      });
+                      incorrectAns.add(value!);
                     }
+                    // if (countEnterToAnswer == 0) {
+                    //   q.add(widget.listQuestion[index].question.toString());
+                    // }
+                    // if (widget.listQuestion[index].answer!.contains(value!) &&
+                    //     widget.listQuestion[index].answer! == value) {
+                    //   score++;
+                    //   incorrectAns.add("");
+                    //   correctAns.add(widget.listQuestion[index].answer!);
+                    //   setState(() {
+                    //     _haveSummited = true;
+                    //     _isCorrectAnswer = true;
+                    //     _autofocus = true;
+                    //   });
+                    // } else {
+                    //   setState(() {
+                    //     _haveSummited = true;
+                    //     _isCorrectAnswer = false;
+                    //     countEnterToAnswer++;
+                    //     _autofocus = true;
+                    //   });
+                    //   if (countEnterToAnswer == 2) {
+                    //     incorrectAns.add(value);
+                    //     correctAns.add(widget.listQuestion[index].answer!);
+                    //   }
+                    // }
 
-                    Future.delayed(const Duration(seconds: 3), () {
+
+                    Future.delayed(const Duration(milliseconds: 200), () {
                       if (_pageController!.page?.toInt() ==
                           widget.listQuestion.length - 1) {
+                        q.add(widget.listQuestion[index].question.toString());
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ResultExam(),
+                            builder: (context) => ResultExam(
+                              score,
+                              q,
+                              correctAns,
+                              incorrectAns,
+                              questionLearn: widget.listQuestion,),
                           ),
                         );
-                      } else if (_isCorrectAnswer || countEnterToAnswer == 2) {
+                      }  else {
                         _pageController!.nextPage(
                           duration: const Duration(milliseconds: 250),
                           curve: Curves.easeInOut,
                         );
-                      } else {
                         setState(() {
                           _haveSummited = false;
                           _isCorrectAnswer = false;
@@ -222,15 +251,7 @@ class _ExamScreenState extends State<ExamScreen> {
           const SizedBox(
             height: 10,
           ),
-          if (_haveSummited)
-            _isCorrectAnswer
-                ? const Text("Correct", style: TextStyle(color: Colors.green))
-                : const Text(
-                    "Incorrect",
-                    style: TextStyle(color: Colors.orange),
-                  )
-          else
-            const Text(
+          const Text(
               "Fill the blank",
               style: TextStyle(color: Colors.white),
             )
@@ -288,41 +309,79 @@ class _ExamScreenState extends State<ExamScreen> {
                   borderRadius: BorderRadius.circular(8.0),
                   side: const BorderSide(color: Colors.white),
                 ),
-                fillColor: btnPressed
-                    ? (i == selectedIndex
-                        ? (widget.listQuestion[index].listAnswer![i] ==
-                                widget.listQuestion[index].answer
-                            ? Colors.green
-                            : Colors.red)
-                        : (widget.listQuestion[index].listAnswer![i] ==
-                                widget.listQuestion[index].answer
-                            ? Colors.green
-                            : const Color.fromRGBO(12, 12, 48, 1)))
-                    : const Color.fromRGBO(12, 12, 48, 1),
+                fillColor: const Color.fromRGBO(12, 12, 48, 1),
+                // btnPressed
+                //     ? (i == selectedIndex
+                //         ? (widget.listQuestion[index].listAnswer![i] ==
+                //                 widget.listQuestion[index].answer
+                //             ? Colors.green
+                //             : Colors.red)
+                //         : (widget.listQuestion[index].listAnswer![i] ==
+                //                 widget.listQuestion[index].answer
+                //             ? Colors.green
+                //             : const Color.fromRGBO(12, 12, 48, 1)))
+                //     :
+
                 onPressed: !answered
                     ? () {
+                        // q.add(
+                        //   widget.listQuestion[index].question.toString(),
+                        // );
+                        // correctAns.add(
+                        //   widget.listQuestion[index].answer.toString(),
+                        // );
+                        // if (widget.listQuestion[index].listAnswer![i] ==
+                        //     widget.listQuestion[index].answer) {
+                        //   score++;
+                        //   incorrectAns.add("");
+                        //   setState(() {
+                        //     selectedIndex = i;
+                        //   });
+                        // } else {
+                        //   incorrectAns.add(
+                        //     widget.listQuestion[index].listAnswer![i],
+                        //   );
+                        //   setState(() {
+                        //     selectedIndex = i;
+                        //   });
+                        // }
+                        // setState(() {
+                        //   btnPressed = true;
+                        //   answered = true;
+                        // });
+                        q.add(
+                          widget.listQuestion[index].question.toString(),
+                        );
+                        correctAns.add(
+                              widget.listQuestion[index].answer.toString(),
+                            );
                         if (widget.listQuestion[index].listAnswer![i] ==
-                            widget.listQuestion[index].answer) {
-                          score++;
-                          setState(() {
-                            selectedIndex = i;
-                          });
+                                widget.listQuestion[index].answer) {
+                              score++;
+                              incorrectAns.add("");
+                              setState(() {
+                                selectedIndex = i;
+                              });
                         } else {
-                          setState(() {
-                            selectedIndex = i;
-                          });
+                          incorrectAns.add(widget.listQuestion[index].listAnswer![i]);
                         }
-                        setState(() {
+
+                        setState((){
                           btnPressed = true;
                           answered = true;
                         });
-                        Future.delayed(const Duration(seconds: 3), () {
+                        Future.delayed(const Duration(milliseconds: 200), () {
                           if (_pageController!.page?.toInt() ==
                               widget.listQuestion.length - 1) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const ResultExam(),
+                                builder: (context) => ResultExam(
+                                  score,
+                                  q,
+                                  correctAns,
+                                  incorrectAns,
+                                  questionLearn: widget.listQuestion,),
                               ),
                             );
                           } else {
