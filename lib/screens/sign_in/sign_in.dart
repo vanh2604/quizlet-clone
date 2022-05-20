@@ -219,6 +219,17 @@ class _SignInScreenState extends State<SignInScreen> {
                   ],
                 ),
               ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).pushNamed('/forget');
+                },
+                child: Center(
+                  child: QText(
+                    color: textColor.withOpacity(0.5),
+                    text: "Forget Password",
+                  ),
+                ),
+              )
             ],
           ),
         ),
