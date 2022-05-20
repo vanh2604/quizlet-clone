@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/learn/result_screen.dart';
 import 'package:quizlet/utils/colors.dart';
+import 'package:quizlet/widgets/qtext.dart';
 
 class LearnScreen extends StatefulWidget {
   List<CardModel2> questionLearn;
@@ -42,7 +43,7 @@ class _LearnScreenState extends State<LearnScreen> {
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: Padding(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
         child: PageView.builder(
           controller: _controller,
           onPageChanged: (page) {
@@ -54,33 +55,40 @@ class _LearnScreenState extends State<LearnScreen> {
           physics: const NeverScrollableScrollPhysics(),
           itemBuilder: (context, index) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    "Question ${index + 1}/${widget.questionLearn.length}",
-                    textAlign: TextAlign.start,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 28.0,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Container(
+                      width: 400,
+                      color: secondaryColor,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 40, 20, 40),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            QText(
+                              text:
+                                  "Question ${index + 1}/${widget.questionLearn.length}",
+                              size: 28,
+                              color: textColor,
+                            ),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            QText(
+                              text: "${widget.questionLearn[index].question}",
+                              size: 22,
+                              color: textColor,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 200.0,
-                  child: Text(
-                    "${widget.questionLearn[index].question}",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22.0,
-                    ),
-                  ),
-                ),
+                const SizedBox(height: 250),
                 for (int i = 0;
                     i < widget.questionLearn[index].listAnswer!.length;
                     i++)
