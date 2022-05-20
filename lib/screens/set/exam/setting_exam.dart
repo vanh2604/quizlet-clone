@@ -76,29 +76,29 @@ class _Setting extends State<Setting> {
               ),
             ),
           ),
-          const Text(
-            "General",
-            style: TextStyle(color: Colors.grey),
-          ),
-          SwitchListTile(
-            title: const Text(
-              "Show answer",
-              style: TextStyle(color: Colors.white),
-            ),
-            value: _isShowAnswer,
-            activeColor: Colors.white,
-            activeTrackColor: Colors.blue,
-            inactiveTrackColor: Colors.grey,
-            onChanged: (bool value) {
-              setState(() {
-                _isShowAnswer = value;
-              });
-            },
-          ),
-          const Text(
-            "Mode",
-            style: TextStyle(color: Colors.grey),
-          ),
+          // const Text(
+          //   "General",
+          //   style: TextStyle(color: Colors.grey),
+          // ),
+          // SwitchListTile(
+          //   title: const Text(
+          //     "Show answer",
+          //     style: TextStyle(color: Colors.white),
+          //   ),
+          //   value: _isShowAnswer,
+          //   activeColor: Colors.white,
+          //   activeTrackColor: Colors.blue,
+          //   inactiveTrackColor: Colors.grey,
+          //   onChanged: (bool value) {
+          //     setState(() {
+          //       _isShowAnswer = value;
+          //     });
+          //   },
+          // ),
+          // const Text(
+          //   "Mode",
+          //   style: TextStyle(color: Colors.grey),
+          // ),
           SwitchListTile(
             title: const Text(
               "Multiple choices",
