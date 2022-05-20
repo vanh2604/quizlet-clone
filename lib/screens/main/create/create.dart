@@ -27,6 +27,8 @@ class _CreateScreenState extends State<CreateScreen> {
   final List<TextEditingController> termControllers = [];
   final List<TextEditingController> defControllers = [];
 
+  final FirestoreService firestoreService = FirestoreService();
+
   void _addWidget() {
     setState(() {
       termControllers.add(TextEditingController());
@@ -68,7 +70,8 @@ class _CreateScreenState extends State<CreateScreen> {
         cards[widget.termController.text] = widget.defController.text;
       }
     }
-    await createSet(nameController.text, folderController.text, cards, {});
+    await firestoreService
+        .createSet(nameController.text, folderController.text, cards, {});
     setState(() {
       widgets.clear();
       termControllers.clear();
@@ -107,7 +110,11 @@ class _CreateScreenState extends State<CreateScreen> {
   }
 
   Future<void> _ocr() async {
-    final FilePickerResult? result = await FilePicker.platform.pickFiles();
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      withData: true,
+      type: FileType.custom,
+      allowedExtensions: ['jpeg', 'png', 'jpg'],
+    );
     if (result != null) {
       final File file = File(result.files.single.path.toString());
       final inputImage = InputImage.fromFile(file);
@@ -168,7 +175,7 @@ class _CreateScreenState extends State<CreateScreen> {
                 ),
               ),
               suggestionsCallback: (pattern) {
-                return getFoldersSuggestion();
+                return firestoreService.getFoldersSuggestion();
               },
               itemBuilder: (context, String suggestion) {
                 return ListTile(

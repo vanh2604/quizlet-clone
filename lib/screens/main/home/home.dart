@@ -15,6 +15,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final FirestoreService firestoreService = FirestoreService();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -49,12 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 150,
               child: StreamBuilder<QuerySnapshot>(
-                stream: getUserSetsStream(),
+                stream: firestoreService.getUserSetsStream(),
                 builder: (
                   BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot,
                 ) {
-                  if (snapshot.data!.docs.isEmpty) {
+                  if (snapshot.hasData && snapshot.data!.docs.isEmpty) {
                     return const Center(
                       child: QText(
                         text: "Create set using the create button below.",
@@ -125,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 170,
               child: FutureBuilder<DocumentSnapshot>(
-                future: getUserInfo(),
+                future: firestoreService.getUserInfo(),
                 builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   return AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
@@ -175,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 150,
               child: StreamBuilder<QuerySnapshot>(
-                stream: getRecommendedSetsStream(),
+                stream: firestoreService.getRecommendedSetsStream(),
                 builder: (
                   BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot,
