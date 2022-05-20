@@ -274,9 +274,9 @@ class _CreateScreenState extends State<CreateScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            const Center(
+            Center(
               child: QText(
-                color: textColor,
+                color: textColor.withOpacity(0.5),
                 text: "Hint: At least 4 cards must be created within a set.",
               ),
             ),

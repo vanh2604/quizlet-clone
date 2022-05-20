@@ -38,7 +38,37 @@ class FirestoreService {
     });
   }
 
+  Future<List<int>> getSetsNumberPerFolder() async {
+    final List<int> result = [];
+    final List<String> folders = [];
+    final db = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser!;
+    final uid = user.uid;
+    final query = await db.collection('users').doc(uid).get();
+    query.data()!['folders'].forEach((item) {
+      folders.add(item.toString());
+    });
+    for (final folder in folders) {
+      final query =
+          await db.collection('sets').where('folder', isEqualTo: folder).get();
+      result.add(query.docs.length);
+    }
+    return result;
+  }
+
   Future<List<String>> getFoldersSuggestion() async {
+    final List<String> folders = [];
+    final db = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser!;
+    final uid = user.uid;
+    final query = await db.collection('users').doc(uid).get();
+    query.data()!['folders'].forEach((item) {
+      folders.add(item.toString());
+    });
+    return folders;
+  }
+
+  Future<List<String>> getFolders() async {
     final List<String> folders = [];
     final db = FirebaseFirestore.instance;
     final user = FirebaseAuth.instance.currentUser!;
