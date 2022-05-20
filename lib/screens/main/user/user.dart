@@ -32,23 +32,35 @@ class _UserScreenState extends State<UserScreen> {
             child: profileCard,
           ),
           GestureDetector(
-            child: const OptionCard(icon: Icons.storage_rounded, text: 'Sets'),
-            onTap: () async {},
-          ),
+              child:
+                  const OptionCard(icon: Icons.storage_rounded, text: 'Sets'),
+              onTap: () async {
+                if (mounted) {
+                  Navigator.of(context).pushNamed(
+                    '/sets',
+                  );
+                }
+              }),
           GestureDetector(
             child: const OptionCard(
               icon: Icons.folder_copy_rounded,
               text: 'Folders',
             ),
-            onTap: () async {},
+            onTap: () async {
+              if (mounted) {
+                Navigator.of(context).pushNamed(
+                  '/folders',
+                );
+              }
+            },
           ),
-          GestureDetector(
-            child: const OptionCard(
-              icon: Icons.settings_rounded,
-              text: 'Settings',
-            ),
-            onTap: () async {},
-          ),
+          // GestureDetector(
+          //   child: const OptionCard(
+          //     icon: Icons.settings_rounded,
+          //     text: 'Settings',
+          //   ),
+          //   onTap: () async {},
+          // ),
           GestureDetector(
             child: const OptionCard(
               icon: Icons.door_back_door_rounded,
