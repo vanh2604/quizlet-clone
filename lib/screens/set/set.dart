@@ -146,7 +146,7 @@ class _SetScreenState extends State<SetScreen> {
                         ),
                         Row(
                           children: [
-                            const Icon(Icons.build),
+                            const Icon(Icons.person_rounded),
                             const SizedBox(
                               width: 10,
                             ),

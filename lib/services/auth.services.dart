@@ -32,6 +32,7 @@ class AuthService {
         idToken: googleAuth.idToken,
       );
       await FirebaseAuth.instance.signInWithCredential(authCredential);
+      await createUserDB();
     } on FirebaseAuthException catch (e) {
       print(e);
     }

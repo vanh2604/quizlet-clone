@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:quizlet/services/firestore.services.dart';
+import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/home/folder_card_home.dart';
 import 'package:quizlet/widgets/home/set_card_home.dart';
 import 'package:quizlet/widgets/qtext.dart';
@@ -53,6 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   BuildContext context,
                   AsyncSnapshot<QuerySnapshot> snapshot,
                 ) {
+                  if (snapshot.data!.docs.isEmpty) {
+                    return const Center(
+                      child: QText(
+                        text: "Create set using the create button below.",
+                        color: textColor,
+                      ),
+                    );
+                  }
                   return AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
                     child: snapshot.hasData

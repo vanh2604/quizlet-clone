@@ -32,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: authThemeColor,
       body: Container(
-        margin: const EdgeInsets.only(top: 50, left: 16, right: 16),
+        margin: const EdgeInsets.only(top: 8, left: 16, right: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 16),
                 child: Row(
                   children: [
                     Expanded(
@@ -219,14 +219,17 @@ class _SignInScreenState extends State<SignInScreen> {
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).pushNamed('/forget');
-                },
-                child: Center(
-                  child: QText(
-                    color: textColor.withOpacity(0.5),
-                    text: "Forget Password",
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed('/forget');
+                  },
+                  child: Center(
+                    child: QText(
+                      color: textColor.withOpacity(0.5),
+                      text: "Forget Password",
+                    ),
                   ),
                 ),
               )
