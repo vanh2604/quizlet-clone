@@ -1,120 +1,73 @@
-import 'dart:math';
-import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:quizlet/services/firestore.services.dart';
 import 'package:quizlet/widgets/qtext.dart';
 import 'package:quizlet/widgets/sets/set_card.dart';
 
-class FolderScreen extends StatelessWidget {
-  final String folderTitle;
-  final String username;
-  final int terms;
-  const FolderScreen({
-    Key? key,
-    required this.folderTitle,
-    required this.username,
-    required this.terms,
-  }) : super(key: key);
+class FolderScreen extends StatefulWidget {
+  const FolderScreen({Key? key}) : super(key: key);
+
+  @override
+  State<FolderScreen> createState() => _FolderScreenState();
+}
+
+class _FolderScreenState extends State<FolderScreen> {
+  final FirestoreService firestoreService = FirestoreService();
 
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, dynamic>> _setCard = List.generate(
-      100,
-      (index) => {
-        'username': 'Person $index',
-        'terms': Random().nextInt(100) + 1,
-        'title': 'Title $index',
-      },
-    );
+    final Map<String, dynamic> arguments =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
+    final name = arguments['name'];
+
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
-        toolbarHeight: 80,
-        title: Column(
-          //mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            QText(
-              text: folderTitle,
-              color: Colors.white,
-              isBold: true,
-              size: 40,
-            ),
-            Row(
-              children: [
-                const Icon(Icons.favorite),
-                const SizedBox(
-                  width: 5,
-                ),
-                QText(text: username, color: Colors.white),
-                const SizedBox(
-                  width: 5,
-                )
-              ],
-            )
-          ],
+        title: const QText(
+          color: Colors.white,
+          text: 'Sets',
+          size: 30,
+          isBold: true,
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Navigate to add new set ')),
-              );
-            },
-            icon: const Icon(Icons.add),
-          ),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back))
-        ],
+        centerTitle: false,
+        elevation: 0,
+        backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 90,
-            child: Container(
-              margin: const EdgeInsets.only(right: 15, left: 15, top: 10),
-              //height: MediaQuery.of(context).size.height*0.78,
-              child: ListView.builder(
-                itemCount: _setCard.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return SetCard(
-                    terms: int.parse(_setCard[index]['terms'].toString()),
-                    title: _setCard[index]['title'].toString(),
-                    username: _setCard[index]['username'].toString(),
-                  );
-                },
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 10,
-            child: Container(
-              //height: MediaQuery.of(context).size.height*0.07,
-              width: MediaQuery.of(context).size.width,
-
-              margin: const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: SizedBox(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    //padding: const EdgeInsets.all(16.0),
-                    primary: Colors.white,
-                    textStyle: const TextStyle(fontSize: 15),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: firestoreService.getSetsInFolderStream(name.toString()),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          return snapshot.hasData
+              ? ListView.builder(
+                  itemCount: snapshot.data!.docs.length,
+                  itemBuilder: (context, index) {
+                    final DocumentSnapshot set = snapshot.data!.docs[index];
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/set',
+                          arguments: {'setDetail': set.data()},
+                        );
+                      },
+                      child: SetCard(
+                        title: set['name'].toString(),
+                        username: set['username'].toString(),
+                        terms: int.parse(set['cards'].length.toString()),
+                      ),
+                    );
+                  },
+                )
+              : const Center(
+                  child: SizedBox(
+                    height: 50,
+                    child: LoadingIndicator(
+                      indicatorType: Indicator.lineScaleParty,
+                      colors: [Colors.white],
+                      strokeWidth: 2,
+                    ),
                   ),
-                  onPressed: () {},
-                  child: const AutoSizeText("Study this folder"),
-                ),
-              ),
-            ),
-          ),
-        ],
+                );
+        },
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
     );

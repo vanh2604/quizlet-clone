@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
 
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:quizlet/screens/folder/folder.dart';
 import 'package:quizlet/screens/folder/folders.dart';
 import 'package:quizlet/screens/forget_password/forget_password.dart';
 import 'package:quizlet/screens/introduction/introduction.dart';
@@ -22,5 +23,6 @@ Map<String, Widget Function(dynamic context)> appRoutes = {
   '/create': (context) => const CreateScreen(),
   '/set': (context) => const SetScreen(),
   '/sets': (context) => const SetsScreen(),
+  '/folder': (context) => const FolderScreen(),
   '/folders': (context) => const FoldersScreen(),
 };

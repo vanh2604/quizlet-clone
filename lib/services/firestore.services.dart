@@ -49,8 +49,11 @@ class FirestoreService {
       folders.add(item.toString());
     });
     for (final folder in folders) {
-      final query =
-          await db.collection('sets').where('folder', isEqualTo: folder).get();
+      final query = await db
+          .collection('sets')
+          .where('folder', isEqualTo: folder)
+          .where('uid', isEqualTo: uid)
+          .get();
       result.add(query.docs.length);
     }
     return result;
@@ -97,6 +100,17 @@ class FirestoreService {
     final user = FirebaseAuth.instance.currentUser!;
     final uid = user.uid;
     return db.collection('sets').where('uid', isEqualTo: uid).snapshots();
+  }
+
+  Stream<QuerySnapshot> getSetsInFolderStream(String folder) {
+    final db = FirebaseFirestore.instance;
+    final user = FirebaseAuth.instance.currentUser!;
+    final uid = user.uid;
+    return db
+        .collection('sets')
+        .where('uid', isEqualTo: uid)
+        .where('folder', isEqualTo: folder)
+        .snapshots();
   }
 
   Stream<QuerySnapshot> findSetsStream(String query) {

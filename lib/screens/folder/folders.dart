@@ -58,7 +58,10 @@ class _FoldersScreenState extends State<FoldersScreen> {
                           Navigator.pushNamed(
                             context,
                             '/folder',
-                            arguments: {'setDetail': "test"},
+                            arguments: {
+                              'name':
+                                  snapshot.data!['folders'][index].toString()
+                            },
                           );
                         },
                         child: FolderCard(

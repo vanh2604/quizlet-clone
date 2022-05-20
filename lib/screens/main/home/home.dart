@@ -155,11 +155,24 @@ class _HomeScreenState extends State<HomeScreen> {
                               snapshot.data!['folders'].length.toString(),
                             ),
                             itemBuilder: (_, index) {
-                              return FolderCardBig(
-                                title:
-                                    snapshot.data!['folders'][index].toString(),
-                                username: snapshot.data!['username'].toString(),
-                                sets: setsPerFolder[index],
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/folder',
+                                    arguments: {
+                                      'name': snapshot.data!['folders'][index]
+                                          .toString()
+                                    },
+                                  );
+                                },
+                                child: FolderCardBig(
+                                  title: snapshot.data!['folders'][index]
+                                      .toString(),
+                                  username:
+                                      snapshot.data!['username'].toString(),
+                                  sets: setsPerFolder[index],
+                                ),
                               );
                             },
                           )
