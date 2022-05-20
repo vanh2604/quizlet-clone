@@ -17,6 +17,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final FirestoreService firestoreService = FirestoreService();
 
+  List<int> setsPerFolder = [];
+
+  @override
+  void initState() {
+    firestoreService
+        .getSetsNumberPerFolder()
+        .then((value) => setState(() => setsPerFolder = value));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -109,17 +119,22 @@ class _HomeScreenState extends State<HomeScreen> {
               margin: const EdgeInsets.only(top: 25, left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  QText(
+                children: [
+                  const QText(
                     text: 'Folders',
                     color: Colors.white,
                     size: 14,
                     isBold: true,
                   ),
-                  QText(
-                    text: 'View all',
-                    color: Color.fromRGBO(103, 108, 168, 1),
-                    size: 14,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/folders');
+                    },
+                    child: const QText(
+                      text: 'View all',
+                      color: Color.fromRGBO(103, 108, 168, 1),
+                      size: 14,
+                    ),
                   ),
                 ],
               ),
@@ -131,7 +146,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   return AnimatedSwitcher(
                     duration: const Duration(milliseconds: 250),
-                    child: snapshot.hasData &&
+                    child: setsPerFolder.isNotEmpty &&
+                            snapshot.hasData &&
                             snapshot.connectionState == ConnectionState.done
                         ? PageView.builder(
                             controller: PageController(viewportFraction: 0.93),
@@ -143,6 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 title:
                                     snapshot.data!['folders'][index].toString(),
                                 username: snapshot.data!['username'].toString(),
+                                sets: setsPerFolder[index],
                               );
                             },
                           )

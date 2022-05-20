@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/qtext.dart';
 
-class FolderCardBig extends StatelessWidget {
+class FolderCard extends StatelessWidget {
   final String title;
   final String username;
   final int sets;
   final double width;
   final double height;
-  // thêm một biến để lưu ảnh thay cho icon
 
-  const FolderCardBig({
+  const FolderCard({
     Key? key,
     required this.title,
     required this.username,
@@ -22,7 +21,7 @@ class FolderCardBig extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 0, 5, 5),
+      margin: const EdgeInsets.fromLTRB(15, 0, 15, 5),
       child: Column(
         children: [
           Card(
@@ -46,14 +45,14 @@ class FolderCardBig extends StatelessWidget {
                     text: title,
                     color: textColor,
                     isBold: true,
-                    size: 18,
+                    size: 22.5,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12, 0, 0, 10),
                   child: Row(
                     children: [
-                      const Icon(Icons.person_rounded), // Thay bằng ảnh
+                      const Icon(Icons.person_rounded),
                       const SizedBox(
                         width: 10,
                       ),
