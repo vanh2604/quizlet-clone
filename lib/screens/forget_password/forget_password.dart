@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:quizlet/services/auth.services.dart';
 import 'package:quizlet/utils/colors.dart';
@@ -31,7 +30,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: authThemeColor,
       body: Container(
-        margin: const EdgeInsets.only(top: 50, left: 16, right: 16),
+        margin: const EdgeInsets.only(top: 8, left: 16, right: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

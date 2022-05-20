@@ -33,7 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: authThemeColor,
       body: Container(
-        margin: const EdgeInsets.only(top: 50, left: 16, right: 16),
+        margin: const EdgeInsets.only(top: 8, left: 16, right: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 20),
+                margin: const EdgeInsets.only(top: 16),
                 child: Row(
                   children: [
                     Expanded(
