@@ -111,7 +111,7 @@ class _SwipeCardState extends State<SwipeCard> {
       case CardStatus.like:
         final child = buildStamp(
           color: Colors.green,
-          text: "I understand",
+          text: "Got it",
           opacity: opacity,
         );
         return Container(
@@ -121,7 +121,7 @@ class _SwipeCardState extends State<SwipeCard> {
       case CardStatus.dislike:
         final child = buildStamp(
           color: Colors.orangeAccent,
-          text: "I dont understand",
+          text: "Study again",
           opacity: opacity,
         );
         return Container(
