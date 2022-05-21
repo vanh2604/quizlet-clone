@@ -38,6 +38,12 @@ class _ResultWScreenState extends State<ResultWScreen> {
           title: const Text("Result"),
           backgroundColor: primaryColor,
           elevation: 0,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).popUntil(ModalRoute.withName('/set'));
+            },
+          ),
         ),
         backgroundColor: primaryColor,
         body: SingleChildScrollView(

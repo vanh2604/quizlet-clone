@@ -33,7 +33,6 @@ class Setting extends StatefulWidget {
 }
 
 class _Setting extends State<Setting> {
-  bool _isShowAnswer = false;
   bool _multichoice = true;
   bool _write = true;
 
@@ -149,17 +148,21 @@ class _Setting extends State<Setting> {
               if (!_multichoice && !value) {
                 showDialog(
                   context: context,
-                  builder: (_) => AlertDialog(
-                    title: const Text("Khong the thay doi cai dat"),
-                    content: const Text(
-                      "Ban phai kich hoat it nhat mot loai cau hoi",
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, 'OK'),
-                        child: const Text('OK'),
+                  builder: (_) => ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: AlertDialog(
+                      backgroundColor: primaryColor,
+                      title: const Text("Not Allowed"),
+                      content: const Text(
+                        "At least one type of question must be activated",
                       ),
-                    ],
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'OK'),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               } else {

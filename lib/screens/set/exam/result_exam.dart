@@ -13,13 +13,13 @@ class ResultExam extends StatefulWidget {
   List<String> incorrectAns;
   final List<CardModel2> questionLearn;
   ResultExam(
-      this.score,
-      this.q,
-      this.correctAns,
-      this.incorrectAns, {
-        Key? key,
-        required this.questionLearn,
-      }) : super(key: key);
+    this.score,
+    this.q,
+    this.correctAns,
+    this.incorrectAns, {
+    Key? key,
+    required this.questionLearn,
+  }) : super(key: key);
 
   @override
   _ResultExamState createState() => _ResultExamState();
@@ -33,6 +33,12 @@ class _ResultExamState extends State<ResultExam> {
         title: const Text("Result"),
         backgroundColor: primaryColor,
         elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).popUntil(ModalRoute.withName('/set'));
+          },
+        ),
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: SingleChildScrollView(
