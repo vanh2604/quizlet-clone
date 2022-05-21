@@ -40,6 +40,12 @@ class _LearnScreenState extends State<LearnScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: primaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).popUntil(ModalRoute.withName('/set'));
+          },
+        ),
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: Padding(
@@ -144,7 +150,7 @@ class _LearnScreenState extends State<LearnScreen> {
                                 btnPressed = true;
                                 answered = true;
                               });
-                              Future.delayed(const Duration(seconds: 250), () {
+                              Future.delayed(const Duration(seconds: 1), () {
                                 if (_controller!.page?.toInt() ==
                                     widget.questionLearn.length - 1) {
                                   Navigator.push(

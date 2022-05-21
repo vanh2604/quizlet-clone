@@ -44,6 +44,12 @@ class _WriteScreen extends State<WriteScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: primaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).popUntil(ModalRoute.withName('/set'));
+          },
+        ),
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: PageView.builder(

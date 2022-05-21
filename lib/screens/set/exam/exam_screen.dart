@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/result_exam.dart';
@@ -29,7 +27,6 @@ class _ExamScreenState extends State<ExamScreen> {
   final FocusNode _focusNode = FocusNode();
   PageController? _pageController;
   bool _haveSummited = false;
-  bool _isCorrectAnswer = false;
   bool _autofocus = true;
   int countEnterToAnswer = 0;
 
@@ -67,6 +64,12 @@ class _ExamScreenState extends State<ExamScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: primaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.of(context).popUntil(ModalRoute.withName('/set'));
+          },
+        ),
       ),
       backgroundColor: const Color.fromRGBO(12, 12, 48, 1),
       body: PageView.builder(
@@ -74,7 +77,6 @@ class _ExamScreenState extends State<ExamScreen> {
         onPageChanged: (page) {
           setState(() {
             _haveSummited = false;
-            _isCorrectAnswer = false;
             _autofocus = true;
             countEnterToAnswer = 0;
             btnPressed = false;
@@ -170,7 +172,7 @@ class _ExamScreenState extends State<ExamScreen> {
             style: const TextStyle(color: Colors.white),
             cursorColor: Colors.white,
             focusNode: _focusNode,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(
                   color: Colors.white,
@@ -185,7 +187,8 @@ class _ExamScreenState extends State<ExamScreen> {
                       _haveSummited = true;
                     });
                     q.add(widget.listQuestion[index].question.toString());
-                    correctAns.add(widget.listQuestion[index].answer.toString());
+                    correctAns
+                        .add(widget.listQuestion[index].answer.toString());
                     if (value == widget.listQuestion[index].answer) {
                       score++;
                       incorrectAns.add("");
@@ -218,7 +221,6 @@ class _ExamScreenState extends State<ExamScreen> {
                     //   }
                     // }
 
-
                     Future.delayed(const Duration(milliseconds: 200), () {
                       if (_pageController!.page?.toInt() ==
                           widget.listQuestion.length - 1) {
@@ -231,17 +233,17 @@ class _ExamScreenState extends State<ExamScreen> {
                               q,
                               correctAns,
                               incorrectAns,
-                              questionLearn: widget.listQuestion,),
+                              questionLearn: widget.listQuestion,
+                            ),
                           ),
                         );
-                      }  else {
+                      } else {
                         _pageController!.nextPage(
                           duration: const Duration(milliseconds: 250),
                           curve: Curves.easeInOut,
                         );
                         setState(() {
                           _haveSummited = false;
-                          _isCorrectAnswer = false;
                         });
                       }
                     });
@@ -252,9 +254,9 @@ class _ExamScreenState extends State<ExamScreen> {
             height: 10,
           ),
           const Text(
-              "Fill the blank",
-              style: TextStyle(color: Colors.white),
-            )
+            "Fill the blank",
+            style: TextStyle(color: Colors.white),
+          )
         ],
       ),
     );
@@ -353,20 +355,21 @@ class _ExamScreenState extends State<ExamScreen> {
                           widget.listQuestion[index].question.toString(),
                         );
                         correctAns.add(
-                              widget.listQuestion[index].answer.toString(),
-                            );
+                          widget.listQuestion[index].answer.toString(),
+                        );
                         if (widget.listQuestion[index].listAnswer![i] ==
-                                widget.listQuestion[index].answer) {
-                              score++;
-                              incorrectAns.add("");
-                              setState(() {
-                                selectedIndex = i;
-                              });
+                            widget.listQuestion[index].answer) {
+                          score++;
+                          incorrectAns.add("");
+                          setState(() {
+                            selectedIndex = i;
+                          });
                         } else {
-                          incorrectAns.add(widget.listQuestion[index].listAnswer![i]);
+                          incorrectAns
+                              .add(widget.listQuestion[index].listAnswer![i]);
                         }
 
-                        setState((){
+                        setState(() {
                           btnPressed = true;
                           answered = true;
                         });
@@ -381,7 +384,8 @@ class _ExamScreenState extends State<ExamScreen> {
                                   q,
                                   correctAns,
                                   incorrectAns,
-                                  questionLearn: widget.listQuestion,),
+                                  questionLearn: widget.listQuestion,
+                                ),
                               ),
                             );
                           } else {
