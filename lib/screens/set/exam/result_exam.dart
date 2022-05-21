@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
+import 'package:quizlet/screens/set/exam/exam_screen.dart';
 import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/review_term.dart';
@@ -11,6 +12,8 @@ class ResultExam extends StatefulWidget {
   List<String> q;
   List<String> correctAns;
   List<String> incorrectAns;
+  bool isWrite;
+  bool isMulti;
   final List<CardModel2> questionLearn;
   ResultExam(
     this.score,
@@ -19,6 +22,8 @@ class ResultExam extends StatefulWidget {
     this.incorrectAns, {
     Key? key,
     required this.questionLearn,
+    this.isWrite = true,
+    this.isMulti = true
   }) : super(key: key);
 
   @override
@@ -104,8 +109,10 @@ class _ResultExamState extends State<ResultExam> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LearnScreen(
-                            questionLearn: widget.questionLearn,
+                          builder: (context) => ExamScreen(
+                            listQuestion: widget.questionLearn,
+                            isMultichoice: widget.isMulti,
+                            isWrite: widget.isWrite,
                           ),
                         ),
                       );
