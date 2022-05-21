@@ -150,9 +150,9 @@ class _Setting extends State<Setting> {
                 showDialog(
                   context: context,
                   builder: (_) => AlertDialog(
-                    title: const Text("Khong the thay doi cai dat"),
+                    title: const Text("Not Allowed"),
                     content: const Text(
-                      "Ban phai kich hoat it nhat mot loai cau hoi",
+                      "At least one type of question must be activated",
                     ),
                     actions: [
                       TextButton(
