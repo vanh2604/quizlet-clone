@@ -113,6 +113,15 @@ class _ExamScreenState extends State<ExamScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    QText(
+                      text:
+                      "Question ${index + 1}/${widget.listQuestion.length}",
+                      size: 28,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
                     Text(
                       "${widget.listQuestion[index].question}",
                       style: const TextStyle(
@@ -234,6 +243,9 @@ class _ExamScreenState extends State<ExamScreen> {
                               correctAns,
                               incorrectAns,
                               questionLearn: widget.listQuestion,
+                              isWrite: widget.isWrite,
+                              isMulti: widget.isMultichoice,
+
                             ),
                           ),
                         );
@@ -385,6 +397,8 @@ class _ExamScreenState extends State<ExamScreen> {
                                   correctAns,
                                   incorrectAns,
                                   questionLearn: widget.listQuestion,
+                                  isMulti: widget.isMultichoice,
+                                  isWrite: widget.isWrite,
                                 ),
                               ),
                             );
