@@ -57,7 +57,7 @@ class _FlipTermCard extends State<FlipTermCard> {
                         borderRadius: BorderRadius.circular(20.0),
                         color: widget.isFront
                             ? const Color.fromRGBO(52, 58, 85, 1)
-                            : const Color.fromRGBO(12, 12, 48, 1),
+                            : const Color.fromRGBO(52, 58, 85, 1),
                       ),
                       child: Center(
                         child: QText(
@@ -74,7 +74,7 @@ class _FlipTermCard extends State<FlipTermCard> {
                           borderRadius: BorderRadius.circular(20),
                           color: widget.isFront
                               ? const Color.fromRGBO(52, 58, 85, 1)
-                              : const Color.fromRGBO(12, 12, 48, 1),
+                              : const Color.fromRGBO(52, 58, 85, 1),
                         ),
                         child: Center(
                           child: QText(
