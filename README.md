@@ -20,16 +20,16 @@
 
 <div align="center">
   <a href="https://github.com/vanh2604/flutterplayground">
-    <img src="screnshots/Introduction.png" alt="Screenshot" width="585" height="766">
+    <img src="screnshots/Introduction.png" alt="Screenshot" height="766">
   </a>
   <a href="https://github.com/vanh2604/flutterplayground">
-    <img src="screenshots/Flashcard.png" alt="Screenshot" width="585" height="766">
+    <img src="screenshots/Flashcard.png" alt="Screenshot" height="766">
   </a>
   <a href="https://github.com/vanh2604/flutterplayground">
-    <img src="screenshots/Create.png" alt="Screenshot" width="585" height="766">
+    <img src="screenshots/Create.png" alt="Screenshot" height="766">
   </a>
   <a href="https://github.com/vanh2604/flutterplayground">
-    <img src="screenshots/Search.png" alt="Screenshot" width="585" height="766">
+    <img src="screenshots/Search.png" alt="Screenshot" height="766">
   </a>
 </div>
 
