@@ -9,7 +9,7 @@
 5. Run tests from TestProject's page
 
 ## Flutter's Unit Testing
-- Ongoing...
+- Test authentication services (Firebase Authentication) of the app
 
 ## Reports
 - [TestProject's Report](https://github.com/vanh2604/quizlet-clone/tree/main/test/testproject/report)
