@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizlet/model/card_model.dart';
 import 'package:quizlet/screens/set/exam/exam_screen.dart';
-import 'package:quizlet/screens/set/learn/learn_screen.dart';
 import 'package:quizlet/utils/colors.dart';
 import 'package:quizlet/widgets/review_term.dart';
 
@@ -23,7 +22,7 @@ class ResultExam extends StatefulWidget {
     Key? key,
     required this.questionLearn,
     this.isWrite = true,
-    this.isMulti = true
+    this.isMulti = true,
   }) : super(key: key);
 
   @override
