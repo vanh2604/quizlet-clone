@@ -18,6 +18,21 @@
   </p>
 </div>
 
+<div align="center">
+  <a href="https://github.com/vanh2604/flutterplayground">
+    <img src="screenshots/Introduction.png" alt="Screenshot" height="400">
+  </a>
+  <a href="https://github.com/vanh2604/flutterplayground">
+    <img src="screenshots/Flashcard.png" alt="Screenshot" height="400">
+  </a>
+  <a href="https://github.com/vanh2604/flutterplayground">
+    <img src="screenshots/Create.png" alt="Screenshot" height="400">
+  </a>
+  <a href="https://github.com/vanh2604/flutterplayground">
+    <img src="screenshots/Search.png" alt="Screenshot" height="400">
+  </a>
+</div>
+
 <br/>
 
 <details>
@@ -77,7 +92,13 @@ and a lot more libraries...
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-## Installation
+## Deploy to your device (iOS/iPadOS)
+1. Install [AltServer](https://altstore.io/) on your Windows/macOS device 
+2. Connect your iOS/iPadOS device to your computer 
+3. Install AltStore using AltServer using instructions from [AltStore's FAQ](https://faq.altstore.io/)
+4. Install Quizzy using AltStore with the IPA in the git's release tab.
+
+## Installation from source
 
 1. Clone the repo
    ```sh
@@ -86,6 +107,7 @@ and a lot more libraries...
 2. Create a iOS Simulator device using [Xcode](https://developer.apple.com/xcode/) or AVD using [Android Studio](https://developer.android.com/studio)
 3. Run the app
    ```
+   flutter pub get
    flutter run
    ```
 
@@ -99,10 +121,13 @@ If you have a suggestion that would make this better, please fork the repo and c
 Don't forget to give the project a star! Thanks again!
 
 1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+2. Perform the instructions from 'Installation from source' section
+3. Re-initalize the app using [FlutterFire](https://firebase.flutter.dev/) with your own Firebase app
+4. Click on Quizzy logo on the app's home screen to re-seed the database
+5. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+6. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+7. Push to the Branch (`git push origin feature/AmazingFeature`)
+8. Open a Pull Request
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
